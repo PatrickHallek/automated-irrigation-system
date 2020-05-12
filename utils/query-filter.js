@@ -42,6 +42,10 @@ exports.getTimefilterQuery = (filter) => {
                 'minute': { '$minute': "$timestamp" }
             }
             break
+        case "all":
+            return "$_id"
+            
+            break
         default:
             return {}
     }
