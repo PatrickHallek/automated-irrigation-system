@@ -4,7 +4,7 @@ const measurementService = require("../services/measurement-service")
 const irrigationService = require("../services/irrigation-service")
 const sensorService = require("../services/sensor-service")
 
-exports.waterMonitor = () => {
+exports.irrigationMonitor = () => {
     cron.schedule("*/10 * * * * *", async () => {
         const preferences = await preferenceService.getPreferences();
         const currentCapacity = await sensorService.getCurrentCapacity()
@@ -20,7 +20,6 @@ exports.waterMonitor = () => {
             console.log("The last irrigation has just been...")
             return
         }
-        console.log(preferences.capacityBuffer)
         if (await measurementService.getCapacityMeanValue(preferences.capacityMeanBuffer) < preferences.capacityBuffer) {
             console.log("Irrigation")
             irrigationService.setIrregation(currentCapacity)

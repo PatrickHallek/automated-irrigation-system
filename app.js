@@ -16,7 +16,7 @@ const indexRouter = require('./routes/index');
 dotenv.config();
 
 // Setup Tasks
-tasks.waterMonitor()
+tasks.irrigationMonitor()
 
 // Mongoose Configs
 const uri = process.env.MONGO_DB;
