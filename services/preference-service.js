@@ -17,3 +17,16 @@ exports.getPreferences = async () => {
         });
     return preference
 }
+
+exports.updatePreferences = async (body) => {
+    const preference = await Preference.findOneAndUpdate(
+        {},
+        {
+            $setOnInsert: body
+        },
+        {
+            returnOriginal: false,
+            upsert: true,
+        });
+    return preference
+}
