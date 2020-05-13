@@ -23,7 +23,11 @@ code {
 }
 
 h2 {
-  line-height: 0px;
+  margin: 5px 0px 5px 0px;
+}
+
+h3 {
+  margin: 5px 0px 5px 0px;
 }
 
 .container {
@@ -134,4 +138,22 @@ img {
   to {
     -webkit-transform: rotate(360deg);
   }
+}
+
+.preference {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  margin: 5px 0px 5px 0px;
+}
+
+.preference input {
+  background: transparent;
+  border: solid 2px var(--primary);
+  height: 25px;
+  width: 50px;
+  font-size: 18px;
+  border-radius: 5px;
+  padding-left: 5px;
 }
