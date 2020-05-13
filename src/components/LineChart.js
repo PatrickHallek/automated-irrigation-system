@@ -6,7 +6,6 @@ import { Line } from "react-chartjs-2";
 
 const LineChart = () => {
   const chartRef = React.createRef();
-
   const initialData = {
     labels: [],
     datasets: [{
@@ -18,53 +17,14 @@ const LineChart = () => {
       borderColor: 'rgba(4, 214, 143, 1)',
     }]
   }
-
-  const [chartData, setChartData] = useState(initialData);
-
-  useEffect(() => {
-    loadData()
-    setInterval(() => {
-      loadData()
-    }, 1000)
-  }, [setChartData])
-
-  const loadData = () => {
-    const liveData = [{
-      capacity: Math.random() * 20,
-      timestamp: "2018-06-13T12:11:13+05:30"
-    }, {
-      capacity: Math.random() * 20,
-      timestamp: "2019-06-13T12:11:13+05:30"
-    }, {
-      capacity: Math.random() * 20,
-      timestamp: "2020-06-13T12:11:13+05:30"
-    }, {
-      capacity: Math.random() * 20,
-      timestamp: "2021-06-13T12:11:13+05:30"
-    }, {
-      capacity: Math.random() * 20,
-      timestamp: "2022-06-13T12:11:13+05:30"
-    }]
-    setChartData({
-      labels: liveData.map(data => data.timestamp),
-      datasets: [{
-        label: 'Irrigation',
-        fill: true,
-        data: liveData.map(data => data.capacity),
-        borderWidth: 2,
-        backgroundColor: 'rgba(4, 214, 144, 0.1)',
-        borderColor: 'rgba(4, 214, 143, 1)',
-      }],
-    })
-  }
-
   const options = {
     responsive: true,
     scales: {
       yAxes: [
         {
           ticks: {
-            fontColor: "#5C657C", // this here
+            fontColor: "#5C657C",
+            maxTicksLimit: 10
           },
           id: 'y-axis-0',
           position: 'left',
@@ -75,10 +35,11 @@ const LineChart = () => {
           display: false,
         },
         ticks: {
-          fontColor: "#5C657C", // this here
+          fontColor: "#5C657C",
+          maxTicksLimit: 10
         },
         type: 'time',
-        distribution: 'series',
+        distribution: 'linear',
         time: {
           displayFormats: {
             quarter: 'MMM YYYY',
@@ -93,6 +54,39 @@ const LineChart = () => {
       enabled: false,
     },
   };
+  const [chartData, setChartData] = useState(initialData);
+
+  useEffect(() => {
+    loadData()
+    setInterval(() => {
+      loadData()
+    }, 10000)
+  }, [setChartData])
+
+  const loadData = () => {
+    fetch("http://localhost:3000/measurements/minute")
+      .then(res => res.json())
+      .then(
+        async (liveData) => {
+          const timestamps = liveData.map(data => data.timestamp)
+          const capacities = liveData.map(data => data.capacity)
+          setChartData({
+            labels: timestamps,
+            datasets: [{
+              label: 'Irrigation',
+              fill: true,
+              data: capacities,
+              borderWidth: 2,
+              backgroundColor: 'rgba(4, 214, 144, 0.1)',
+              borderColor: 'rgba(4, 214, 143, 1)',
+            }],
+          })
+        },
+        (error) => {
+          console.log(`Coudn't fetch data. Error: ${error}`)
+        }
+      )
+  }
 
   return (
     <div className="line-chart">
