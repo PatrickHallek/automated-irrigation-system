@@ -6,12 +6,20 @@ import { useState } from "react";
 const IotButton = () => {
   const [spinner, addSpinner] = useState(false);
 
-  const loading = () => {
-    addSpinner(true);
-    setTimeout(() => {
-      addSpinner(false);
-    }, 2000);
-  };
+  const sendIrrigationRequest = () => {
+    addSpinner(true)
+    fetch("http://localhost:3000/sensors/irrigation")
+      .then(res => res.json())
+      .then(
+        async (result) => {
+          console.log(result)
+          addSpinner(false)
+        },
+        (error) => {
+          console.log(`Coudn't fetch data. Error: ${error}`)
+        }
+      )
+  }
 
   return (
     <div className="iot-button">
@@ -22,7 +30,7 @@ const IotButton = () => {
               ? "linear-gradient(90deg, #598bff, #3366FF)"
               : "grey"
         }}
-        onClick={() => loading()}
+        onClick={() => sendIrrigationRequest()}
       >
         {spinner === false ? <img width="40px" src={require('../assets/watering.svg')} alt="dark" /> : <div id="loading" />}
       </button>
