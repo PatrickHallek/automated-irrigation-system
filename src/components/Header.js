@@ -8,7 +8,7 @@ const Header = () => {
     <header sx={{ bg: "backgroundSecondary" }}>
       <h1 className="logo-text" sx={{ color: "text" }}>
         <img src={require('../assets/logo.svg')} alt="logo" />
-        <b>smart irrigation</b>
+        smart irrigation
       </h1>
       <ToggleColorMode />
     </header>
