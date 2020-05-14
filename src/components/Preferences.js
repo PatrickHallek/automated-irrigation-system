@@ -29,10 +29,7 @@ const Preferences = () => {
   }
 
   const updatePreferences = (e, key) => {
-    console.log(e)
     setPreferences({ ...preferences, [key]: Number(e.target.value) })
-    console.log("send")
-    console.log(preferences)
     fetch("http://localhost:3000/preferences", {
       headers: { 'Content-Type': 'application/json', },
       method: 'PUT',
@@ -41,8 +38,6 @@ const Preferences = () => {
       .then(res => res.json())
       .then(
         async (result) => {
-          console.log("result")
-          console.log(result)
           setPreferences(result)
         },
         (error) => {
@@ -76,10 +71,6 @@ const Preferences = () => {
         <input sx={{ color: "text" }} type="number"
           onChange={(e) => updatePreferences(e, "capacityMeanBuffer")}
           value={preferences.capacityMeanBuffer} />
-      </div>
-      <div className="preference">
-        <div></div>
-        <button onClick={() => updatePreferences()}>Submit</button>
       </div>
     </h3>
   );
