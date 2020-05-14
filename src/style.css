@@ -83,11 +83,13 @@ header {
 
 .card {
   width: 100%;
+  max-width: 100%;
   height: auto;
   padding: 10px 20px 10px 20px;
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
   margin-bottom: 10px;
+  overflow: hidden;
 }
 
 .separator {
