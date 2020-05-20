@@ -8,7 +8,7 @@ const Readline = require('@serialport/parser-readline')
 const serial = require('./serial')
 
 exports.connect = async () => {
-    const port = new SerialPort("COM5", { baudRate: 9600 })
+    const port = new SerialPort((await SerialPort.list())[0].path, { baudRate: 9600 })
     const parser = new Readline()
     port.pipe(parser)
     port.on('open', open => console.log('Port open on baud rate: ' + port.baudRate));
