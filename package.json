@@ -14,7 +14,8 @@
     "jade": "~1.11.0",
     "mongoose": "^5.9.13",
     "morgan": "~1.9.1",
-    "node-cron": "^2.0.3"
+    "node-cron": "^2.0.3",
+    "serialport": "^9.0.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.5"
