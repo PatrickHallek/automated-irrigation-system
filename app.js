@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
-const tasks = require("./tasks/index");
+const serial = require("./utils/serial");
 
 const app = express();
 
@@ -16,7 +16,7 @@ const indexRouter = require('./routes/index');
 dotenv.config();
 
 // Setup Tasks
-tasks.irrigationMonitor()
+serial.connect()
 
 // Mongoose Configs
 const uri = process.env.MONGO_DB;
