@@ -70,7 +70,6 @@ const LineChart = () => {
 
 
   useEffect(() => {
-    console.log(process.env.REACT_APP_BACKEND_URL + "/measurements/" + dataFilter)
     const loadData = () => {
       fetch(process.env.REACT_APP_BACKEND_URL + "/measurements/" + dataFilter)
         .then(res => res.json())
