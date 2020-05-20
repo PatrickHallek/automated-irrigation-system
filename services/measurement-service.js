@@ -9,19 +9,25 @@ exports.getCapacityMeanValue = async (capacityMeanBuffer) => {
     return measurementsMeanValue
 }
 
-exports.getMeasurements = async (filter) => {
-
+exports.getMeasurements = async (filter, startDate, endDate) => {
+    const { id, match } = QueryFilter.getTimefilterQuery(filter);
     return await Measurement.aggregate([
         {
+            $match: match
+        },
+        {
             $group: {
-                '_id': QueryFilter.getTimefilterQuery(filter),
+                '_id': id,
                 timestamp: {
                     $first: "$timestamp"
                 },
                 capacity: {
-                    $first: '$capacity'
+                    $avg: '$capacity'
                 }
-            }
+            },
+        },
+        {
+            $sort: { timestamp: 1 }
         }
     ])
 }

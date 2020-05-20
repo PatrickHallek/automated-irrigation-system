@@ -9,19 +9,20 @@ exports.setIrregation = async (currentCapacity) => {
     return await Irrigation.create({ capacity: currentCapacity })
 }
 
-
 exports.getIrrigations = async (filter) => {
+    const { id } = QueryFilter.getTimefilterQuery(filter);
     return await Irrigation.aggregate([
         {
             $group: {
-                '_id': QueryFilter.getTimefilterQuery(filter),
+                '_id': id,
                 timestamp: {
                     $last: "$timestamp"
                 },
                 capacity: {
                     $last: '$capacity'
-                }
-            }
+                },
+            },
+            $sort: { "timestamp": 1 }
         }
     ])
 }

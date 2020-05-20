@@ -1,52 +1,57 @@
 exports.getTimefilterQuery = (filter) => {
     switch (filter) {
-        case "year":
-            return {
-                'year': { '$year': "$timestamp" }
-            }
-            break
         case "month":
             return {
-                'year': { '$year': "$timestamp" },
-                'month': { '$month': "$timestamp" }
+                match: { "timestamp": { $lte: new Date(), $gte: new Date(new Date().setMonth(new Date().getMonth() - 1)) } },
+                id: {
+                    'year': { '$year': "$timestamp" },
+                    'month': { '$month': "$timestamp" },
+                    'week': { '$week': "$timestamp" },
+                    'day': { '$dayOfMonth': "$timestamp" }
+                }
             }
-            break
         case "week":
             return {
-                'year': { '$year': "$timestamp" },
-                'month': { '$month': "$timestamp" },
-                'week': { '$week': "$timestamp" }
+                match: { "timestamp": { $lte: new Date(), $gte: new Date(new Date().setDate(new Date().getDate() - 7)) } },
+                id: {
+                    'year': { '$year': "$timestamp" },
+                    'month': { '$month': "$timestamp" },
+                    'week': { '$week': "$timestamp" },
+                    'day': { '$dayOfMonth': "$timestamp" }
+                }
             }
-            break
         case "day":
             return {
-                'year': { '$year': "$timestamp" },
-                'month': { '$month': "$timestamp" },
-                'day': { '$dayOfMonth': "$timestamp" }
+                match: { "timestamp": { $lte: new Date(), $gte: new Date(new Date().setDate(new Date().getDate() - 1)) } },
+                id: {
+                    'year': { '$year': "$timestamp" },
+                    'month': { '$month': "$timestamp" },
+                    'day': { '$dayOfMonth': "$timestamp" },
+                    'hour': { '$hour': "$timestamp" }
+                }
             }
-            break
         case "hour":
             return {
-                'year': { '$year': "$timestamp" },
-                'month': { '$month': "$timestamp" },
-                'day': { '$dayOfMonth': "$timestamp" },
-                'hour': { '$hour': "$timestamp" },
+                match: { "timestamp": { $lte: new Date(), $gte: new Date(new Date().setHours(new Date().getHours() - 1)) } },
+                id: {
+                    'year': { '$year': "$timestamp" },
+                    'month': { '$month': "$timestamp" },
+                    'day': { '$dayOfMonth': "$timestamp" },
+                    'hour': { '$hour': "$timestamp" },
+                    'minute': { '$minute': "$timestamp" }
+                }
             }
-            break
         case "minute":
             return {
-                'year': { '$year': "$timestamp" },
-                'month': { '$month': "$timestamp" },
-                'day': { '$dayOfMonth': "$timestamp" },
-                'hour': { '$hour': "$timestamp" },
-                'minute': { '$minute': "$timestamp" }
+                match: { "timestamp": { $lte: new Date(), $gte: new Date(new Date().setMinutes(new Date().getMinutes() - 1)) } },
+                id: "$_id"
             }
-            break
         case "all":
-            return "$_id"
-            
-            break
+            return {
+                match: null,
+                id: "$_id"
+            }
         default:
-            return {}
+            return
     }
 }
