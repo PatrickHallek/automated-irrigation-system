@@ -8,22 +8,21 @@ exports.irrigationMonitor = () => {
     cron.schedule("*/10 * * * * *", async () => {
         const preferences = await preferenceService.getPreferences();
         const currentCapacity = await sensorService.getCurrentCapacity()
-        console.log(`Waterlevel: ${currentCapacity}`);
-
         measurementService.setMeasurement(currentCapacity)
 
         const now = new Date().getTime()
-        let lastMeasurementTime = (await irrigationService.getLastIrrigation()).timestamp
-        lastMeasurementTime = lastMeasurementTime.setMinutes(lastMeasurementTime.getMinutes() + 1)
-
-        if (now < lastMeasurementTime) {
-            console.log("The last irrigation has just been...")
-            return
+        const lastMeasurement = await irrigationService.getLastIrrigation()
+        if (lastMeasurement) {
+            let lastMeasurementTime = lastMeasurement.timestamp
+            lastMeasurementTime = lastMeasurementTime.setMinutes(lastMeasurementTime.getMinutes() + preferences.minIrrigationIntervalInMinutes)
+            if (now < lastMeasurementTime) {
+                return
+            }
         }
-        if (await measurementService.getCapacityMeanValue(preferences.capacityMeanBuffer) < preferences.capacityBuffer) {
+        else if (await measurementService.getCapacityMeanValue(preferences.capacityMeanBuffer) < preferences.capacityBuffer) {
             console.log("Irrigation")
             irrigationService.setIrregation(currentCapacity)
-            sensorService.waterPlants(preferences.wateringTimeInSeconds)
+            sensorService.waterPlants(preferences.irrigationTimeInSeconds)
             return
         }
     });

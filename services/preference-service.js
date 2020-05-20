@@ -5,9 +5,9 @@ exports.getPreferences = async () => {
         {},
         {
             $setOnInsert: {
-                wateringTimeBufferInMinutes: 15,
+                minIrrigationIntervalInMinutes: 15,
+                irrigationTimeInSeconds: 2,
                 capacityBuffer: 30,
-                wateringTimeInSeconds: 1,
                 capacityMeanBuffer: 20
             }
         },
@@ -22,11 +22,12 @@ exports.updatePreferences = async (body) => {
     const preference = await Preference.findOneAndUpdate(
         {},
         {
-            $setOnInsert: body
+            $set: body
         },
         {
             returnOriginal: false,
             upsert: true,
+            new: true
         });
     return preference
 }

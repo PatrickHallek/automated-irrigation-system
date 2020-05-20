@@ -2,9 +2,9 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 const preferenceSchema = new Schema({
-    wateringTimeBufferInMinutes: { type: Number },
+    minIrrigationIntervalInMinutes: { type: Number },
+    irrigationTimeInSeconds: { type: Number },
     capacityBuffer: { type: Number },
-    wateringTimeInSeconds: { type: Number },
     capacityMeanBuffer: { type: Number }
 })
 

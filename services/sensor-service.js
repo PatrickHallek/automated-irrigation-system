@@ -1,23 +1,22 @@
 exports.getCurrentCapacity = () => {
     return new Promise((resolve) => {
-        resolve(Math.random()*50)
+        resolve(Math.random() * 50)
     })
 }
 
-exports.waterPlants = async (wateringTimeInSeconds) => {
-
+exports.waterPlants = async (irrigationTimeInSeconds) => {
     console.log("Watering...")
     // relay on
-    await wateringTimeout(wateringTimeInSeconds)
+    await wateringTimeout(irrigationTimeInSeconds)
     // relay off
     console.log("Stop Watering...")
-    return 20
+    return "Success"
 }
 
-const wateringTimeout = (wateringTimeInSeconds) => {
+const wateringTimeout = (irrigationTimeInSeconds) => {
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve()
-        }, wateringTimeInSeconds * 1000)
+        }, irrigationTimeInSeconds * 1000)
     })
 }
