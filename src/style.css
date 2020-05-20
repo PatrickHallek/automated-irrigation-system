@@ -47,6 +47,7 @@ h1 {
 }
 
 h2 {
+  display: inline-block;
   font-size: 24px;
   font-family: "IBM Plex Mono";
   margin: 5px 0px 5px 0px;
@@ -54,6 +55,7 @@ h2 {
 
 h3 {
   font-size: 18px;
+  font-weight: 100;
   font-family: "IBM Plex Mono";
   margin: 5px 0px 5px 0px;
 }
@@ -82,6 +84,7 @@ header {
 }
 
 .card {
+  position: relative;
   width: 100%;
   max-width: 100%;
   height: auto;
@@ -96,6 +99,7 @@ header {
   background: var(--primary);
   width: 100%;
   height: 2px;
+  padding-right: 5px
 }
 
 .logo-text {
@@ -118,8 +122,9 @@ img {
 
 .iot-button button {
   position: relative;
-  height: 80px;
-  width: 100px;
+  height: 70px;
+  min-width: 80px;
+  width: 80px;
   cursor: pointer;
   border-radius: 5px;
   outline: none !important;
@@ -129,6 +134,24 @@ img {
 
 .line-chart {
   margin-top: 15px;
+}
+
+.chart-drop-down {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 3px;
+  box-shadow: var(--box-shadow);
+  outline: none !important;
+  cursor: pointer;
+  border: solid 2px var(--primary);
+  border-radius: 5px;
+  font-family: "IBM Plex Mono";
+  background: transparent;
+}
+
+option {
+  color: #262F4D !important;
 }
 
 .toggler {

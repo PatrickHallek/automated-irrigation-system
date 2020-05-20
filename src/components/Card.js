@@ -7,12 +7,15 @@ const Card = props => {
     <div sx={{ bg: "backgroundSecondary" }} className="card">
       {props.title ? (
         <div>
-          <h2>{props.title}</h2>
-          <div className="separator" />
+          <h2>
+            {props.title}
+            <div className="separator" />
+          </h2>
+
         </div>
       ) : (
-        <div />
-      )}
+          <div />
+        )}
       {props.body}
     </div>
   );
