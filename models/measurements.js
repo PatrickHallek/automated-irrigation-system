@@ -10,11 +10,6 @@ const measurementSchema = new Schema({
     capacity: {
         type: Number,
         require: true
-    },
-    type: {
-        type: String,
-        default: "MEASUREMENT",
-        require: true
     }
 })
 
