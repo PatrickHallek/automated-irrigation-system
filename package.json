@@ -4,6 +4,8 @@
   "description": "",
   "keywords": [],
   "main": "src/index.js",
+  "author": "Patrick Hallek",
+  "license": "MIT",
   "dependencies": {
     "@emotion/core": "10.0.22",
     "@mdx-js/react": "1.5.1",
