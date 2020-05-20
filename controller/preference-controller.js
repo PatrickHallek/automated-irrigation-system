@@ -1,6 +1,6 @@
 const preferenceService = require("../services/preference-service")
 
-exports.getPreferences= async (req, res, next) => {
+exports.getPreferences = async (req, res, next) => {
     res.json(await preferenceService.getPreferences());
 };
 
