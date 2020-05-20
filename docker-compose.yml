@@ -1,0 +1,39 @@
+version: "3"
+services:
+  frontend:
+    build: .
+    ports:
+      - "4200:4200"
+    volumes:
+      - .:/src
+    restart: always
+    command: npm start
+    depends_on:
+      - backend
+      - mongodb
+    environment:
+      - SKIP_PREFLIGHT_CHECK:true
+      - PORT:4200
+      - HOST=0.0.0.0
+      - REACT_APP_BACKEND_URL=http://192.168.178.29:3000
+
+  backend:
+    build: ./backend/
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend:/src
+      - /src/node_modules/
+    command: npm start
+    restart: always
+    depends_on:
+      - mongodb
+    environment:
+      MONGO_DB: "mongodb://mongodb/irrigation"
+
+  mongodb:
+    image: mongo:4.1.7
+    volumes:
+      - ./mongo-volume:/data/db
+    ports:
+      - "27018:27017"
