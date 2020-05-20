@@ -16,7 +16,7 @@ const Preferences = () => {
   }, [setPreferences])
 
   const getPreferences = () => {
-    fetch("http://localhost:3000/preferences")
+    fetch(process.env.REACT_APP_BACKEND_URL + "/preferences")
       .then(res => res.json())
       .then(
         async (preferences) => {
@@ -30,7 +30,7 @@ const Preferences = () => {
 
   const updatePreferences = (e, key) => {
     setPreferences({ ...preferences, [key]: Number(e.target.value) })
-    fetch("http://localhost:3000/preferences", {
+    fetch(process.env.REACT_APP_BACKEND_URL + "/preferences", {
       headers: { 'Content-Type': 'application/json', },
       method: 'PUT',
       body: JSON.stringify({ ...preferences })

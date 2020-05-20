@@ -8,7 +8,7 @@ const IotButton = () => {
 
   const sendIrrigationRequest = () => {
     addSpinner(true)
-    fetch("http://localhost:3000/sensors/irrigation")
+    fetch(process.env.REACT_APP_BACKEND_URL + "/sensors/irrigation")
       .then(res => res.json())
       .then(
         async (result) => {
@@ -34,10 +34,10 @@ const IotButton = () => {
       >
         {spinner === false ? <img width="40px" src={require('../assets/watering.svg')} alt="dark" /> : <div id="loading" />}
       </button>
-      <h2 sx={{ color: "text", marginLeft: "12px", lineHeight: "23px" }}>
+      <h3 sx={{ color: "text", marginLeft: "12px", lineHeight: "23px" }}>
         Start Manual Irrigation <br />
         {spinner === false ? "OFF" : "ON"}
-      </h2>
+      </h3>
     </div>
   );
 };
