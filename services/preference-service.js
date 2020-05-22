@@ -5,8 +5,7 @@ exports.getPreferences = async () => {
         $setOnInsert: {
             minIrrigationIntervalInMinutes: 15,
             irrigationTimeInSeconds: 2,
-            capacityBuffer: 30,
-            capacityMeanBuffer: 20
+            capacityBuffer: 30
         }
     }, {
         returnOriginal: false,
