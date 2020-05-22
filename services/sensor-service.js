@@ -4,16 +4,16 @@ exports.getCurrentCapacity = () => {
     })
 }
 
-exports.waterPlants = async (irrigationTimeInSeconds) => {
-    console.log("Watering...")
+exports.irrigate = async (irrigationTimeInSeconds) => {
+    console.log("Start Irrigation...")
     // relay on
-    await wateringTimeout(irrigationTimeInSeconds)
+    await irrigatonTimeout(irrigationTimeInSeconds)
     // relay off
-    console.log("Stop Watering...")
+    console.log("Stop Irrigation...")
     return "Success"
 }
 
-const wateringTimeout = (irrigationTimeInSeconds) => {
+const irrigatonTimeout = (irrigationTimeInSeconds) => {
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve()
