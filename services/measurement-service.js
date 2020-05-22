@@ -1,14 +1,6 @@
 const Measurement = require('../models/measurements');
 const QueryFilter = require('../utils/query-filter');
 
-exports.getCapacityMeanValue = async (capacityMeanBuffer) => {
-    measurements = await Measurement.find().limit(capacityMeanBuffer).sort({ timestamp: -1 })
-    measurementsMeanValue = measurements.reduce((sum, measurement) => {
-        return sum + parseFloat(measurement.capacity);
-    }, 0) / measurements.length;
-    return measurementsMeanValue
-}
-
 exports.getMeasurements = async (filter, startDate, endDate) => {
     const { id, match } = QueryFilter.getTimefilterQuery(filter);
     return await Measurement.aggregate([
