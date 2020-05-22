@@ -7,8 +7,7 @@ const Preferences = () => {
   const [preferences, setPreferences] = useState({
     minIrrigationIntervalInMinutes: 0,
     irrigationTimeInSeconds: 0,
-    capacityBuffer: 0,
-    capacityMeanBuffer: 0
+    capacityBuffer: 0
   });
 
   useEffect(() => {
@@ -65,12 +64,6 @@ const Preferences = () => {
         <input sx={{ color: "text" }} type="number"
           onChange={(e) => updatePreferences(e, "capacityBuffer")}
           value={preferences.capacityBuffer} />
-      </div>
-      <div className="preference">
-        <h3>Capacity Mean Buffer:</h3>
-        <input sx={{ color: "text" }} type="number"
-          onChange={(e) => updatePreferences(e, "capacityMeanBuffer")}
-          value={preferences.capacityMeanBuffer} />
       </div>
     </h3>
   );
