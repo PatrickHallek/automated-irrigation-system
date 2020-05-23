@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, useThemeUI  } from "theme-ui";
+import { jsx, useThemeUI } from "theme-ui";
 import React, { useState, useEffect } from 'react'
 import { Line } from "react-chartjs-2";
 import "../style.css";
@@ -7,7 +7,7 @@ import "../style.css";
 const LineChart = () => {
   const context = useThemeUI()
   const chartRef = React.createRef();
-  const initialDataFilter = "day"
+  const initialDataFilter = "minute"
   const initialData = {
     labels: [],
     datasets: [{
@@ -21,6 +21,10 @@ const LineChart = () => {
   }
   const options = {
     responsive: true,
+    animation: {
+      duration: 300,
+      easing: 'linear'
+    },
     elements: {
       point: {
         radius: 0
@@ -47,7 +51,7 @@ const LineChart = () => {
           maxRotation: 0,
           minRotation: 0,
           callback: function (value) {
-            if (dataFilter === "minute") return new Date(value).toLocaleTimeString('de-DE', { second: 'numeric' }) +'s';
+            if (dataFilter === "minute") return new Date(value).toLocaleTimeString('de-DE', { second: 'numeric' }) + 's';
             if (dataFilter === "hour") return new Date(value).toLocaleTimeString('de-DE', { minute: 'numeric' }) + 'min';
             if (dataFilter === "day") return new Date(value).toLocaleTimeString('de-DE', { hour: 'numeric' });
             if (dataFilter === "week") return new Date(value).toLocaleDateString('de-DE', { day: 'numeric', month: 'short' });
@@ -97,7 +101,7 @@ const LineChart = () => {
     loadData()
     const intervall = setInterval(() => {
       loadData()
-    }, 10000)
+    }, 1000)
     return () => {
       clearInterval(intervall);
     };
