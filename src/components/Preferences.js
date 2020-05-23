@@ -28,11 +28,10 @@ const Preferences = () => {
   }
 
   const updatePreferences = (e, key) => {
-    setPreferences({ ...preferences, [key]: Number(e.target.value) })
     fetch(process.env.REACT_APP_BACKEND_URL + "/preferences", {
       headers: { 'Content-Type': 'application/json', },
       method: 'PUT',
-      body: JSON.stringify({ ...preferences })
+      body: JSON.stringify({ [key]: Number(e.target.value) })
     })
       .then(res => res.json())
       .then(
@@ -56,7 +55,7 @@ const Preferences = () => {
       <div className="preference">
         <h3>Minimum irrigation time interval [min]:</h3>
         <input sx={{ color: "text" }} type="number"
-          onChange={(e) => updatePreferences(e, "minIrrigationIntervalInMinutese")}
+          onChange={(e) => updatePreferences(e, "minIrrigationIntervalInMinutes")}
           value={preferences.minIrrigationIntervalInMinutes} />
       </div>
       <div className="preference">
