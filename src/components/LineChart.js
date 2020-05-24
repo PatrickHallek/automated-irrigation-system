@@ -7,9 +7,8 @@ import "../style.css";
 const LineChart = () => {
   const context = useThemeUI()
   const chartRef = React.createRef();
-  const initialDataFilter = "day"
-  const [dataFilter, setDataFilter] = useState(initialDataFilter);
-  const initialData = {
+  const [dataFilter, setDataFilter] = useState("day");
+  const [chartData, setChartData] = useState({
     labels: [],
     datasets: [{
       label: 'Irrigation',
@@ -19,7 +18,7 @@ const LineChart = () => {
       backgroundColor: 'rgba(4, 214, 144, 0.1)',
       borderColor: 'rgba(4, 214, 143, 1)',
     }]
-  }
+  });
   const options = {
     responsive: true,
     animation: {
@@ -50,12 +49,9 @@ const LineChart = () => {
           fontColor: context.theme.colors.text,
           maxTicksLimit: 4,
           maxRotation: 0,
-          minRotation: 0,
+          minRotation: 0
         },
         type: 'time',
-        time: {
-          unit: dataFilter
-        },
         distribution: 'linear',
       }]
     },
@@ -66,7 +62,6 @@ const LineChart = () => {
       enabled: false,
     },
   };
-  const [chartData, setChartData] = useState(initialData);
 
   useEffect(() => {
     const loadData = () => {
@@ -79,7 +74,6 @@ const LineChart = () => {
             setChartData({
               labels: timestamps,
               datasets: [{
-                label: 'Irrigation',
                 fill: true,
                 data: capacities,
                 borderWidth: 2,
