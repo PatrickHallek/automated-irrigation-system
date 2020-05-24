@@ -7,7 +7,7 @@ import "../style.css";
 const LineChart = () => {
   const context = useThemeUI()
   const chartRef = React.createRef();
-  const initialDataFilter = "minute"
+  const initialDataFilter = "day"
   const initialData = {
     labels: [],
     datasets: [{
@@ -95,13 +95,13 @@ const LineChart = () => {
           }
         )
     }
+
     loadData()
     const intervall = setInterval(() => {
       loadData()
     }, 1000)
-    return () => {
-      clearInterval(intervall);
-    };
+
+    return () => clearInterval(intervall);
   }, [setChartData, dataFilter])
 
   const selectFilter = (filter) => {
