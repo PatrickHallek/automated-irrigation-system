@@ -8,6 +8,7 @@ const LineChart = () => {
   const context = useThemeUI()
   const chartRef = React.createRef();
   const initialDataFilter = "day"
+  const [dataFilter, setDataFilter] = useState(initialDataFilter);
   const initialData = {
     labels: [],
     datasets: [{
@@ -66,9 +67,6 @@ const LineChart = () => {
     },
   };
   const [chartData, setChartData] = useState(initialData);
-  const [dataFilter, setDataFilter] = useState(initialDataFilter);
-
-
 
   useEffect(() => {
     const loadData = () => {
