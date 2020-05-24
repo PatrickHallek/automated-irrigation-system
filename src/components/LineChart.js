@@ -46,17 +46,14 @@ const LineChart = () => {
           display: false,
         },
         ticks: {
-          fontColor: context.theme.colors.text, // "#5C657C",
+          fontColor: context.theme.colors.text,
           maxTicksLimit: 4,
           maxRotation: 0,
           minRotation: 0,
-          callback: function (value) {
-            if (dataFilter === "minute") return new Date(value).toLocaleTimeString('de-DE', { second: 'numeric' }) + 's';
-            if (dataFilter === "hour") return new Date(value).toLocaleTimeString('de-DE', { minute: 'numeric' }) + 'min';
-            if (dataFilter === "day") return new Date(value).toLocaleTimeString('de-DE', { hour: 'numeric' });
-            if (dataFilter === "week") return new Date(value).toLocaleDateString('de-DE', { day: 'numeric', month: 'short' });
-            if (dataFilter === "month") return new Date(value).toLocaleDateString('de-DE', { day: 'numeric', month: 'short' });
-          },
+        },
+        type: 'time',
+        time: {
+          unit: dataFilter
         },
         distribution: 'linear',
       }]
