@@ -15,9 +15,6 @@ const indexRouter = require('./routes/index');
 // Load envs
 dotenv.config();
 
-// Setup Tasks
-serial.connect()
-
 // Mongoose Configs
 const uri = process.env.MONGO_DB;
 mongoose.connect(uri, {
@@ -28,6 +25,9 @@ mongoose.connect(uri, {
 })
   .then(() => { console.log('Connection to database!') })
   .catch(() => { console.log('Connection to database failed!') })
+
+// Setup serial connection
+serial.connect()
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
