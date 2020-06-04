@@ -8,9 +8,7 @@ const Readline = require('@serialport/parser-readline')
 const serial = require('./serial')
 
 exports.connect = async () => {
-    const serialList = await SerialPort.list()
-    if (serialList.length < 1) return reconnect()
-    const port = new SerialPort(serialList[0].path, {
+    const port = new SerialPort('/dev/ttyAMA0', {
         baudRate: 9600
     })
     const parser = new Readline()
@@ -28,12 +26,7 @@ exports.connect = async () => {
 
     parser.on('data', async currentCapacity => {
         console.log(currentCapacity)
-        const preferences = await preferenceService.getPreferences()
-        measurementService.setMeasurement(currentCapacity)
-        if (await isLastIrrigationTimeBufferPassed(preferences) && currentCapacity < preferences.capacityBuffer) {
-            irrigationService.setIrregation(currentCapacity)
-            sensorService.irrigate(preferences.irrigationTimeInSeconds)
-        }
+        irrigateIfNeeded(currentCapacity)
     })
 }
 
@@ -42,6 +35,15 @@ function reconnect() {
     setTimeout(() => {
         serial.connect();
     }, 5000)
+}
+
+async function irrigateIfNeeded(currentCapacity) {
+    const preferences = await preferenceService.getPreferences()
+    measurementService.setMeasurement(currentCapacity)
+    if (await isLastIrrigationTimeBufferPassed(preferences) && currentCapacity < preferences.capacityBuffer) {
+        irrigationService.setIrregation(currentCapacity)
+        sensorService.irrigate(preferences.irrigationTimeInSeconds)
+    }
 }
 
 async function isLastIrrigationTimeBufferPassed(preferences) {
