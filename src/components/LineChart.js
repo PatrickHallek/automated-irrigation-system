@@ -5,6 +5,7 @@ import { Line } from "react-chartjs-2";
 import "../style.css";
 
 const LineChart = () => {
+  const requestIntervall = 10000
   const context = useThemeUI()
   const chartRef = React.createRef();
   const [dataFilter, setDataFilter] = useState("day");
@@ -64,6 +65,7 @@ const LineChart = () => {
   };
 
   useEffect(() => {
+    console.log(process.env.REACT_APP_BACKEND_URL)
     const loadData = () => {
       fetch(process.env.REACT_APP_BACKEND_URL + "/measurements/" + dataFilter)
         .then(res => res.json())
@@ -91,7 +93,7 @@ const LineChart = () => {
     loadData()
     const intervall = setInterval(() => {
       loadData()
-    }, 1000)
+    }, requestIntervall)
 
     return () => clearInterval(intervall);
   }, [setChartData, dataFilter])
