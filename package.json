@@ -20,7 +20,8 @@
     "typescript": "3.3.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "dev": "npm start",
+    "start": "serve build",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
