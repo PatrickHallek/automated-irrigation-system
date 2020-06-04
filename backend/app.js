@@ -13,21 +13,27 @@ const app = express();
 const indexRouter = require('./routes/index');
 
 // Load envs
-dotenv.config();
+dotenv.config({ path: (__dirname, './.env')});
 
 // Mongoose Configs
+mongoose.Promise = global.Promise;
 const uri = process.env.MONGO_DB;
 mongoose.connect(uri, {
   useNewUrlParser: true,
   useFindAndModify: false,
-  useCreateIndex: true,
-  useUnifiedTopology: true
-})
-  .then(() => { console.log('Connection to database!') })
-  .catch(() => { console.log('Connection to database failed!') })
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+    useMongoClient: true
+  })
+  .then(() => {
+    console.log('Connection to database!')
+  })
+  .catch(() => {
+    console.log('Connection to database failed!')
+  })
 
 // Setup serial connection
-serial.connect()
+// serial.connect()
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
