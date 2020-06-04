@@ -13,4 +13,6 @@ router.get('/preferences', PreferenceController.getPreferences);
 
 router.put('/preferences', PreferenceController.updatePreferences);
 
+router.post('/measurement', MeasurementController.setMeasurement);
+
 module.exports = router;
