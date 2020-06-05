@@ -110,6 +110,7 @@ const LineChart = () => {
         <option value="day">Last Day</option>
         <option value="week">Last Week</option>
         <option value="month">Last Month</option>
+        <option value="all">All</option>
       </select>
       {chartData.dataset ? <div /> : <Line ref={chartRef} data={chartData} options={options} />}
     </div>
