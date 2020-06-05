@@ -19,10 +19,6 @@ dotenv.config({ path: (__dirname, './.env')});
 mongoose.Promise = global.Promise;
 const uri = process.env.MONGO_DB;
 mongoose.connect(uri, {
-  useNewUrlParser: true,
-  useFindAndModify: false,
-    useCreateIndex: true,
-    useUnifiedTopology: true,
     useMongoClient: true
   })
   .then(() => {
