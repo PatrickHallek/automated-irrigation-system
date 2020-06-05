@@ -7,8 +7,8 @@ const PreferenceController = require("../controller/preference-controller");
 const SensorController = require("../controller/sensor-controller");
 
 const measurementLimiter = rateLimit({
-    windowMs: 20000, // time window
-    max: 1, // start blocking after 5 requests
+    windowMs: 1000, // time window
+    max: 2, // start blocking after 5 requests
     message: "Too many measurements this IP"
 });
 

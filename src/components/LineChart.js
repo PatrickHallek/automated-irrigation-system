@@ -5,7 +5,7 @@ import { Line } from "react-chartjs-2";
 import "../style.css";
 
 const LineChart = () => {
-  const requestIntervall = 10000
+  const requestIntervall = 1000
   const context = useThemeUI()
   const chartRef = React.createRef();
   const [dataFilter, setDataFilter] = useState("day");
