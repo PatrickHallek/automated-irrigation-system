@@ -36,14 +36,14 @@ exports.getDailyMeasurements = async (queryFilter) => {
     return await DailyMeasurement.find(queryFilter);
 };
 
-exports.getHourlyMeasurements = async () => {
-    return await HourlyMeasurement.find();
+exports.getHourlyMeasurements = async (queryFilter) => {
+    return await HourlyMeasurement.find(queryFilter);
 };
 
-exports.getMinutelyMeasurements = async () => {
-    return await MinutelyMeasurement.find();
+exports.getMinutelyMeasurements = async (queryFilter) => {
+    return await MinutelyMeasurement.find(queryFilter);
 };
 
-exports.getSecondlyMeasurements = async () => {
-    return await SecondlyMeasurement.find();
+exports.getSecondlyMeasurements = async (queryFilter) => {
+    return await SecondlyMeasurement.find(queryFilter);
 };

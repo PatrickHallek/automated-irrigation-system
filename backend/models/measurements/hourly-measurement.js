@@ -5,7 +5,7 @@ const hourlyMeasurementSchema = new Schema({
     timestamp: {
         type: Date,
         default: Date.now,
-        expires: 86400,
+        expires: 604800,
         require: true
     },
     capacity: {
