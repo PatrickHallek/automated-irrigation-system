@@ -235,12 +235,14 @@ option {
 }
 
 .sensorPicker {
-  display: flex;
+  display: inline-block;
   width: 100%;
-  justify-content: flex-start;
+  overflow-x: scroll;
+  overflow:auto
 }
 
 .sensorPicker>div {
+  display: inline-block;
   font-size: 13.3333;
   width: auto;
   margin-right: 5px;
