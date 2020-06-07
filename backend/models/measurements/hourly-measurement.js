@@ -12,6 +12,10 @@ const hourlyMeasurementSchema = new Schema({
         type: Number,
         require: true
     },
+    sensorName: {
+        type: String,
+        require: true
+    }
 })
 
 module.exports = mongoose.model('hourly_measurements', hourlyMeasurementSchema);

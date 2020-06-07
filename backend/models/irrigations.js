@@ -10,6 +10,10 @@ const irrigationSchema = new Schema({
     capacity: {
         type: Number,
         require: true
+    },
+    sensorName: {
+        type: String,
+        require: true
     }
 })
 

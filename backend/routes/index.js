@@ -13,20 +13,20 @@ const measurementLimiter = rateLimit({
 });
 
 /* GET home page. */
-router.get('/measurements/all', MeasurementController.getAllMeasurements);
-router.get('/measurements/month', MeasurementController.getLastMonthMeasurements);
-router.get('/measurements/week', MeasurementController.getLastWeekMeasurements);
-router.get('/measurements/day', MeasurementController.getLastDayMeasurements);
-router.get('/measurements/hour', MeasurementController.getLastHourMeasurements);
-router.get('/measurements/minute', MeasurementController.getLastMinuteMeasurements);
-router.post('/measurement', measurementLimiter, MeasurementController.setMeasurement);
+router.get('/measurements/all/:sensorName', MeasurementController.getAllMeasurements);
+router.get('/measurements/month/:sensorName', MeasurementController.getLastMonthMeasurements);
+router.get('/measurements/week/:sensorName', MeasurementController.getLastWeekMeasurements);
+router.get('/measurements/day/:sensorName', MeasurementController.getLastDayMeasurements);
+router.get('/measurements/hour/:sensorName', MeasurementController.getLastHourMeasurements);
+router.get('/measurements/minute/:sensorName', MeasurementController.getLastMinuteMeasurements);
+router.post('/measurement/:sensorName', measurementLimiter, MeasurementController.setMeasurement);
 
-router.get('/irrigations', IrrigationController.getIrrigations);
+router.get('/irrigations/:sensorName', IrrigationController.getIrrigations);
 
 router.get('/sensors/irrigation', SensorController.irrigation);
 
-router.get('/preferences', PreferenceController.getPreferences);
-router.put('/preferences', PreferenceController.updatePreferences);
+router.get('/preferences/:sensorName', PreferenceController.getPreferences);
+router.put('/preferences/:sensorName', PreferenceController.updatePreferences);
 
 
 module.exports = router;

@@ -5,7 +5,8 @@ import { Line } from "react-chartjs-2";
 import "../style.css";
 
 const LineChart = () => {
-  const requestIntervall = 1000
+  const sensorName = "Hochbeet"
+  const requestIntervall = 5000
   const context = useThemeUI()
   const chartRef = React.createRef();
   const [dataFilter, setDataFilter] = useState("day");
@@ -67,7 +68,7 @@ const LineChart = () => {
   useEffect(() => {
     console.log(process.env.REACT_APP_BACKEND_URL)
     const loadData = () => {
-      fetch(process.env.REACT_APP_BACKEND_URL + "/measurements/" + dataFilter)
+      fetch(`${process.env.REACT_APP_BACKEND_URL}/measurements/${dataFilter}/${sensorName}`)
         .then(res => res.json())
         .then(
           async (liveData) => {

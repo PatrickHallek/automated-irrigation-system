@@ -1,31 +1,31 @@
-const Irrigation = require('../models/irrigations');
+const Irrigation = require('../models/irrigations')
 const preferenceService = require("../services/preference-service")
 const sensorService = require("../services/sensor-service")
 const irrigationService = require("./irrigation-service")
 
-exports.getLastIrrigation = async () => {
-    return await Irrigation.findOne().sort({ timestamp: -1 });
+exports.getLastIrrigation = async (sensorName) => {
+    return await Irrigation.findOne({ sensorName }).sort({ timestamp: -1 });
 }
 
-exports.setIrregation = async (currentCapacity) => {
-    return await Irrigation.create({ capacity: currentCapacity })
+exports.setIrregation = async (capacity, sensorName) => {
+    return await Irrigation.create({ capacity, sensorName })
 }
 
-exports.getIrrigations = async (filter) => {
-    return await Irrigation.find({})
+exports.getIrrigations = async (sensorName) => {
+    return await Irrigation.find({ sensorName })
 }
 
-exports.irrigateIfNeeded = async (currentCapacity) => {
-    const preferences = await preferenceService.getPreferences()
-    if (await isLastIrrigationTimeBufferPassed(preferences) && currentCapacity > preferences.capacityBuffer) {
-        irrigationService.setIrregation(currentCapacity)
-        sensorService.irrigate(preferences.irrigationTimeInSeconds)
+exports.irrigateIfNeeded = async (currentCapacity, sensorName) => {
+    const preferences = await preferenceService.getPreferences(sensorName)
+    if (await isLastIrrigationTimeBufferPassed(preferences, sensorName) && currentCapacity > preferences.capacityBuffer) {
+        irrigationService.setIrregation(currentCapacity, sensorName)
+        sensorService.irrigate(preferences.irrigationTimeInSeconds, sensorName)
         return true
     } else return false
 }
 
-async function isLastIrrigationTimeBufferPassed(preferences) {
-    const lastMeasurement = await irrigationService.getLastIrrigation()
+async function isLastIrrigationTimeBufferPassed(preferences, sensorName) {
+    const lastMeasurement = await irrigationService.getLastIrrigation(sensorName)
     const now = new Date().getTime()
     if (lastMeasurement) {
         let lastMeasurementTime = lastMeasurement.timestamp

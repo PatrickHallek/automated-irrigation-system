@@ -11,6 +11,11 @@ const minutelyMeasurementSchema = new Schema({
     capacity: {
         type: Number,
         require: true
+    },
+    sensorName: {
+        type: String,
+        require: true
     }
 })
+
 module.exports = mongoose.model('minutely_measurements', minutelyMeasurementSchema);

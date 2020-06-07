@@ -10,6 +10,11 @@ const dailyMeasurementSchema = new Schema({
     capacity: {
         type: Number,
         require: true
+    },
+    sensorName: {
+        type: String,
+        require: true
     }
 })
+
 module.exports = mongoose.model('daily_measurements', dailyMeasurementSchema);
