@@ -1,7 +1,7 @@
 const Preference = require('../models/preferences');
 
 exports.getPreference = async (sensorName) => {
-    return sensorName ? preference = await Preference.findOneAndUpdate({
+    return (sensorName && sensorName !== "undefined") ? await Preference.findOneAndUpdate({
             sensorName
         }, {
             $setOnInsert: {
