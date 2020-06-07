@@ -2,8 +2,12 @@ const irrigationService = require("../services/irrigation-service")
 const sensorService = require("../services/sensor-service")
 const preferenceService = require("../services/preference-service")
 
+exports.getSensorNames = async (req, res, next) => {
+    res.json(await sensorService.getSensorNames())
+};
+
 exports.irrigation = async (req, res, next) => {
-    const preferences = await preferenceService.getPreferences(req.params.sensorName);
+    const preferences = await preferenceService.getPreference(req.params.sensorName);
     const sensorResult = await sensorService.irrigate(preferences.irrigationTimeInSeconds, req.params.sensorName);
     if (sensorResult) {
         await irrigationService.setIrregation(null).then(() => {

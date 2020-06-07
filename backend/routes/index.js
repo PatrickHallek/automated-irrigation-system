@@ -23,9 +23,10 @@ router.post('/measurement/:sensorName', measurementLimiter, MeasurementControlle
 
 router.get('/irrigations/:sensorName', IrrigationController.getIrrigations);
 
+router.get('/sensors', SensorController.getSensorNames);
 router.get('/sensors/irrigation', SensorController.irrigation);
 
-router.get('/preferences/:sensorName', PreferenceController.getPreferences);
+router.get('/preferences/:sensorName', PreferenceController.getPreference);
 router.put('/preferences/:sensorName', PreferenceController.updatePreferences);
 
 

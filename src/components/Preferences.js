@@ -3,8 +3,8 @@ import { jsx, useThemeUI } from "theme-ui";
 import "../style.css";
 import { useState, useEffect } from "react";
 
-const Preferences = () => {
-  const sensorName = "Hochbeet"
+const Preferences = props => {
+  const sensorName = props.sensorInFocus
   const context = useThemeUI()
   const [preferences, setPreferences] = useState({
     minIrrigationIntervalInMinutes: 0,
@@ -20,10 +20,6 @@ const Preferences = () => {
   });
 
   useEffect(() => {
-    getPreferences()
-  }, [setPreferences])
-
-  const getPreferences = () => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/preferences/${sensorName}`)
       .then(res => res.json())
       .then(
@@ -35,7 +31,8 @@ const Preferences = () => {
           console.log(`Coudn't fetch data. Error: ${error}`)
         }
       )
-  }
+  }, [setPreferences, sensorName])
+
 
   const updatePreferences = (e, key) => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/preferences/${sensorName}`, {
@@ -67,26 +64,26 @@ const Preferences = () => {
       <div className="preference">
         <h3>Irrigation time [s]:</h3>
         <input sx={{ color: "text", borderColor: preferenceBorderColor("irrigationTimeInSeconds") }} type="number"
-          onChange = {
+          onChange={
             (e) => setPreferences({ ...preferences, irrigationTimeInSeconds: parseInt(e.target.value) })
           }
           value={preferences.irrigationTimeInSeconds} />
       </div>
       <div className="preference">
         <h3>Minimum irrigation time interval [min]:</h3>
-        <input sx={{ color: "text", borderColor: preferenceBorderColor("minIrrigationIntervalInMinutes")  }} type="number"
+        <input sx={{ color: "text", borderColor: preferenceBorderColor("minIrrigationIntervalInMinutes") }} type="number"
           onChange={(e) => setPreferences({ ...preferences, minIrrigationIntervalInMinutes: parseInt(e.target.value) })}
           value={preferences.minIrrigationIntervalInMinutes} />
       </div>
       <div className="preference">
         <h3>Capacity Buffer:</h3>
-        <input sx={{ color: "text", borderColor: preferenceBorderColor("capacityBuffer")  }} type="number"
+        <input sx={{ color: "text", borderColor: preferenceBorderColor("capacityBuffer") }} type="number"
           onChange={(e) => setPreferences({ ...preferences, capacityBuffer: parseInt(e.target.value) })}
           value={preferences.capacityBuffer} />
       </div>
       <div className="preference">
         <h3>Signal Pin:</h3>
-        <input sx={{ color: "text", borderColor: preferenceBorderColor("signalPin")  }} type="number"
+        <input sx={{ color: "text", borderColor: preferenceBorderColor("signalPin") }} type="number"
           onChange={(e) => setPreferences({ ...preferences, signalPin: parseInt(e.target.value) })}
           value={preferences.signalPin} />
       </div>

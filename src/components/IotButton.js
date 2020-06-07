@@ -3,16 +3,16 @@ import { jsx } from "theme-ui";
 import "../style.css";
 import { useState } from "react";
 
-const IotButton = () => {
+const IotButton = props => {
+  const sensorName = props.sensorInFocus
   const [spinner, addSpinner] = useState(false);
 
   const sendIrrigationRequest = () => {
     addSpinner(true)
-    fetch(process.env.REACT_APP_BACKEND_URL + "/sensors/irrigation")
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/sensors/irrigation/${sensorName}`)
       .then(res => res.json())
       .then(
         async (result) => {
-          console.log(result)
           addSpinner(false)
         },
         (error) => {

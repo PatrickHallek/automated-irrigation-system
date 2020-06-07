@@ -4,8 +4,8 @@ import React, { useState, useEffect } from 'react'
 import { Line } from "react-chartjs-2";
 import "../style.css";
 
-const LineChart = () => {
-  const sensorName = "Hochbeet"
+const LineChart = props => {
+  const sensorName = props.sensorInFocus
   const requestIntervall = 5000
   const context = useThemeUI()
   const chartRef = React.createRef();
@@ -66,7 +66,6 @@ const LineChart = () => {
   };
 
   useEffect(() => {
-    console.log(process.env.REACT_APP_BACKEND_URL)
     const loadData = () => {
       fetch(`${process.env.REACT_APP_BACKEND_URL}/measurements/${dataFilter}/${sensorName}`)
         .then(res => res.json())
@@ -97,7 +96,7 @@ const LineChart = () => {
     }, requestIntervall)
 
     return () => clearInterval(intervall);
-  }, [setChartData, dataFilter])
+  }, [setChartData, dataFilter, sensorName])
 
   const selectFilter = (filter) => {
     setDataFilter(filter)

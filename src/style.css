@@ -60,6 +60,13 @@ h3 {
   margin: 5px 0px 5px 0px;
 }
 
+h4 {
+  font-size: 13.3333px;
+  font-weight: 100;
+  font-family: "IBM Plex Mono";
+  margin: 5px 0px 5px 0px;
+}
+
 .container {
   display: realative;
   padding: 10px;
@@ -210,17 +217,33 @@ option {
   border-radius: 5px;
   padding-left: 5px;
   outline: none !important;
+  transition: all 0.3s ease;
 }
 
 .preference button {
   background: transparent;
   border: solid 2px var(--primary);
   height: 30px;
-  width: 85px;
+  width: 100%;
   font-size: 18px;
   border-radius: 5px;
   padding-left: 5px;
   margin-top: 5px;
   outline: none !important;
   color: white;
+  transition: all 0.3s ease;
+}
+
+.sensorPicker {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.sensorPicker>div {
+  font-size: 13.3333;
+  width: auto;
+  margin-right: 5px;
+  padding: 0px 10px 0px 10px;
+  border: 2px transparent solid;
 }
