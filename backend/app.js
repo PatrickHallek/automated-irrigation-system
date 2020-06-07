@@ -6,7 +6,6 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
-const serial = require("./utils/serial");
 
 const app = express();
 
@@ -27,9 +26,6 @@ mongoose.connect(uri, {
   .catch(() => {
     console.log('Connection to database failed!')
   })
-
-// Setup serial connection
-// serial.connect()
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
