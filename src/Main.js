@@ -32,11 +32,13 @@ const Main = () => {
   return (
     <div>
       <Header />
-      <div className="container">
-        <SensorPicker sensors={sensors} setSensorInFocus={setSensorInFocus} sensorInFocus={sensorInFocus} />
-        <Card title="Statistics" body={<LineChart  sensorInFocus={sensorInFocus}/>} />
-        <Card title="Preferences" body={<Preferences sensorInFocus={sensorInFocus}/>}  />
-        <Card body={<IotButton />} />
+      <div className="main">
+        <div className="container">
+          <SensorPicker sensors={sensors} setSensorInFocus={setSensorInFocus} sensorInFocus={sensorInFocus} />
+          <Card title="Statistics" body={<LineChart sensorInFocus={sensorInFocus} />} />
+          <Card title="Preferences" body={<Preferences sensorInFocus={sensorInFocus} />} />
+          <Card body={<IotButton />} />
+        </div>
       </div>
     </div>
   );

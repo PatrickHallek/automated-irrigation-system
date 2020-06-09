@@ -39,6 +39,11 @@ code {
   --secondaryGradient: linear-gradient(90deg, #598bff, #36f);
 }
 
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
 h1 {
   font-size: 24px;
   font-family: "IBM Plex Mono";
@@ -67,12 +72,22 @@ h4 {
   margin: 5px 0px 5px 0px;
 }
 
+.main {
+  display: flex;
+  position:relative;
+  width: 100vw;
+  overflow: hidden;
+}
+
 .container {
-  display: realative;
+  display: relative;
   padding: 10px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  width: 100%;
+  max-width: 960px;
+  align-self: center;
 }
 
 header {
@@ -230,7 +245,6 @@ option {
   padding-left: 5px;
   margin-top: 5px;
   outline: none !important;
-  color: white;
   transition: all 0.3s ease;
 }
 

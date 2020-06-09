@@ -1,11 +1,10 @@
 /** @jsx jsx */
-import { jsx, useThemeUI } from "theme-ui";
+import { jsx } from "theme-ui";
 import "../style.css";
 import { useState, useEffect } from "react";
 
 const Preferences = props => {
   const sensorName = props.sensorInFocus
-  const context = useThemeUI()
   const [preferences, setPreferences] = useState({
     minIrrigationIntervalInMinutes: 0,
     irrigationTimeInSeconds: 0,
@@ -52,11 +51,11 @@ const Preferences = props => {
   }
 
   const preferenceBorderColor = (key) => {
-    return preferences[key] === databasePreferences[key] ? `${context.theme.colors.background} !important` : "initial"
+    return preferences[key] === databasePreferences[key] ? "#161A30 !important" : "var(--primary)"
   }
 
   const preferenceButtonColor = () => {
-    return JSON.stringify(preferences) === JSON.stringify(databasePreferences) ? `${context.theme.colors.background} !important` : "initial"
+    return JSON.stringify(preferences) === JSON.stringify(databasePreferences) ? "#161A30 !important" : "var(--primary)"
   }
 
   return (
@@ -89,7 +88,7 @@ const Preferences = props => {
       </div>
       <div className="preference">
         <div></div>
-        <button sx={{ borderColor: preferenceButtonColor() }} onClick={() => updatePreferences()}>Submit</button>
+        <button sx={{ color: "text", borderColor: preferenceButtonColor() }} onClick={() => updatePreferences()}>Submit</button>
       </div>
     </h3>
   );
