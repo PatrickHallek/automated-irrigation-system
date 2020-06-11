@@ -10,7 +10,7 @@ import { useState, useEffect } from "react";
 
 const Main = () => {
   const [sensors, setSensors] = useState([]);
-  const [sensorInFocus, setSensorInFocus] = useState([]);
+  const [sensorInFocus, setSensorInFocus] = useState();
   useEffect(() => {
     getSensors()
   }, [setSensors])

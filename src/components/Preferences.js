@@ -19,17 +19,19 @@ const Preferences = props => {
   });
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/preferences/${sensorName}`)
-      .then(res => res.json())
-      .then(
-        async (preferences) => {
-          setDatabasePreferences(preferences)
-          setPreferences(preferences)
-        },
-        (error) => {
-          console.log(`Coudn't fetch data. Error: ${error}`)
-        }
-      )
+    if (sensorName) {
+      fetch(`${process.env.REACT_APP_BACKEND_URL}/preferences/${sensorName}`)
+        .then(res => res.json())
+        .then(
+          async (preferences) => {
+            setDatabasePreferences(preferences)
+            setPreferences(preferences)
+          },
+          (error) => {
+            console.log(`Coudn't fetch data. Error: ${error}`)
+          }
+        )
+    }
   }, [setPreferences, sensorName])
 
 
