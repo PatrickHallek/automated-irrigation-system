@@ -51,10 +51,15 @@ const LineChart = props => {
           fontColor: context.theme.colors.text,
           maxTicksLimit: 4,
           maxRotation: 0,
-          minRotation: 0
+          minRotation: 0,
+          callback: function (value) {
+            if (dataFilter === "minute") return new Date(value).toLocaleTimeString('en', { second: 'numeric' }) + 's';
+            if (dataFilter === "hour") return new Date(value).toLocaleTimeString('en', { minute: 'numeric' }) + 'min';
+            if (dataFilter === "day") return new Date(value).toLocaleTimeString('en', { hour: 'numeric' });
+            if (dataFilter === "week") return new Date(value).toLocaleDateString('en', { day: 'numeric', month: 'short' });
+            if (dataFilter === "month") return new Date(value).toLocaleDateString('en', { day: 'numeric', month: 'short' });
+          },
         },
-        type: 'time',
-        distribution: 'linear',
       }]
     },
     legend: {
