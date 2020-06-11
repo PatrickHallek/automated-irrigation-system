@@ -1,13 +1,14 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
 
+const String sensorName = "***";
 const String ssid = "***";
 const String password = "***";
-const char* host = "192.168.178.44";
+const char* host = "***";
 const int port = 3000;
 
-const int numReadings = 3;
-const int sendingIntervall = 1000;
+const int numReadings = 30;
+const int sendingIntervall = 60000;
 
 int inputPin1 = A0;
 
@@ -59,7 +60,7 @@ void postData(int data) {
 
     HTTPClient http;  // Declare object of class HTTPClient
 
-    http.begin("http://" + (String)host + ":" + (String)port + "/measurement");  // Specify request destination
+    http.begin("http://" + (String)host + ":" + (String)port + "/measurement/" + (String)sensorName);  // Specify request destination
     http.addHeader("Content-Type", "application/json");  // Specify content-type header
     http.POST("{\"capacity\": \"" + (String)data + "\"}");// Send the request
     http.end();                                        // Close connection
