@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 
 const Preferences = props => {
   const sensorName = props.sensorInFocus
+  const capacityFactor = 100000
   const [preferences, setPreferences] = useState({
     minIrrigationIntervalInMinutes: 0,
     irrigationTimeInSeconds: 0,
@@ -24,8 +25,8 @@ const Preferences = props => {
         .then(res => res.json())
         .then(
           async (preferences) => {
-            setDatabasePreferences(preferences)
-            setPreferences(preferences)
+            setDatabasePreferences({ ...preferences, capacityBuffer: parseInt(capacityFactor / preferences.capacityBuffer) })
+            setPreferences({ ...preferences, capacityBuffer: parseInt(capacityFactor / preferences.capacityBuffer) })
           },
           (error) => {
             console.log(`Coudn't fetch data. Error: ${error}`)
@@ -39,12 +40,12 @@ const Preferences = props => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/preferences/${sensorName}`, {
       headers: { 'Content-Type': 'application/json', },
       method: 'PUT',
-      body: JSON.stringify({ ...preferences })
+      body: JSON.stringify({ ...preferences, capacityBuffer: parseInt(capacityFactor / preferences.capacityBuffer) })
     })
       .then(res => res.json())
       .then(
-        async (result) => {
-          setDatabasePreferences(result)
+        async (preferences) => {
+          setDatabasePreferences({ ...preferences, capacityBuffer: parseInt(capacityFactor / preferences.capacityBuffer) })
         },
         (error) => {
           console.log(`Coudn't fetch data. Error: ${error}`)
@@ -53,11 +54,11 @@ const Preferences = props => {
   }
 
   const preferenceBorderColor = (key) => {
-    return preferences[key] === databasePreferences[key] ? "#161A30 !important" : "var(--primary)"
+    return preferences[key] === databasePreferences[key] ? "#161A30 !important" : "var(--primary) !important"
   }
 
   const preferenceButtonColor = () => {
-    return JSON.stringify(preferences) === JSON.stringify(databasePreferences) ? "#161A30 !important" : "var(--primary)"
+    return JSON.stringify(preferences) === JSON.stringify(databasePreferences) ? "#161A30 !important" : "var(--primary) !important"
   }
 
   return (
@@ -77,7 +78,7 @@ const Preferences = props => {
           value={preferences.minIrrigationIntervalInMinutes} />
       </div>
       <div className="preference">
-        <h3>Capacity Buffer:</h3>
+        <h3>Minimum soil moisture:</h3>
         <input sx={{ color: "text", borderColor: preferenceBorderColor("capacityBuffer") }} type="number"
           onChange={(e) => setPreferences({ ...preferences, capacityBuffer: parseInt(e.target.value) })}
           value={preferences.capacityBuffer} />

@@ -6,6 +6,7 @@ import "../style.css";
 
 const LineChart = props => {
   const sensorName = props.sensorInFocus
+  const capacityFactor = 100000
   const requestIntervall = 5000
   const context = useThemeUI()
   const chartRef = React.createRef();
@@ -77,7 +78,7 @@ const LineChart = props => {
         .then(
           async (liveData) => {
             const timestamps = liveData.map(data => data.timestamp)
-            const capacities = liveData.map(data => data.capacity)
+            const capacities = liveData.map(data => capacityFactor / data.capacity)
             setChartData({
               labels: timestamps,
               datasets: [{

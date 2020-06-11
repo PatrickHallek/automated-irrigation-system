@@ -37,7 +37,7 @@ const Main = () => {
           <SensorPicker sensors={sensors} setSensorInFocus={setSensorInFocus} sensorInFocus={sensorInFocus} />
           <Card title="Statistics" body={<LineChart sensorInFocus={sensorInFocus} />} />
           <Card title="Preferences" body={<Preferences sensorInFocus={sensorInFocus} />} />
-          <Card body={<IotButton />} />
+          <Card body={<IotButton sensorInFocus={sensorInFocus}/>} />
         </div>
       </div>
     </div>
