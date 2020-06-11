@@ -58,7 +58,17 @@ const Preferences = props => {
   }
 
   const preferenceButtonColor = () => {
-    return JSON.stringify(preferences) === JSON.stringify(databasePreferences) ? "#161A30 !important" : "var(--primary) !important"
+    return JSON.stringify({
+      minIrrigationIntervalInMinutes: preferences.minIrrigationIntervalInMinutes,
+      irrigationTimeInSeconds: preferences.irrigationTimeInSeconds,
+      capacityBuffer: preferences.capacityBuffer,
+      signalPin: preferences.signalPin
+    }) === JSON.stringify({
+      minIrrigationIntervalInMinutes: databasePreferences.minIrrigationIntervalInMinutes,
+      irrigationTimeInSeconds: databasePreferences.irrigationTimeInSeconds,
+      capacityBuffer: databasePreferences.capacityBuffer,
+      signalPin: databasePreferences.signalPin
+    }) ? "#161A30 !important" : "var(--primary) !important"
   }
 
   return (

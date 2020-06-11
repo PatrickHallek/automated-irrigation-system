@@ -24,6 +24,7 @@ const LineChart = props => {
   });
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     animation: {
       duration: 300,
       easing: 'linear'

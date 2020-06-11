@@ -33,11 +33,19 @@ const Main = () => {
     <div>
       <Header />
       <div className="main">
-        <div className="container">
-          <SensorPicker sensors={sensors} setSensorInFocus={setSensorInFocus} sensorInFocus={sensorInFocus} />
-          <Card title="Statistics" body={<LineChart sensorInFocus={sensorInFocus} />} />
-          <Card title="Preferences" body={<Preferences sensorInFocus={sensorInFocus} />} />
-          <Card body={<IotButton sensorInFocus={sensorInFocus}/>} />
+        <div className="container row">
+          <div className="col-12">
+            <SensorPicker sensors={sensors} setSensorInFocus={setSensorInFocus} sensorInFocus={sensorInFocus} />
+          </div>
+          <div className="col-md-12">
+            <Card title="Statistics" body={<LineChart sensorInFocus={sensorInFocus} />} />
+          </div>
+          <div className="col-md-6">
+            <Card title="Preferences" body={<Preferences sensorInFocus={sensorInFocus} />} />
+          </div>
+          <div className="col-md-6">
+            <Card body={<IotButton sensorInFocus={sensorInFocus} />} />
+          </div>
         </div>
       </div>
     </div>
