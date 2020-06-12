@@ -13,13 +13,10 @@
     "express-rate-limit": "^5.1.3",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
-    "johnny-five": "^1.4.0",
     "mongoose": "4.13.19",
     "morgan": "~1.9.1",
     "node-cron": "^2.0.3",
-    "raspi-io": "^11.0.0",
-    "rpio": "^2.1.1",
-    "serialport": "^9.0.0"
+    "rpio": "^2.1.1"
   },
   "devDependencies": {
     "nodemon": "^1.18.5"
