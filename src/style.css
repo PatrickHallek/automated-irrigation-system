@@ -83,6 +83,7 @@ h4 {
 .container {
   position: relative;
   padding: 0px;
+  margin-top: 10px;
 }
 
 @media (max-width: 726px) {
@@ -265,7 +266,6 @@ option {
 .sensorPicker {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 10px;
   width: 100%;
 }
 
