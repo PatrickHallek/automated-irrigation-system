@@ -15,7 +15,7 @@ services:
       - SKIP_PREFLIGHT_CHECK:true
       - PORT:4200
       - HOST=0.0.0.0
-      - REACT_APP_BACKEND_URL=http://192.168.178.29:3000
+      - REACT_APP_BACKEND_URL=http://192.168.178.50:3000
 
   backend:
     build: ./backend/
