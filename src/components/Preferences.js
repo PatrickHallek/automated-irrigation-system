@@ -1,11 +1,11 @@
 /** @jsx jsx */
-import { jsx, useThemeUI } from "theme-ui";
+import { jsx } from "theme-ui";
 import "../style.css";
 import { useState, useEffect } from "react";
 
 const Preferences = props => {
   const sensorName = props.sensorInFocus
-  const context = useThemeUI()
+  const capacityFactor = 100000
   const [preferences, setPreferences] = useState({
     minIrrigationIntervalInMinutes: 0,
     irrigationTimeInSeconds: 0,
@@ -20,17 +20,19 @@ const Preferences = props => {
   });
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/preferences/${sensorName}`)
-      .then(res => res.json())
-      .then(
-        async (preferences) => {
-          setDatabasePreferences(preferences)
-          setPreferences(preferences)
-        },
-        (error) => {
-          console.log(`Coudn't fetch data. Error: ${error}`)
-        }
-      )
+    if (sensorName) {
+      fetch(`${process.env.REACT_APP_BACKEND_URL}/preferences/${sensorName}`)
+        .then(res => res.json())
+        .then(
+          async (preferences) => {
+            setDatabasePreferences({ ...preferences, capacityBuffer: parseInt(capacityFactor / preferences.capacityBuffer) })
+            setPreferences({ ...preferences, capacityBuffer: parseInt(capacityFactor / preferences.capacityBuffer) })
+          },
+          (error) => {
+            console.log(`Coudn't fetch data. Error: ${error}`)
+          }
+        )
+    }
   }, [setPreferences, sensorName])
 
 
@@ -38,12 +40,12 @@ const Preferences = props => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/preferences/${sensorName}`, {
       headers: { 'Content-Type': 'application/json', },
       method: 'PUT',
-      body: JSON.stringify({ ...preferences })
+      body: JSON.stringify({ ...preferences, capacityBuffer: parseInt(capacityFactor / preferences.capacityBuffer) })
     })
       .then(res => res.json())
       .then(
-        async (result) => {
-          setDatabasePreferences(result)
+        async (preferences) => {
+          setDatabasePreferences({ ...preferences, capacityBuffer: parseInt(capacityFactor / preferences.capacityBuffer) })
         },
         (error) => {
           console.log(`Coudn't fetch data. Error: ${error}`)
@@ -52,11 +54,21 @@ const Preferences = props => {
   }
 
   const preferenceBorderColor = (key) => {
-    return preferences[key] === databasePreferences[key] ? `${context.theme.colors.background} !important` : "initial"
+    return preferences[key] === databasePreferences[key] ? "#161A30 !important" : "var(--primary) !important"
   }
 
   const preferenceButtonColor = () => {
-    return JSON.stringify(preferences) === JSON.stringify(databasePreferences) ? `${context.theme.colors.background} !important` : "initial"
+    return JSON.stringify({
+      minIrrigationIntervalInMinutes: preferences.minIrrigationIntervalInMinutes,
+      irrigationTimeInSeconds: preferences.irrigationTimeInSeconds,
+      capacityBuffer: preferences.capacityBuffer,
+      signalPin: preferences.signalPin
+    }) === JSON.stringify({
+      minIrrigationIntervalInMinutes: databasePreferences.minIrrigationIntervalInMinutes,
+      irrigationTimeInSeconds: databasePreferences.irrigationTimeInSeconds,
+      capacityBuffer: databasePreferences.capacityBuffer,
+      signalPin: databasePreferences.signalPin
+    }) ? "#161A30 !important" : "var(--primary) !important"
   }
 
   return (
@@ -76,7 +88,7 @@ const Preferences = props => {
           value={preferences.minIrrigationIntervalInMinutes} />
       </div>
       <div className="preference">
-        <h3>Capacity Buffer:</h3>
+        <h3>Minimum soil moisture:</h3>
         <input sx={{ color: "text", borderColor: preferenceBorderColor("capacityBuffer") }} type="number"
           onChange={(e) => setPreferences({ ...preferences, capacityBuffer: parseInt(e.target.value) })}
           value={preferences.capacityBuffer} />
@@ -89,7 +101,7 @@ const Preferences = props => {
       </div>
       <div className="preference">
         <div></div>
-        <button sx={{ borderColor: preferenceButtonColor() }} onClick={() => updatePreferences()}>Submit</button>
+        <button sx={{ color: "text", borderColor: preferenceButtonColor() }} onClick={() => updatePreferences()}>Submit</button>
       </div>
     </h3>
   );

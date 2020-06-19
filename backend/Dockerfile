@@ -1,7 +1,6 @@
-FROM mhart/alpine-node:14
+FROM node:10
 COPY . /src
 WORKDIR /src
-RUN apk add --no-cache make gcc g++ python linux-headers udev
 RUN npm install
-RUN npm rebuild serialport --build-from-source
+RUN npm rebuild
 EXPOSE 3000

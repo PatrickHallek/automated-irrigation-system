@@ -39,6 +39,11 @@ code {
   --secondaryGradient: linear-gradient(90deg, #598bff, #36f);
 }
 
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
 h1 {
   font-size: 24px;
   font-family: "IBM Plex Mono";
@@ -67,12 +72,30 @@ h4 {
   margin: 5px 0px 5px 0px;
 }
 
-.container {
-  display: realative;
-  padding: 10px;
+.main {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
+  position: relative;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.container {
+  position: relative;
+  padding: 0px;
+  margin-top: 10px;
+}
+
+@media (max-width: 726px) {
+  .container {
+    max-width: 100%
+  }
+}
+
+.container>div {
+  max-width: 100%;
+  padding: 0px 10px 0px 10px;
+  position: relative;
 }
 
 header {
@@ -92,8 +115,7 @@ header {
 
 .card {
   position: relative;
-  width: 100%;
-  max-width: 100%;
+  width: auto;
   height: auto;
   padding: 10px 20px 10px 20px;
   border-radius: var(--border-radius);
@@ -141,6 +163,13 @@ img {
 
 .line-chart {
   margin-top: 15px;
+  height: 25vh;
+}
+
+@media (min-width: 992px) {
+ .line-chart {
+   height: 45vh;
+ }
 }
 
 .chart-drop-down {
@@ -210,9 +239,10 @@ option {
 
 .preference input {
   background: transparent;
-  border: solid 2px var(--primary);
+  font-family: "Arial";
+  border: solid 2px;
   height: 25px;
-  width: 50px;
+  width: 55px;
   font-size: 18px;
   border-radius: 5px;
   padding-left: 5px;
@@ -222,7 +252,7 @@ option {
 
 .preference button {
   background: transparent;
-  border: solid 2px var(--primary);
+  border: solid 2px;
   height: 30px;
   width: 100%;
   font-size: 18px;
@@ -230,19 +260,18 @@ option {
   padding-left: 5px;
   margin-top: 5px;
   outline: none !important;
-  color: white;
   transition: all 0.3s ease;
 }
 
 .sensorPicker {
   display: flex;
+  flex-wrap: wrap;
   width: 100%;
-  justify-content: flex-start;
 }
 
 .sensorPicker>div {
+  flex: 0 0 auto;
   font-size: 13.3333;
-  width: auto;
   margin-right: 5px;
   padding: 0px 10px 0px 10px;
   border: 2px transparent solid;

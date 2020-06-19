@@ -10,7 +10,7 @@ import { useState, useEffect } from "react";
 
 const Main = () => {
   const [sensors, setSensors] = useState([]);
-  const [sensorInFocus, setSensorInFocus] = useState([]);
+  const [sensorInFocus, setSensorInFocus] = useState();
   useEffect(() => {
     getSensors()
   }, [setSensors])
@@ -32,11 +32,21 @@ const Main = () => {
   return (
     <div>
       <Header />
-      <div className="container">
-        <SensorPicker sensors={sensors} setSensorInFocus={setSensorInFocus} sensorInFocus={sensorInFocus} />
-        <Card title="Statistics" body={<LineChart  sensorInFocus={sensorInFocus}/>} />
-        <Card title="Preferences" body={<Preferences sensorInFocus={sensorInFocus}/>}  />
-        <Card body={<IotButton />} />
+      <div className="main">
+        <div className="container row">
+          <div className="col-12">
+            <SensorPicker sensors={sensors} setSensorInFocus={setSensorInFocus} sensorInFocus={sensorInFocus} />
+          </div>
+          <div className="col-md-12">
+            <Card title="Statistics" body={<LineChart sensorInFocus={sensorInFocus} />} />
+          </div>
+          <div className="col-md-6">
+            <Card title="Preferences" body={<Preferences sensorInFocus={sensorInFocus} />} />
+          </div>
+          <div className="col-md-6">
+            <Card body={<IotButton sensorInFocus={sensorInFocus} />} />
+          </div>
+        </div>
       </div>
     </div>
   );

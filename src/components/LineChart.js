@@ -6,6 +6,7 @@ import "../style.css";
 
 const LineChart = props => {
   const sensorName = props.sensorInFocus
+  const capacityFactor = 100000
   const requestIntervall = 5000
   const context = useThemeUI()
   const chartRef = React.createRef();
@@ -23,6 +24,7 @@ const LineChart = props => {
   });
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     animation: {
       duration: 300,
       easing: 'linear'
@@ -51,10 +53,15 @@ const LineChart = props => {
           fontColor: context.theme.colors.text,
           maxTicksLimit: 4,
           maxRotation: 0,
-          minRotation: 0
+          minRotation: 0,
+          callback: function (value) {
+            if (dataFilter === "minute") return new Date(value).toLocaleTimeString('en', { second: 'numeric' }) + 's';
+            if (dataFilter === "hour") return new Date(value).toLocaleTimeString('en', { minute: 'numeric' }) + 'min';
+            if (dataFilter === "day") return new Date(value).toLocaleTimeString('en', { hour: 'numeric' });
+            if (dataFilter === "week") return new Date(value).toLocaleDateString('en', { day: 'numeric', month: 'short' });
+            if (dataFilter === "month") return new Date(value).toLocaleDateString('en', { day: 'numeric', month: 'short' });
+          },
         },
-        type: 'time',
-        distribution: 'linear',
       }]
     },
     legend: {
@@ -72,7 +79,7 @@ const LineChart = props => {
         .then(
           async (liveData) => {
             const timestamps = liveData.map(data => data.timestamp)
-            const capacities = liveData.map(data => data.capacity)
+            const capacities = liveData.map(data => capacityFactor / data.capacity)
             setChartData({
               labels: timestamps,
               datasets: [{
