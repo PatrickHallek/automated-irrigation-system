@@ -3,11 +3,13 @@ services:
   frontend:
     build: .
     ports:
-      - "4200:4200"
-    volumes:
-      - .:/src
+      - "5000:5000"
     restart: always
     command: npm start
+    volumes:
+      - ./:/src
+      - /node_modules/
+      - /backend/
     depends_on:
       - backend
       - mongodb
@@ -22,8 +24,8 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./backend:/src
-      - /src/node_modules/
+      - ./backend:/src/backend
+      - /src/backend/node_modules/
     command: npm start
     restart: always
     depends_on:
