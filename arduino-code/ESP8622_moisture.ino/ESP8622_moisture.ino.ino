@@ -8,7 +8,7 @@ const char* host = "***";
 const int port = 3000;
 
 const int numReadings = 30;
-const int sendingIntervall = 60000;
+const int sendingIntervall = 1000;
 
 int inputPin1 = A0;
 
