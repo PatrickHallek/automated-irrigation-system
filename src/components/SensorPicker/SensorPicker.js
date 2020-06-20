@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui";
-import "../style.css";
+import "./SensorPicker.css";
 
 const SensorPicker = props => {
     return (

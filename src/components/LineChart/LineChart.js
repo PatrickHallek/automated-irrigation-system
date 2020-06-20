@@ -2,12 +2,12 @@
 import { jsx, useThemeUI } from "theme-ui";
 import React, { useState, useEffect } from 'react'
 import { Line } from "react-chartjs-2";
-import "../style.css";
+import "./LineChart.css";
 
 const LineChart = props => {
   const sensorName = props.sensorInFocus
   const capacityFactor = 100000
-  const requestIntervall = 5000
+  const requestIntervall = 1000
   const context = useThemeUI()
   const chartRef = React.createRef();
   const [dataFilter, setDataFilter] = useState("day");

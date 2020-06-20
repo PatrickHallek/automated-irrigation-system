@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui";
-import "../style.css";
+import "./IotButton.css";
 import { useState } from "react";
 
 const IotButton = props => {
@@ -32,7 +32,7 @@ const IotButton = props => {
         }}
         onClick={() => sendIrrigationRequest()}
       >
-        {spinner === false ? <img width="40px" src={require('../assets/watering.svg')} alt="dark" /> : <div id="loading" />}
+        {spinner === false ? <img width="40px" src={require('../../assets/watering.svg')} alt="dark" /> : <div id="loading" />}
       </button>
       <h3 sx={{ color: "text", marginLeft: "12px", lineHeight: "23px" }}>
         Start Manual Irrigation <br />

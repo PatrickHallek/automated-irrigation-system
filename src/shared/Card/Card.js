@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui";
-import "../style.css";
+import "./Card.css";
 
 const Card = props => {
   return (

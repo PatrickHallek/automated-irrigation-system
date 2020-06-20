@@ -2,7 +2,7 @@
 import { jsx } from "theme-ui";
 import { useColorMode } from "theme-ui";
 
-const ToggleColorMode = () => {
+const ThemePicker = () => {
   const [colorMode, setColorMode] = useColorMode();
   return (
     <button
@@ -11,12 +11,12 @@ const ToggleColorMode = () => {
     >
       <div sx={{ color: "text" }}>
         {colorMode === "light" ?
-          <img width="20px" src={require('../assets/moon.svg')} alt="dark" /> :
-          <img width="20px" src={require('../assets/sun.svg')} alt="light" />
+          <img width="20px" src={require('../../../assets/moon.svg')} alt="dark" /> :
+          <img width="20px" src={require('../../../assets/sun.svg')} alt="light" />
         }
       </div>
     </button>
   );
 };
 
-export default ToggleColorMode;
+export default ThemePicker;

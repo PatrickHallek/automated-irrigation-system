@@ -1,0 +1,44 @@
+.line-chart {
+    margin-top: 15px;
+    height: 25vh;
+}
+
+@media (min-width: 992px) {
+    .line-chart {
+        height: 45vh;
+    }
+}
+
+.chart-drop-down {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 3px;
+    box-shadow: var(--box-shadow);
+    outline: none !important;
+    cursor: pointer;
+    border: solid 2px var(--primary);
+    border-radius: 5px;
+    font-family: "IBM Plex Mono";
+    background: transparent;
+}
+
+option {
+    color: #262F4D !important;
+}
+
+.toggler {
+    height: 30px;
+    width: 50px;
+    border: solid 2px var(--primary);
+    border-radius: 15px;
+    background: transparent;
+    outline: none !important;
+    cursor: pointer;
+    box-shadow: var(--box-shadow);
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    padding-top: 2px;
+}

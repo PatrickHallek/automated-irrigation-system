@@ -1,4 +1,3 @@
-// example theme.js
 const theme = {
   colors: {
     text: "white",

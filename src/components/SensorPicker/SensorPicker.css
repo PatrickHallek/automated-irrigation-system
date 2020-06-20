@@ -1,0 +1,14 @@
+.sensorPicker {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.sensorPicker>div {
+    flex: 0 0 auto;
+    font-size: 13.3333;
+    margin-right: 5px;
+    padding: 0px 10px 0px 10px;
+    border: 2px transparent solid;
+    cursor: pointer;
+}
