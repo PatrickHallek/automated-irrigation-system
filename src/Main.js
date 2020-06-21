@@ -1,12 +1,13 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui";
-import Header from "./components/Header";
-import Card from "./components/Card";
-import IotButton from "./components/IotButton";
-import LineChart from "./components/LineChart";
-import Preferences from "./components/Preferences";
-import SensorPicker from "./components/SensorPicker";
+import Header from "./components/Header/Header";
+import Card from "./shared/Card/Card";
+import IotButton from "./components/IotButton/IotButton";
+import LineChart from "./components/LineChart/LineChart";
+import Preferences from "./components/Preferences/Preferences";
+import SensorPicker from "./components/SensorPicker/SensorPicker";
 import { useState, useEffect } from "react";
+import "./style.css"
 
 const Main = () => {
   const [sensors, setSensors] = useState([]);

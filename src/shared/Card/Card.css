@@ -1,0 +1,17 @@
+.card {
+    position: relative;
+    width: auto;
+    height: auto;
+    padding: 10px 20px 10px 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.separator {
+    background: var(--primary);
+    width: 100%;
+    height: 2px;
+    padding-right: 5px
+}

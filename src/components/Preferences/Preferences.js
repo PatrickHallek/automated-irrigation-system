@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui";
-import "../style.css";
+import "./Preferences.css";
 import { useState, useEffect } from "react";
 
 const Preferences = props => {
