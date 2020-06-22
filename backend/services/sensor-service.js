@@ -1,21 +1,22 @@
-const dotenv = require('dotenv');
-dotenv.config();
-const preferenceService = require("../services/preference-service")
-let rpio = {};
-if (!process.env.DEVELOPMENT) rpio = require('rpio');
+// import { open, OUTPUT, LOW, write, HIGH, sleep, close } from 'rpio';
 
-exports.irrigate = async (irrigationTimeInSeconds, sensorName) => {
-    const preferences = await preferenceService.getPreference(sensorName)
-    console.log("Start Irrigation...")
-    rpio.open(preferences.signalPin, rpio.OUTPUT, rpio.LOW);
-    rpio.write(preferences.signalPin, rpio.HIGH);
-    rpio.sleep(irrigationTimeInSeconds);
-    rpio.write(preferences.signalPin, rpio.LOW);
-    rpio.close(preferences.signalPin);
-    return "Success"
-}
+import { PreferenceService } from "./preference-service";
 
-exports.getSensorNames = async () => {
-    const preferences = await preferenceService.getPreferences()
-    return preferences.map(preference => preference.sensorName)
+export class SensorSerivce {
+
+    async irrigate(irrigationTimeInSeconds, sensorName) {
+        const preferences = await PreferenceService.getPreference(sensorName)
+        console.log("Start Irrigation...")
+        open(preferences.signalPin, OUTPUT, LOW);
+        write(preferences.signalPin, HIGH);
+        sleep(irrigationTimeInSeconds);
+        write(preferences.signalPin, LOW);
+        close(preferences.signalPin);
+        return "Success"
+    }
+
+    async getSensorNames() {
+        const preferences = await PreferenceService.getPreferences()
+        return preferences.map(preference => preference.sensorName)
+    }
 }

@@ -1,9 +1,12 @@
-const preferenceService = require("../services/preference-service")
+import { PreferenceService } from "../services/preference-service";
 
-exports.getPreference = async (req, res, next) => {
-    res.json(await preferenceService.getPreference(req.params.sensorName));
-};
+export class PreferenceController {
 
-exports.updatePreferences = async (req, res, next) => {
-    res.json(await preferenceService.updatePreferences(req.body, req.params.sensorName));
-};
+    async getPreference(req, res, next) {
+        res.json(await PreferenceService.getPreference(req.params.sensorName));
+    }
+
+    async updatePreferences(req, res, next) {
+        res.json(await PreferenceService.updatePreferences(req.body, req.params.sensorName));
+    }
+}

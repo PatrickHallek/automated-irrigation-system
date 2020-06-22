@@ -1,71 +1,74 @@
-const measurementService = require("../services/measurement-service")
-const irrigationService = require("../services/irrigation-service")
+import { MeasurementSerivce } from "../services/measurement-service";
+import { IrrigationSerivce } from "../services/irrigation-service";
 
-exports.getLastMinuteMeasurements = async (req, res, next) => {
-    const queryFilter = {
-        sensorName: req.params.sensorName,
-        timestamp: {
-            $lte: new Date(),
-            $gte: new Date(new Date().setMinutes(new Date().getMinutes() - 1))
+export class MeasurementController {
+
+    async getLastMinuteMeasurements(req, res, next) {
+        const queryFilter = {
+            sensorName: req.params.sensorName,
+            timestamp: {
+                $lte: new Date(),
+                $gte: new Date(new Date().setMinutes(new Date().getMinutes() - 1))
+            }
         }
+        res.json(await MeasurementSerivce.getSecondlyMeasurements(queryFilter));
     }
-    res.json(await measurementService.getSecondlyMeasurements(queryFilter));
-};
 
-exports.getLastHourMeasurements = async (req, res, next) => {
-    const queryFilter = {
-        sensorName: req.params.sensorName,
-        timestamp: {
-            $lte: new Date(),
-            $gte: new Date(new Date().setHours(new Date().getHours() - 1))
+    async getLastHourMeasurements(req, res, next) {
+        const queryFilter = {
+            sensorName: req.params.sensorName,
+            timestamp: {
+                $lte: new Date(),
+                $gte: new Date(new Date().setHours(new Date().getHours() - 1))
+            }
         }
+        res.json(await MeasurementSerivce.getMinutelyMeasurements(queryFilter));
     }
-    res.json(await measurementService.getMinutelyMeasurements(queryFilter));
-};
 
-exports.getLastDayMeasurements = async (req, res, next) => {
-    const queryFilter = {
-        sensorName: req.params.sensorName,
-        timestamp: {
-            $lte: new Date(),
-            $gte: new Date(new Date().setDate(new Date().getDate() - 1))
+    async getLastDayMeasurements(req, res, next) {
+        const queryFilter = {
+            sensorName: req.params.sensorName,
+            timestamp: {
+                $lte: new Date(),
+                $gte: new Date(new Date().setDate(new Date().getDate() - 1))
+            }
         }
+        res.json(await MeasurementSerivce.getHourlyMeasurements(queryFilter));
     }
-    res.json(await measurementService.getHourlyMeasurements(queryFilter));
-};
 
-exports.getLastWeekMeasurements = async (req, res, next) => {
-    const queryFilter = {
-        sensorName: req.params.sensorName,
-        timestamp: {
-            $lte: new Date(),
-            $gte: new Date(new Date().setDate(new Date().getDate() - 7))
+    async getLastWeekMeasurements(req, res, next) {
+        const queryFilter = {
+            sensorName: req.params.sensorName,
+            timestamp: {
+                $lte: new Date(),
+                $gte: new Date(new Date().setDate(new Date().getDate() - 7))
+            }
         }
+        res.json(await MeasurementSerivce.getHourlyMeasurements(queryFilter));
     }
-    res.json(await measurementService.getHourlyMeasurements(queryFilter));
-};
 
-exports.getLastMonthMeasurements = async (req, res, next) => {
-    const queryFilter = {
-        sensorName: req.params.sensorName,
-        timestamp: {
-            $lte: new Date(),
-            $gte: new Date(new Date().setMonth(new Date().getMonth() - 1))
+    async getLastMonthMeasurements(req, res, next) {
+        const queryFilter = {
+            sensorName: req.params.sensorName,
+            timestamp: {
+                $lte: new Date(),
+                $gte: new Date(new Date().setMonth(new Date().getMonth() - 1))
+            }
         }
+        res.json(await MeasurementSerivce.getDailyMeasurements(queryFilter));
     }
-    res.json(await measurementService.getDailyMeasurements(queryFilter));
-};
 
-exports.getAllMeasurements = async (req, res, next) => {
-    const queryFilter = {
-        sensorName: req.params.sensorName
+    async getAllMeasurements(req, res, next) {
+        const queryFilter = {
+            sensorName: req.params.sensorName
+        }
+        res.json(await MeasurementSerivce.getDailyMeasurements(queryFilter));
     }
-    res.json(await measurementService.getDailyMeasurements(queryFilter));
-};
 
-exports.setMeasurement = async (req, res, next) => {
-    console.log(req.body.capacity)
-    const result = await measurementService.setMeasurement(req.body.capacity, req.params.sensorName);
-    const irrigated = await irrigationService.irrigateIfNeeded(req.body.capacity, req.params.sensorName);
-    res.json({ ...result, irrigated })
-};
+    async setMeasurement(req, res, next) {
+        console.log(req.body.capacity)
+        const result = await MeasurementSerivce.setMeasurement(req.body.capacity, req.params.sensorName);
+        const irrigated = await IrrigationSerivce.irrigateIfNeeded(req.body.capacity, req.params.sensorName);
+        res.json({ ...result, irrigated })
+    }
+}

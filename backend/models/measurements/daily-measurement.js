@@ -1,7 +1,6 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import mongoose from 'mongoose';
 
-const dailyMeasurementSchema = new Schema({
+const dailyMeasurementSchema = new mongoose.Schema({
     timestamp: {
         type: Date,
         default: Date.now,
@@ -17,4 +16,4 @@ const dailyMeasurementSchema = new Schema({
     }
 })
 
-module.exports = mongoose.model('daily_measurements', dailyMeasurementSchema);
+export default mongoose.model('daily_measurements', dailyMeasurementSchema);

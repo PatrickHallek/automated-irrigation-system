@@ -1,7 +1,6 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import mongoose from 'mongoose';
 
-const preferenceSchema = new Schema({
+const preferenceSchema = new mongoose.Schema({
     minIrrigationIntervalInMinutes: {
         type: Number,
         require: true
@@ -24,4 +23,4 @@ const preferenceSchema = new Schema({
     }
 })
 
-module.exports = mongoose.model('preferences', preferenceSchema);
+export default mongoose.model('preferences', preferenceSchema);

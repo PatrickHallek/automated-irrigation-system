@@ -1,5 +1,8 @@
-const irrigationService = require("../services/irrigation-service")
+import { IrrigationSerivce } from "../services/irrigation-service";
 
-exports.getIrrigations = async (req, res, next) => {
-    res.json(await irrigationService.getIrrigations(req.params.sensorName));
-};
+export class IrrigationController {
+
+    async getIrrigations(req, res, next) {
+        res.json(await IrrigationSerivce.getIrrigations(req.params.sensorName));
+    }
+}

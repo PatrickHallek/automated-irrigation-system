@@ -1,18 +1,26 @@
-const createError = require('http-errors');
-const express = require('express');
-const dotenv = require('dotenv');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const logger = require('morgan');
-const mongoose = require('mongoose');
+import createError from 'http-errors';
+import express, {
+  json,
+  urlencoded
+} from 'express';
+import {
+  config
+} from 'dotenv';
+import {
+  join
+} from 'path';
+import mongoose from 'mongoose';
+import cookieParser from 'cookie-parser';
+import logger from 'morgan';
+
+import indexRouter from './routes/index';
 
 const app = express();
 
-const indexRouter = require('./routes/index');
-
 // Load envs
-dotenv.config({ path: (__dirname, './.env')});
+config({
+  path: (__dirname, './.env')
+});
 
 // Mongoose Configs
 mongoose.Promise = global.Promise;
@@ -28,8 +36,9 @@ mongoose.connect(uri, {
   })
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', join(__dirname, 'views'));
 app.set('view engine', 'jade');
+
 
 // Enable Cors
 app.use(function (req, res, next) {
@@ -40,10 +49,10 @@ app.use(function (req, res, next) {
 });
 
 app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(json());
+app.use(urlencoded({
+  extended: false
+}));
 app.use(cookieParser());
 app.use('/', indexRouter);
 
@@ -64,4 +73,10 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+app.set('port', process.env.PORT || 3000)
+
+app.listen(app.get('port'), () => {
+  console.log(`Express server listening on port ${app.get('port')}`);
+})
+
+export default app;

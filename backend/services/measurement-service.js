@@ -1,50 +1,61 @@
-const DailyMeasurement = require("../models/measurements/daily-measurement");
-const HourlyMeasurement = require("../models/measurements/hourly-measurement");
-const MinutelyMeasurement = require("../models/measurements/minutely-measurement");
-const SecondlyMeasurement = require("../models/measurements/secondly-measurement");
+import SecondlyMeasurement from "../models/measurements/secondly-measurement";
+import MinutelyMeasurement from "../models/measurements/minutely-measurement";
+import HourlyMeasurement from "../models/measurements/hourly-measurement";
+import DailyMeasurement from "../models/measurements/daily-measurement";
 
-exports.setMeasurement = async (capacity, sensorName) => {
-    const minute = 1000 * 60;
-    const hour = minute * 60;
-    const day = hour * 24;
+export class MeasurementSerivce {
 
-    const currentDay = new Date(Math.floor(new Date().getTime() / day) * day);
-    const currentHour = new Date(Math.floor(new Date().getTime() / hour) * hour);
-    const currentMinute = new Date(Math.floor(new Date().getTime() / minute) * minute);
-    const currentDate = new Date();
+    constructor(DailyMeasurement, HourlyMeasurement, MinutelyMeasurement, SecondlyMeasurement) {
+        this.secondlyMeasurement = SecondlyMeasurement
+        this.minutelyMeasurement = MinutelyMeasurement
+        this.hourlyMeasurement = HourlyMeasurement
+        this.dailyMeasurement = DailyMeasurement
+    }
 
-    let result = [];
-    result.push(await updateMeasurement(DailyMeasurement, currentDay, capacity, sensorName));
-    result.push(await updateMeasurement(HourlyMeasurement, currentHour, capacity, sensorName));
-    result.push(await updateMeasurement(MinutelyMeasurement, currentMinute, capacity, sensorName));
-    result.push(await updateMeasurement(SecondlyMeasurement, currentDate, capacity, sensorName));
+    async setMeasurement(capacity, sensorName) {
+        const minute = 1000 * 60;
+        const hour = minute * 60;
+        const day = hour * 24;
 
-    return result;
-};
+        const currentDay = new Date(Math.floor(new Date().getTime() / day) * day);
+        const currentHour = new Date(Math.floor(new Date().getTime() / hour) * hour);
+        const currentMinute = new Date(Math.floor(new Date().getTime() / minute) * minute);
+        const currentDate = new Date();
 
-const updateMeasurement = async (collection, timestamp, capacity, sensorName) => {
-    return await collection.updateOne({
-        timestamp
-    }, {
-        capacity,
-        sensorName
-    }, {
-        upsert: true,
-    })
+        let result = [];
+        result.push(await this.updateMeasurement(this.secondlyMeasurement, currentDate, capacity, sensorName));
+        result.push(await this.updateMeasurement(this.minutelyMeasurement, currentMinute, capacity, sensorName));
+        result.push(await this.updateMeasurement(this.hourlyMeasurement, currentHour, capacity, sensorName));
+        result.push(await this.updateMeasurement(this.dailyMeasurement, currentDay, capacity, sensorName));
+
+        return result;
+    }
+
+    async updateMeasurement(collection, timestamp, capacity, sensorName) {
+        return await collection.updateOne({
+            timestamp
+        }, {
+            capacity,
+            sensorName
+        }, {
+            upsert: true,
+        })
+    }
+    async getSecondlyMeasurements(queryFilter) {
+        return await SecondlyMeasurement.find(queryFilter);
+    }
+
+    async getMinutelyMeasurements(queryFilter) {
+        return await MinutelyMeasurement.find(queryFilter);
+    }
+
+    async getHourlyMeasurements(queryFilter) {
+        return await HourlyMeasurement.find(queryFilter);
+    }
+
+    async getDailyMeasurements(queryFilter) {
+        return await DailyMeasurement.find(queryFilter);
+    }
+
+
 }
-
-exports.getDailyMeasurements = async (queryFilter) => {
-    return await DailyMeasurement.find(queryFilter);
-};
-
-exports.getHourlyMeasurements = async (queryFilter) => {
-    return await HourlyMeasurement.find(queryFilter);
-};
-
-exports.getMinutelyMeasurements = async (queryFilter) => {
-    return await MinutelyMeasurement.find(queryFilter);
-};
-
-exports.getSecondlyMeasurements = async (queryFilter) => {
-    return await SecondlyMeasurement.find(queryFilter);
-};

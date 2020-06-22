@@ -1,7 +1,6 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import mongoose from 'mongoose';
 
-const irrigationSchema = new Schema({
+const irrigationSchema = new mongoose.Schema({
     timestamp: {
         type: Date,
         default: Date.now,
@@ -17,4 +16,4 @@ const irrigationSchema = new Schema({
     }
 })
 
-module.exports = mongoose.model('irrigations', irrigationSchema);
+export default mongoose.model('irrigations', irrigationSchema);

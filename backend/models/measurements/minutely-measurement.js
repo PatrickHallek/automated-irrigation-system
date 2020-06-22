@@ -1,7 +1,6 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import mongoose from 'mongoose';
 
-const minutelyMeasurementSchema = new Schema({
+const minutelyMeasurementSchema = new mongoose.Schema({
     timestamp: {
         type: Date,
         default: Date.now,
@@ -18,4 +17,4 @@ const minutelyMeasurementSchema = new Schema({
     }
 })
 
-module.exports = mongoose.model('minutely_measurements', minutelyMeasurementSchema);
+export default mongoose.model('minutely_measurements', minutelyMeasurementSchema);
