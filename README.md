@@ -31,13 +31,13 @@ The app contains the following features:
 
 | Name  | Anmount | Description |
 | ------------- | ------------- | ------------- |
-| [NodeMCU ESP8266](https://amzn.to/2BOPmJ5)  | 1 - n  | Wifi module for reading capacities and sending them to the backend (Raspi)|
-| [Raspberry Pi Zero](https://amzn.to/3h53OwG)  | 1  | Running the whole software and triggering the pump(s) |
-| [Raspberry Pi SD Card](https://amzn.to/3h8qbBg)  | 1  | This is the data memory for the raspberry pi  |
-| [Relay](https://amzn.to/2XJnWwz)  | 1 - n  | To close or open the pump circuit on signal  from the raspi|
-| [Capacitive Soil Moisture Sensors](https://amzn.to/3haEUf2)  | 1-n  | To measure the soil moisture. Capacitive sensors do not dissolve. Never use electrodical humidity sensors, as they wear out very quickly |
-| [Pump](https://amzn.to/2UrRtsC)  | 1 - n  | Theoretically any pump can be used, as it is controlled by a separate power supply and the relay |
-| [Aquarium tube and irrigation nozzles](https://amzn.to/3cRWPUI)  | -  | Water transfer to the plants and to distribute the water on the earth |
+| [NodeMCU ESP8266](https://amzn.to/3dh7IPR)  | 1 - n  | Wifi module for reading capacities and sending them to the backend (Raspi)|
+| [Raspberry Pi Zero](https://amzn.to/2NeY05X)  | 1  | Running the whole software and triggering the pump(s) |
+| [Raspberry Pi SD Card](https://amzn.to/3hLghpt)  | 1  | This is the data memory for the raspberry pi  |
+| [Relay](https://amzn.to/2YgcvNt)  | 1 - n  | To close or open the pump circuit on signal  from the raspi|
+| [Capacitive Soil Moisture Sensors](https://amzn.to/3dh9PTU)  | 1-n  | To measure the soil moisture. Capacitive sensors do not dissolve. Never use electrodical humidity sensors, as they wear out very quickly |
+| [Pump](https://amzn.to/3hIhRZf)  | 1 - n  | Theoretically any pump can be used, as it is controlled by a separate power supply and the relay |
+| [Aquarium tube and irrigation nozzles](https://amzn.to/3153W9I)  | -  | Water transfer to the plants and to distribute the water on the earth |
 
 The "n" in the anmount is due to the number of pumps or different plants. For example, in a raised bed it is usually sufficient to have one pump and one sensor. However, if you have different potted plants, they all need to be watered separately and therefor you have to get one pump and sensor for each potted plant.
 
