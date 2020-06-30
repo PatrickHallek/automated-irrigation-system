@@ -1,3 +1,7 @@
+[![](https://img.shields.io/badge/Buy%20me%20-coffee!-orange.svg?logo=buy-me-a-coffee&color=795548)](https://buymeacoff.ee/PatrickHallek)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+[![PRs welcome!](https://img.shields.io/badge/contributions-welcome-orange.svg?style=flat)](https://github.com/PatrickHallek/automated-irrigation-system/issues)
+
 # Automated irrigation system
 
 This is an open source application to water plants automatically. Up to now there is almost no free professional software and instructions available to build a DYI irrigation that is scalable, accurate and most importantly, durable. The app is also not only there to look good and for the love of data. Above all, it is a tool to tailor the sensors to the exact needs of the plants. This is where most irrigation systems with direct soil moisture measurement fail because every soil and plant is different and therefore manual calibration and possibly after some time also recalibration is essential.
