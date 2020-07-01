@@ -59,7 +59,6 @@ const LineChart = props => {
             if (dataFilter === "hour") return new Date(value).toLocaleTimeString('en', { minute: 'numeric' }) + 'min';
             if (dataFilter === "day") return new Date(value).toLocaleTimeString('en', { hour: 'numeric' });
             if (dataFilter === "week") return new Date(value).toLocaleDateString('en', { day: 'numeric', month: 'short' });
-            if (dataFilter === "month") return new Date(value).toLocaleDateString('en', { day: 'numeric', month: 'short' });
           },
         },
       }]
@@ -116,8 +115,6 @@ const LineChart = props => {
         <option value="hour">Last Hour</option>
         <option value="day">Last Day</option>
         <option value="week">Last Week</option>
-        <option value="month">Last Month</option>
-        <option value="all">All</option>
       </select>
       {chartData.dataset ? <div /> : <Line ref={chartRef} data={chartData} options={options} />}
     </div>
