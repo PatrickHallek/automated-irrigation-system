@@ -84,7 +84,7 @@ sudo pip3 install docker-compose
 Now you have to pass the ip address of your pi into the `REACT_APP_BACKEND_URL=http://<YOUR-RASPI-IP>:3000` environment variable in the docker-compose file:
 
 ```bash
-sudo nano docker-compose
+sudo nano docker-compose.yml
 ```
 
 You can find the ip with the command `ifconfig`. It should be something like *192.168.178.44*. You can save your input in the Nano editor with `ctr + x`, then type in `yes`, finally exit with `enter`.
