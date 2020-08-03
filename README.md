@@ -188,7 +188,7 @@ npm install
 
 If everything is installed, you are able to start the frontend and backend separately 
 ```bash
-npm build
+npm run build
 npm start &
 cd backend 
 npm start &
