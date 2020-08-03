@@ -179,6 +179,20 @@ Copy the following line into the editor in order to set the database connection:
 ```
 MONGO_DB="mongodb://localhost/irrigation"
 ```
+In order to install all dependencies in the frontend and backend, you need to run the following 
+```bash
+npm install
+cd backend
+npm install
+```
+
+If everything is installed, you are able to start the frontend and backend separately 
+```bash
+npm build
+npm start &
+cd backend 
+npm start &
+```
 
 <a name="usage"></a>
 ## Usage
