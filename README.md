@@ -44,6 +44,8 @@ The app contains the following features:
 | [Pump](https://amzn.to/2WO8Zsf)  | 1 - n  | Theoretically any pump can be used, as it is controlled by a separate power supply and the relay |
 | [Aquarium tube and irrigation nozzles](https://amzn.to/3153W9I)  | -  | Water transfer to the plants and to distribute the water on the earth |
 
+*all product links are also affiliate links to exactly the same products I bought for the system. If you order via the link, I will receive a tiny commission.
+
 The "n" in the anmount is due to the number of pumps or different plants. For example, in a raised bed it is usually sufficient to have one pump and one sensor. However, if you have different potted plants, they all need to be watered separately and therefor you have to get one pump and sensor for each potted plant.
 
 <a name="hardware-architecture"></a>
