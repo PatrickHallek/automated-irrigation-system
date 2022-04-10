@@ -18,9 +18,14 @@ const preferenceSchema = new Schema({
         type: String,
         require: true
     },
+    
     signalPin: {
         type: Number,
         required: true
+    },
+    outputSensor: {
+        type: String,
+        require: true
     }
 })
 
