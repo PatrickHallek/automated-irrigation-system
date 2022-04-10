@@ -73,7 +73,7 @@ const LineChart = props => {
 
   useEffect(() => {
     const loadData = () => {
-      fetch(`${process.env.REACT_APP_BACKEND_URL}/measurements/${dataFilter}/${sensorName}`)
+      fetch(document.URL.replace(":5000", ":3000")+`/measurements/${dataFilter}/${sensorName}`)
         .then(res => res.json())
         .then(
           async (liveData) => {
