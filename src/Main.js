@@ -17,7 +17,7 @@ const Main = () => {
   }, [setSensors])
 
   const getSensors = () => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/sensors`)
+    fetch(document.URL.replace(":5000", ":3000")+`/sensors`)
       .then(res => res.json())
       .then(
         async (sensors) => {
