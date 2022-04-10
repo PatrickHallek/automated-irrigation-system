@@ -21,7 +21,7 @@ const Preferences = props => {
 
   useEffect(() => {
     if (sensorName) {
-      fetch(document.URL.replace(":5000", ":3000")+`/preferences/${sensorName}`)
+      fetch(document.URL.replace(":5000", ":3000")+`preferences/${sensorName}`)
         .then(res => res.json())
         .then(
           async (preferences) => {
