@@ -21,7 +21,7 @@ const Preferences = props => {
 
   useEffect(() => {
     if (sensorName) {
-      fetch(`${process.env.REACT_APP_BACKEND_URL}/preferences/${sensorName}`)
+      fetch(document.URL.replace(":5000", ":3000")+`/preferences/${sensorName}`)
         .then(res => res.json())
         .then(
           async (preferences) => {
@@ -37,7 +37,7 @@ const Preferences = props => {
 
 
   const updatePreferences = (e, key) => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/preferences/${sensorName}`, {
+    fetch(document.URL.replace(":5000", ":3000")+`/preferences/${sensorName}`, {
       headers: { 'Content-Type': 'application/json', },
       method: 'PUT',
       body: JSON.stringify({ ...preferences, capacityBuffer: parseInt(capacityFactor / preferences.capacityBuffer) })
