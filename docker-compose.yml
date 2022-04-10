@@ -34,7 +34,7 @@ services:
       MONGO_DB: "mongodb://mongodb/irrigation"
 
   mongodb:
-    image: ivanmarban/armhf-mongodb
+    image: mongo
     volumes:
       - ./mongo-volume:/data/db
     ports:
