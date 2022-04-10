@@ -8,6 +8,7 @@ exports.getPreference = async (sensorName) => {
                 minIrrigationIntervalInMinutes: 15,
                 irrigationTimeInSeconds: 10,
                 capacityBuffer: 500,
+                outputSensor: "Local",
                 signalPin: 18,
                 sensorName
             }
@@ -28,6 +29,7 @@ exports.updatePreferences = async (payload, sensorName) => {
         minIrrigationIntervalInMinutes: payload.minIrrigationIntervalInMinutes,
         irrigationTimeInSeconds: payload.irrigationTimeInSeconds,
         capacityBuffer: payload.capacityBuffer,
+        outputSensor: payload.outputSensor,
         signalPin: payload.signalPin,
         sensorName: payload.sensorName
     }
