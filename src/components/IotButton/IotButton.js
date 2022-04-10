@@ -9,7 +9,7 @@ const IotButton = props => {
 
   const sendIrrigationRequest = () => {
     addSpinner(true)
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/sensors/irrigation/${sensorName}`)
+    fetch(document.URL.replace(":5000", ":3000")+`sensors/irrigation/${sensorName}`)
       .then(res => res.json())
       .then(
         async (result) => {
