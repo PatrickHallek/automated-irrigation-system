@@ -10,7 +10,7 @@ const Preferences = props => {
     minIrrigationIntervalInMinutes: 0,
     irrigationTimeInSeconds: 0,
     capacityBuffer: 0,
-    outputSensor: `Local`,
+    outputSensor: "Local",
     signalPin: 0
   });
   const [databasePreferences, setDatabasePreferences] = useState({
