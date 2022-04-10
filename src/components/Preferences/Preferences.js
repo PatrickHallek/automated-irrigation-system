@@ -37,7 +37,7 @@ const Preferences = props => {
 
 
   const updatePreferences = (e, key) => {
-    fetch(document.URL.replace(":5000", ":3000")+`/preferences/${sensorName}`, {
+    fetch(document.URL.replace(":5000", ":3000")+`preferences/${sensorName}`, {
       headers: { 'Content-Type': 'application/json', },
       method: 'PUT',
       body: JSON.stringify({ ...preferences, capacityBuffer: parseInt(capacityFactor / preferences.capacityBuffer) })
