@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const outputSchema = new Schema({
-   sensorName: {
+   outputSensor: {
         type: String,
         require: true
    },
