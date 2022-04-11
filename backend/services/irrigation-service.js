@@ -16,34 +16,15 @@ exports.getIrrigations = async (sensorName) => {
     return await Irrigation.find({ sensorName })
 }
 
-exports.getOutputs = async (outputSensor) => {
-    return (outputSensor && outputSensor !== "undefined") ? await Output.findOneAndUpdate({
-            outputSensor
-        }, {
-            $setOnInsert: {
-                Porttimes: {},
-                outputSensor
-            }
-        }, {
-            returnOriginal: false,
-            upsert: true,
-            new: true
-        }) : {}
-}
-
-
-
 
 exports.updateOutputs = async (outputSensor, signalPin, irrigationTimeInSeconds) => {
     const outputs = await irrigationService.findOneAndUpdate(
       {
         outputSensor: outputSensor,
+        signalPin: signalPin
       },
-      { $set: { "Porttimes.$[e1]": {signalPin, irrigationTimeInSeconds} } },
+      { $set: { irrigationtime: irrigationTimeInSeconds} },
       {
-        arrayFilters: [
-          { "e1.signalPin": signalPin },
-        ],
         returnOriginal: false,
         upsert: true,
         new: true
@@ -61,8 +42,10 @@ exports.irrigateIfNeeded = async (currentCapacity, sensorName) => {
         } else {
             irrigationService.updateOutputs(preferences.outputSensor, preferences.signalPin, preferences.irrigationTimeInSeconds)
         }
-    }  
-    return irrigationService.getOutputs(sensorName)
+    }
+    const irrigateports = await irrigationService.find( { outputSensor: sensorName } )
+    await irrigationService.deleteMany({ outputSensor: sensorName })
+    return irrigateports
 }
 
 async function isLastIrrigationTimeBufferPassed(preferences, sensorName) {
