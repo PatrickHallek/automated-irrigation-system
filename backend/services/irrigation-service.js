@@ -1,4 +1,5 @@
 const Irrigation = require('../models/irrigations')
+const Output = require('../models/outputs')
 const preferenceService = require("../services/preference-service")
 const sensorService = require("../services/sensor-service")
 const irrigationService = require("./irrigation-service")
@@ -15,13 +16,58 @@ exports.getIrrigations = async (sensorName) => {
     return await Irrigation.find({ sensorName })
 }
 
+exports.getOutputs = async (outputSensor) => {
+    return (outputSensor && outputSensor !== "undefined") ? await Output.findOneAndUpdate({
+            outputSensor
+        }, {
+            $setOnInsert: {
+                Porttimes: {},
+                outputSensor
+            }
+        }, {
+            returnOriginal: false,
+            upsert: true,
+            new: true
+        }) : {}
+}
+
+exports.updateOutputs = async (outputSensor, signalPin, irrigationTimeInSeconds) => {
+    const currentOutput = await irrigationService.getOutputs(outputSensor)
+    const outputs = {
+        Porttimes: currentOutput.Porttimes.set(signalPin,irrigationTimeInSeconds),
+        outputSensor: outputSensor
+    }
+    const preference = await Output.findOneAndUpdate({
+        outputSensor
+    }, {
+        $set: outputs
+    }, {
+        returnOriginal: false,
+        upsert: true,
+        new: true
+    });
+    return outputs
+}
+
+exports.getOutputs = async (sensorName) => {
+    return await Output.find({ sensorName })
+}
+
+exports.setOutput = async (outputSensor, signalPin, irrigationTimeInSeconds) => {
+    return await Output.find({ outputSensor })
+}
+
 exports.irrigateIfNeeded = async (currentCapacity, sensorName) => {
     const preferences = await preferenceService.getPreference(sensorName)
     if (await isLastIrrigationTimeBufferPassed(preferences, sensorName) && currentCapacity > preferences.capacityBuffer) {
         irrigationService.setIrregation(currentCapacity, sensorName)
-        sensorService.irrigate(preferences.irrigationTimeInSeconds, sensorName)
-        return true
-    } else return false
+        if(preferences.outputSensor == "Local"){
+            sensorService.irrigate(preferences.irrigationTimeInSeconds, sensorName)
+        } else {
+            irrigationService.updateOutputs(preferences.outputSensor, preferences.signalPin, preferences.irrigationTimeInSeconds)
+        }
+    }  
+    return irrigationService.getOutputs(sensorName)
 }
 
 async function isLastIrrigationTimeBufferPassed(preferences, sensorName) {
