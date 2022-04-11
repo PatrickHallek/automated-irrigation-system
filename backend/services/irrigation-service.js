@@ -31,30 +31,26 @@ exports.getOutputs = async (outputSensor) => {
         }) : {}
 }
 
+
+
+
 exports.updateOutputs = async (outputSensor, signalPin, irrigationTimeInSeconds) => {
-    const currentOutput = await irrigationService.getOutputs(outputSensor)
-    const outputs = {
-        Porttimes: currentOutput.Porttimes.set(signalPin,irrigationTimeInSeconds),
-        outputSensor: outputSensor
-    }
-    const preference = await Output.findOneAndUpdate({
-        outputSensor
-    }, {
-        $set: outputs
-    }, {
+    const outputs = await irrigationService.findOneAndUpdate(
+      {
+        outputSensor: outputSensor,
+      },
+      { $set: { "Porttimes.$[e1]": {signalPin, irrigationTimeInSeconds} } },
+      {
+        arrayFilters: [
+          { "e1.signalPin": signalPin },
+        ],
+      }
+    {
         returnOriginal: false,
         upsert: true,
         new: true
     });
     return outputs
-}
-
-exports.getOutputs = async (sensorName) => {
-    return await Output.find({ sensorName })
-}
-
-exports.setOutput = async (outputSensor, signalPin, irrigationTimeInSeconds) => {
-    return await Output.find({ outputSensor })
 }
 
 exports.irrigateIfNeeded = async (currentCapacity, sensorName) => {
