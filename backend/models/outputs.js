@@ -6,9 +6,13 @@ const outputSchema = new Schema({
         type: String,
         require: true
    },
-  Porttimes: {
-    type: [portSchema],
-    default: undefined
+   signalPin: {
+        type: Number,
+        require: true
+   },
+  irrigationtime: {
+     type: Number,
+     require: true
   }
 });
 module.exports = mongoose.model('outputs', outputSchema);
