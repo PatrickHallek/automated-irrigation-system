@@ -35,16 +35,26 @@ exports.updateOutputs = async (outputSensor, signalPin, irrigationTimeInSeconds)
 
 exports.irrigateIfNeeded = async (currentCapacity, sensorName) => {
     const preferences = await preferenceService.getPreference(sensorName)
+    console.log("a")
+    console.log(sensorName)
     if (await isLastIrrigationTimeBufferPassed(preferences, sensorName) && currentCapacity > preferences.capacityBuffer) {
         irrigationService.setIrregation(currentCapacity, sensorName)
+        console.log("b")
         if(preferences.outputSensor == "Local"){
             sensorService.irrigate(preferences.irrigationTimeInSeconds, sensorName)
+            console.log("c")
         } else {
             irrigationService.updateOutputs(preferences.outputSensor, preferences.signalPin, preferences.irrigationTimeInSeconds)
+            console.log("d")
         }
     }
+    console.log("e")
     const irrigateports = await Output.find( { outputSensor: sensorName } )
+    console.log("f")
+    console.log(irrigateports)
     await Output.deleteMany({ outputSensor: sensorName })
+    console.log("g")
+    console.log(irrigateports)
     return irrigateports
 }
 
