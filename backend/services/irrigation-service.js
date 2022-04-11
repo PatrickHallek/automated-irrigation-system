@@ -18,7 +18,7 @@ exports.getIrrigations = async (sensorName) => {
 
 
 exports.updateOutputs = async (outputSensor, signalPin, irrigationTimeInSeconds) => {
-    const outputs = await irrigationService.findOneAndUpdate(
+    const outputs = await Output.findOneAndUpdate(
       {
         outputSensor: outputSensor,
         signalPin: signalPin
@@ -43,8 +43,8 @@ exports.irrigateIfNeeded = async (currentCapacity, sensorName) => {
             irrigationService.updateOutputs(preferences.outputSensor, preferences.signalPin, preferences.irrigationTimeInSeconds)
         }
     }
-    const irrigateports = await irrigationService.find( { outputSensor: sensorName } )
-    await irrigationService.deleteMany({ outputSensor: sensorName })
+    const irrigateports = await Output.find( { outputSensor: sensorName } )
+    await Output.deleteMany({ outputSensor: sensorName })
     return irrigateports
 }
 
