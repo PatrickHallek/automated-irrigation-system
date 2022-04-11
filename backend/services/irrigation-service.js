@@ -44,12 +44,11 @@ exports.updateOutputs = async (outputSensor, signalPin, irrigationTimeInSeconds)
         arrayFilters: [
           { "e1.signalPin": signalPin },
         ],
-      }
-    {
         returnOriginal: false,
         upsert: true,
         new: true
-    });
+      }
+    );
     return outputs
 }
 
