@@ -23,7 +23,7 @@ exports.updateOutputs = async (outputSensor, signalPin, irrigationTimeInSeconds)
         outputSensor: outputSensor,
         signalPin: signalPin
       },
-      { $set: { irrigationtime: irrigationTimeInSeconds} },
+      { $set: {outputSensor: outputSensor, signalPin: signalPin, irrigationtime: irrigationTimeInSeconds} },
       {
         returnOriginal: false,
         upsert: true,
