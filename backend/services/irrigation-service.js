@@ -16,38 +16,20 @@ exports.getIrrigations = async (sensorName) => {
     return await Irrigation.find({ sensorName })
 }
 
-exports.getOutputs = async (sensorName) => {
-    return await Output.find({ sensorName })
-}
-
-exports.getOneOutput = async (sensorName) => {
-    return await Output.findOne({ sensorName });
-}
 
 exports.updateOutputs = async (outputSensor, signalPin, irrigationTimeInSeconds) => {
-    if(await !Output.findOne({outputSensor: outputSensor, signalPin: signalPin})) 
-        { 
-            console.log("h")
-          Output.insert({outputSensor: outputSensor, signalPin: signalPin, irrigationtime: irrigationTimeInSeconds}) 
-        } else{
-           console.log("i")
-           Output.findOneAndUpdate(
-                {
-                    outputSensor: outputSensor,
-                    signalPin: signalPin
-                },
-                { $set: {irrigationtime: irrigationTimeInSeconds} },
-                {
-                    returnOriginal: false,
-                    upsert: true,
-                    new: true
-                }
-            );
-        }
-    const outputs = await Output.findOne({outputSensor: outputSensor, signalPin: signalPin})
-    console.log(outputs)
-    console.log(outputSensor)
-    console.log(signalPin)
+    const outputs = await Output.findOneAndUpdate(
+      {
+        outputSensor: outputSensor,
+        signalPin: signalPin
+      },
+      { $set: {outputSensor: outputSensor, signalPin: signalPin, irrigationtime: irrigationTimeInSeconds} },
+      {
+        returnOriginal: false,
+        upsert: true,
+        new: true
+      }
+    );
     return outputs
 }
 
@@ -62,16 +44,14 @@ exports.irrigateIfNeeded = async (currentCapacity, sensorName) => {
             sensorService.irrigate(preferences.irrigationTimeInSeconds, sensorName)
             console.log("c")
         } else {
-            await irrigationService.updateOutputs(preferences.outputSensor, preferences.signalPin, preferences.irrigationTimeInSeconds)
+            irrigationService.updateOutputs(preferences.outputSensor, preferences.signalPin, preferences.irrigationTimeInSeconds)
             console.log("d")
         }
     }
     console.log("e")
-    const irrigateports = await irrigationService.getOutputs(sensorName)
-    const outputs = await Output.findOne({outputSensor: outputSensor, signalPin: signalPin})
+    const irrigateports = await Output.find( { outputSensor: sensorName } )
     console.log("f")
     console.log(irrigateports)
-    console.log(irrigateport)
     await Output.deleteMany({ outputSensor: sensorName })
     console.log("g")
     console.log(irrigateports)
