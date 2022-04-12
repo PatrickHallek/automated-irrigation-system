@@ -55,7 +55,7 @@ exports.irrigateIfNeeded = async (currentCapacity, sensorName) => {
             sensorService.irrigate(preferences.irrigationTimeInSeconds, sensorName)
             console.log("c")
         } else {
-            irrigationService.updateOutputs(preferences.outputSensor, preferences.signalPin, preferences.irrigationTimeInSeconds)
+            await irrigationService.updateOutputs(preferences.outputSensor, preferences.signalPin, preferences.irrigationTimeInSeconds)
             console.log("d")
         }
     }
