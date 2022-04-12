@@ -21,7 +21,7 @@ exports.updateOutputs = async (outputSensor, signalPin, irrigationTimeInSeconds)
     if(await Output.findOne({outputSensor: outputSensor, signalPin: signalPin}))
         {
            console.log("i")
-           Output.findOneAndUpdate(
+           await Output.findOneAndUpdate(
                 {
                     outputSensor: outputSensor,
                     signalPin: signalPin
@@ -36,18 +36,7 @@ exports.updateOutputs = async (outputSensor, signalPin, irrigationTimeInSeconds)
         }else
         { 
           console.log("h")
-          Output.findOneAndUpdate(
-                {
-                    outputSensor: outputSensor,
-                    signalPin: signalPin
-                },
-                { $setOnInsert: {outputSensor: outputSensor, signalPin: signalPin, irrigationtime: irrigationTimeInSeconds} },
-                {
-                    returnOriginal: false,
-                    upsert: true,
-                    new: true
-                }
-            ); 
+          await Output.create({ outputSensor: outputSensor, signalPin: signalPin, irrigationtime: irrigationTimeInSeconds });
         } 
     const outputs = await Output.findOne({outputSensor: outputSensor, signalPin: signalPin})
     console.log(outputs)
