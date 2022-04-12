@@ -18,11 +18,8 @@ exports.getIrrigations = async (sensorName) => {
 
 
 exports.updateOutputs = async (outputSensor, signalPin, irrigationTimeInSeconds) => {
-    if(!Output.findOne({outputSensor: outputSensor, signalPin: signalPin})) 
-        { 
-            console.log("h")
-          Output.insert({outputSensor: outputSensor, signalPin: signalPin, irrigationtime: irrigationTimeInSeconds}) 
-        } else{
+    if(await Output.findOne({outputSensor: outputSensor, signalPin: signalPin}))
+        {
            console.log("i")
            Output.findOneAndUpdate(
                 {
@@ -36,7 +33,11 @@ exports.updateOutputs = async (outputSensor, signalPin, irrigationTimeInSeconds)
                     new: true
                 }
             );
-        }
+        }else
+        { 
+          console.log("h")
+          Output.insert({outputSensor: outputSensor, signalPin: signalPin, irrigationtime: irrigationTimeInSeconds}) 
+        } 
     const outputs = await Output.findOne({outputSensor: outputSensor, signalPin: signalPin})
     console.log(outputs)
     console.log(outputSensor)
