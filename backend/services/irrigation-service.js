@@ -25,7 +25,7 @@ exports.getOneOutput = async (sensorName) => {
 }
 
 exports.updateOutputs = async (outputSensor, signalPin, irrigationTimeInSeconds) => {
-    if(!Output.findOne({outputSensor: outputSensor, signalPin: signalPin})) 
+    if(await !Output.findOne({outputSensor: outputSensor, signalPin: signalPin})) 
         { 
             console.log("h")
           Output.insert({outputSensor: outputSensor, signalPin: signalPin, irrigationtime: irrigationTimeInSeconds}) 
@@ -68,7 +68,7 @@ exports.irrigateIfNeeded = async (currentCapacity, sensorName) => {
     }
     console.log("e")
     const irrigateports = await irrigationService.getOutputs(sensorName)
-    const irrigateport = await irrigationService.getOneOutput(sensorName)
+    const outputs = await Output.findOne({outputSensor: outputSensor, signalPin: signalPin})
     console.log("f")
     console.log(irrigateports)
     console.log(irrigateport)
