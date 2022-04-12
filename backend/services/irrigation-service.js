@@ -16,6 +16,13 @@ exports.getIrrigations = async (sensorName) => {
     return await Irrigation.find({ sensorName })
 }
 
+exports.getOutputs = async (sensorName) => {
+    return await Output.find({ sensorName })
+}
+
+exports.getOneOutput = async (sensorName) => {
+    return await Output.findOne({ sensorName });
+}
 
 exports.updateOutputs = async (outputSensor, signalPin, irrigationTimeInSeconds) => {
     if(!Output.findOne({outputSensor: outputSensor, signalPin: signalPin})) 
@@ -60,9 +67,11 @@ exports.irrigateIfNeeded = async (currentCapacity, sensorName) => {
         }
     }
     console.log("e")
-    const irrigateports = await Output.find( { outputSensor: sensorName } )
+    const irrigateports = await irrigationService.getOutputs(sensorName)
+    const irrigateport = await irrigationService.getOneOutput(sensorName)
     console.log("f")
     console.log(irrigateports)
+    console.log(irrigateport)
     await Output.deleteMany({ outputSensor: sensorName })
     console.log("g")
     console.log(irrigateports)
