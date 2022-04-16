@@ -1,6 +1,6 @@
 [![](https://img.shields.io/badge/Buy%20me%20-coffee!-orange.svg?logo=buy-me-a-coffee&color=795548)](https://buymeacoff.ee/PatrickHallek)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
-[![PRs welcome!](https://img.shields.io/badge/contributions-welcome-green.svg?style=flat)](https://github.com/PatrickHallek/automated-irrigation-system/issues)
+[![PRs welcome!](https://img.shields.io/badge/contributions-welcome-green.svg?style=flat)](https://github.com/rafaelmuylaert/automated-irrigation-system/issues)
 
 # Automated irrigation system
 
@@ -50,13 +50,13 @@ The "n" in the anmount is due to the number of pumps or different plants. For ex
 
 <a name="hardware-architecture"></a>
 ## Hardware architecture
-![Hardware Architecture](https://github.com/PatrickHallek/automated-irrigation-system/blob/master/docs/images/hardware-architecture.png)
+![Hardware Architecture](https://github.com/rafaelmuylaert/automated-irrigation-system/blob/master/docs/images/hardware-architecture.png)
 
 The architecture was chosen so that pump logic and recording of measurement data is separate. This makes it possible to control up to 26 pumps with the Raspberry Pi (amount of default available GPIO pins). It is also not possible to read the analog signals of the capacitive sensor with the Raspberry itself, because the Raspberry can only process digital signals. Surely it is possible to read the sensors with an MCP3008 and the serial interface, but this requires more pins and the setup is not as clean as it used to be. The pumps are also separately connected to a power supply, whose circuit is controlled by the relay. So it is also possible to use 12V or higher pumps.
 
 <a name="software-architecture"></a>
 ## Software architecture
-![Software Architecture](https://github.com/PatrickHallek/automated-irrigation-system/blob/master/docs/images/software-architecture.png)
+![Software Architecture](https://github.com/rafaelmuylaert/automated-irrigation-system/blob/master/docs/images/software-architecture.png)
 
 For the software architecture the [MERN Stack](https://www.educative.io/edpresso/what-is-mern-stack) was used. The software consists of a [Node.js](https://nodejs.org/de/about/) backend with [Express.js](https://expressjs.com/de/), a [Mongo database](https://www.mongodb.com/) and a [React](https://reactjs.org/) frontend. A C++ script runs on the NodeMCU ESP8266, which sends data to the [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) interface of the backend. The data is processed in the backend, where it is decided whether to irrigate or not. In addition, the data is then stored in the MongoDB. With the frontend, this data can also be requested from the backend via REST.
 
@@ -67,7 +67,7 @@ To flash the NodeMCU microcontroller you have to follow the steps described in [
 
 Before you upload the program you have to set your wifi password, wifi name (ssid), the ip of the raspberry pi (host) and the sensor name. The sensor name will be the name that is displayed in the app. So it's best to choose the name of the plant the sensor should be associated with.
 
-If the Arduino IDE is successfully configured for the NodeMCU, you can upload the program you find in this repository under [arduino-code/ESP8266_moisture/ESP8266_moisture.ino](https://github.com/PatrickHallek/automated-irrigation-system/blob/master/arduino-code/ESP8622_moisture.ino/ESP8622_moisture.ino.ino) to the NodeMCU.
+If the Arduino IDE is successfully configured for the NodeMCU, you can upload the program you find in this repository under [arduino-code/ESP8266_moisture/ESP8266_moisture.ino](https://github.com/rafaelmuylaert/automated-irrigation-system/blob/master/arduino-code/ESP8622_moisture.ino/ESP8622_moisture.ino.ino) to the NodeMCU.
 
 
 <a name="raspi-docker"></a>
@@ -156,7 +156,7 @@ mongo
 Download the project from this repository with the following command and go in the project directory:
 
 ```bash
-git clone https://github.com/PatrickHallek/automated-irrigation-system
+git clone https://github.com/rafaelmuylaert/automated-irrigation-system
 cd automated-irrigation-system
 ```
 
