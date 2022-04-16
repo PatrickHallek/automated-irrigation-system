@@ -16,7 +16,7 @@ The app contains the following features:
 
 | App dark themed  | App light themed |
 | ------------- | ------------- |
-| ![App dark themed](https://github.com/PatrickHallek/automated-irrigation-system/blob/master/docs/images/app-dark.png) | ![App light themed](https://github.com/PatrickHallek/automated-irrigation-system/blob/master/docs/images/app-light.png)|
+| ![App dark themed](https://github.com/rafaelmuylaert/automated-irrigation-system/blob/master/docs/images/app-dark.png) | ![App light themed](https://github.com/rafaelmuylaert/automated-irrigation-system/blob/master/docs/images/app-light.png)|
 
 # Table of contents
 
