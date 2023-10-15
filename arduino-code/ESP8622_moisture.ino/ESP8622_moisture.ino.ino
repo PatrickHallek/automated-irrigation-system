@@ -13,7 +13,7 @@ const int sendingIntervall = 1000;
 
 int inputPin1 = A0;
 int total = 0;              // the running total
-int reading = 0
+int reading = 0;
 
 void setup() {
   Serial.begin(115200);        // Serial connection
