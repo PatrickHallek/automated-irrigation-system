@@ -45,9 +45,7 @@ const Main = () => {
             <Card title="Statistics" body={<LineChart sensorInFocus={sensorInFocus} />} />
           </div>
           <div className="col-md-6">
-            <Suspense fallback={<div>Loading...</div>}>
             <Card title="Preferences" body={<Preferences sensorInFocus={sensorInFocus} sensors={sensors} />} />
-            </Suspense>
           </div>
           <div className="col-md-6">
             <Card body={<IotButton sensorInFocus={sensorInFocus} />} />
