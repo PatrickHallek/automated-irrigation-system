@@ -50,6 +50,7 @@ const isLastIrrigationTimeBufferPassed = async (preferences, sensorName) => {
 exports.startIrrigation = async (sensorName) => {
     //return await Irrigation.find({ sensorName })
     return await irrigatesensor(sensorName)
+    await Irrigation.create({ capacity: "0", sensorName: req.params.sensorName});
 }
 
 exports.getPendingIrrigations = async (sensorName) => {
@@ -66,11 +67,6 @@ exports.clearPendingIrrigations = async (sensorName) => {
     //return await Irrigation.find({ sensorName })
     await Output.deleteMany({ outputSensor: sensorName })
 }
-
-exports.irrigation = async (req, res, next) => {
-    await irrigatesensor(req.params.sensorName);
-    await Irrigation.create({ 0, req.params.sensorName})
-};
 
 exports.irrigateIfNeeded = async (currentCapacity, sensorName) => {
     const preferences = await preferenceService.getPreference(sensorName)
