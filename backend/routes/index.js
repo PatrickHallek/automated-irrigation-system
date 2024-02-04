@@ -1,7 +1,6 @@
 const express = require('express');
 const rateLimit = require("express-rate-limit");
 const router = express.Router();
-const IrrigationController = require("../controller/irrigation-controller");
 const MeasurementController = require("../controller/measurement-controller");
 const PreferenceController = require("../controller/preference-controller");
 const SensorController = require("../controller/sensor-controller");
@@ -20,8 +19,6 @@ router.get('/measurements/day/:sensorName', MeasurementController.getLastDayMeas
 router.get('/measurements/hour/:sensorName', MeasurementController.getLastHourMeasurements);
 router.get('/measurements/minute/:sensorName', MeasurementController.getLastMinuteMeasurements);
 router.post('/measurement/:sensorName', measurementLimiter, MeasurementController.setMeasurement);
-
-router.get('/irrigations/:sensorName', IrrigationController.getIrrigations);
 
 router.get('/sensors', SensorController.getSensorNames);
 router.get('/sensors/irrigation/:sensorName', SensorController.irrigation);
