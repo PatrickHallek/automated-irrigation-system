@@ -6,11 +6,11 @@ import Header from "./components/Header/Header";
 import Card from "./shared/Card/Card";
 import IotButton from "./components/IotButton/IotButton";
 import LineChart from "./components/LineChart/LineChart";
+import SensorPicker from "./components/SensorPicker/SensorPicker";
+import "./style.css"
 //import Preferences from "./components/Preferences/Preferences";
 const Preferences = React.lazy(() => import('./components/Preferences/Preferences'));
-import SensorPicker from "./components/SensorPicker/SensorPicker";
 
-import "./style.css"
 
 const Main = () => {
   const [sensors, setSensors] = useState([]);
