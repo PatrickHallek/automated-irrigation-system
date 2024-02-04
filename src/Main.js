@@ -42,7 +42,7 @@ const Main = () => {
             <Card title="Statistics" body={<LineChart sensorInFocus={sensorInFocus} />} />
           </div>
           <div className="col-md-6">
-            <Card title="Preferences" body={<Preferences sensorInFocus={sensorInFocus} />} />
+            <Card title="Preferences" body={<Preferences sensorInFocus={sensorInFocus} sensors={sensors} />} />
           </div>
           <div className="col-md-6">
             <Card body={<IotButton sensorInFocus={sensorInFocus} />} />
