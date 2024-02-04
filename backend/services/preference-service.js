@@ -11,6 +11,8 @@ exports.getPreference = async (sensorName) => {
                 outputSensor: "Local",
                 signalPin: 18,
                 Nickname: sensorName,
+                Batterypower: true,
+                ReadingIntervalInMinutes: 5,
                 sensorName
             }
         }, {
@@ -33,6 +35,8 @@ exports.updatePreferences = async (payload, sensorName) => {
         outputSensor: payload.outputSensor,
         signalPin: payload.signalPin,
         Nickname: payload.Nickname,
+        Batterypower: payload.Batterypower,
+        ReadingIntervalInMinutes: payload.ReadingIntervalInMinutes,
         sensorName: payload.sensorName
     }
     const preference = await Preference.findOneAndUpdate({
