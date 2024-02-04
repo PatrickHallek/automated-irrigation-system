@@ -10,6 +10,7 @@ exports.getPreference = async (sensorName) => {
                 capacityBuffer: 500,
                 outputSensor: "Local",
                 signalPin: 18,
+                Nickname: sensorName,
                 sensorName
             }
         }, {
@@ -31,6 +32,7 @@ exports.updatePreferences = async (payload, sensorName) => {
         capacityBuffer: payload.capacityBuffer,
         outputSensor: payload.outputSensor,
         signalPin: payload.signalPin,
+        Nickname: payload.sensorName,
         sensorName: payload.sensorName
     }
     const preference = await Preference.findOneAndUpdate({
