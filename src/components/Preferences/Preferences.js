@@ -80,7 +80,7 @@ const Preferences = props => {
   }
   var outputname = "";
   var outputsens = props.sensors.find(obj => {return obj.sensorName === preferences.outputSensor});
-  if (outputsens.length > 0) {outputname = outputsens[0].Nickname} else {outputname = "Local"}
+  if (outputsens === undefined) {outputname = "Local"} else {outputname = outputsens[0].Nickname}
   console.log(outputname);
   return (
     <h3 sx={{ color: "text" }}>
@@ -108,7 +108,7 @@ const Preferences = props => {
         <h3>Output Sensor:</h3>
         <select sx={{ color: "text", borderColor: preferenceBorderColor("outputSensor") }}
           onChange={(e) => setPreferences({ ...preferences, outputSensor: e.target.value })}>
-            <option value={preferences.outputSensor} selected> {preferences.outputSensor} </option>
+            <option value={preferences.outputSensor} selected> {outputname} </option>
             <option value="Local"> Local </option>
             {props.sensors.map((sensor) => <option value={sensor.sensorName}> {sensor.Nickname} </option>)}
         </select>
