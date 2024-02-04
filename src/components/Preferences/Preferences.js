@@ -134,10 +134,10 @@ const Preferences = props => {
       <div className="preference">
         <h3>Power Type:</h3>
         <select sx={{ color: "text", borderColor: preferenceBorderColor("Batterypower") }}
-          onChange={(e) => setPreferences({ ...preferences, Batterypower: e.target.value })}>
+          onChange={(e) => setPreferences({ ...preferences, Batterypower: parseInt(e.target.value) })}>
             <option value={preferences.Batterypower} selected> {batterypref} </option>
-            <option value=0> Plug-in </option>
-            <option value=1> Battery </option>
+            <option value="0"> Plug-in </option>
+            <option value="1"> Battery </option>
         </select>
       </div>
       <div className="preference">
