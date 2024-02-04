@@ -59,7 +59,7 @@ const Preferences = props => {
   const preferenceButtonColor = () => {
     let changed = false;
     for (const key in preferences) {
-             not(preferences[key] !== databasePreferences[key]) ? changed = true : null
+             preferences[key] !== databasePreferences[key] ? changed = true : null
             }             
     return changed ? "var(--primary) !important" : "#161A30 !important"
   }
