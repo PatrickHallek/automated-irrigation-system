@@ -20,7 +20,7 @@ const Main = () => {
   }, [setSensors])
 
   const getSensors = () => {
-    fetch(document.URL.replace(":5000", ":3000")+`sensors`)
+    fetch(document.URL.replace(":5000", ":3000")+`preferences`)
       .then(res => res.json())
       .then(
         async (sensors) => {
