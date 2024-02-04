@@ -39,6 +39,40 @@ const IotButton = props => {
         {spinner === false ? "OFF" : "ON"}
       </h3>
     </div>
+    <div className="iot-button">
+      <button
+        sx={{
+          background:
+            spinner === false
+              ? "linear-gradient(90deg, #598bff, #3366FF)"
+              : "grey"
+        }}
+        onClick={() => deletesensordata()}
+      >
+        {spinner === false ? <img width="40px" src={require('../../assets/watering.svg')} alt="dark" /> : <div id="loading" />}
+      </button>
+      <h3 sx={{ color: "text", marginLeft: "12px", lineHeight: "23px" }}>
+        Delete Sensor Data <br />
+        {spinner === false ? "OFF" : "ON"}
+      </h3>
+    </div>
+    <div className="iot-button">
+      <button
+        sx={{
+          background:
+            spinner === false
+              ? "linear-gradient(90deg, #598bff, #3366FF)"
+              : "grey"
+        }}
+        onClick={() => deletesensor()}
+      >
+        {spinner === false ? <img width="40px" src={require('../../assets/watering.svg')} alt="dark" /> : <div id="loading" />}
+      </button>
+      <h3 sx={{ color: "text", marginLeft: "12px", lineHeight: "23px" }}>
+        Delete Sensor <br />
+        {spinner === false ? "OFF" : "ON"}
+      </h3>
+    </div>
   );
 };
 
