@@ -78,9 +78,10 @@ const Preferences = props => {
       signalPin: databasePreferences.signalPin
     }) ? "#161A30 !important" : "var(--primary) !important"
   }
-  //var outputname = "";
-  //var outputsens = props.sensors.find(obj => {return obj.sensorName === preferences.outputSensor});
-  //if (outputsens.length > 0) {outputname = outputsens[0].Nickname} else {outputname = "Local"}
+  var outputname = "";
+  var outputsens = props.sensors.find(obj => {return obj.sensorName === preferences.outputSensor});
+  if (outputsens.length > 0) {outputname = outputsens[0].Nickname} else {outputname = "Local"}
+  console.log(outputname);
   return (
     <h3 sx={{ color: "text" }}>
       <div className="preference">
