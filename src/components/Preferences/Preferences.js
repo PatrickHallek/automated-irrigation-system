@@ -90,7 +90,7 @@ const Preferences = props => {
           value={preferences.irrigationTimeInSeconds} />
       </div>
       <div className="preference">
-        <h3>Minimum irrigation time interval [min]:</h3>
+        <h3>Irrigation time interval [min]:</h3>
         <input sx={{ color: "text", borderColor: preferenceBorderColor("minIrrigationIntervalInMinutes") }} type="number"
           onChange={(e) => setPreferences({ ...preferences, minIrrigationIntervalInMinutes: parseInt(e.target.value) })}
           value={preferences.minIrrigationIntervalInMinutes} />
