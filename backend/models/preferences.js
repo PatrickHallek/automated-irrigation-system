@@ -27,6 +27,14 @@ const preferenceSchema = new Schema({
         type: String,
         require: true
     },
+    Batterypower: {
+        type: Number,
+        require: true
+    },
+    ReadingIntervalInMinutes: {
+        type: Number,
+        require: true
+    },
     Nickname: {
         type: String,
         require: true
