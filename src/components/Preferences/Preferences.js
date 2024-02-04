@@ -79,7 +79,7 @@ const Preferences = props => {
     }) ? "#161A30 !important" : "var(--primary) !important"
   }
   var outputname = "";
-  var outputsens = sensors.find(obj => {return obj.sensorName === preferences.outputSensor});
+  var outputsens = props.sensors.find(obj => {return obj.sensorName === preferences.outputSensor});
   if (outputsens.length > 0) {outputname = outputsens[0].Nickname} else {outputname = "Local"}
   return (
     <h3 sx={{ color: "text" }}>
