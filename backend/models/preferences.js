@@ -26,6 +26,10 @@ const preferenceSchema = new Schema({
     outputSensor: {
         type: String,
         require: true
+    },
+    Nickname: {
+        type: String,
+        require: true
     }
 })
 
