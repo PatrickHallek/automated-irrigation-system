@@ -62,7 +62,7 @@ exports.getIrrigations = async (sensorName) => {
     return await Irrigation.find( { sensorName: sensorName } )
 }
 
-exports.clearIrrigations = async (sensorName) => {
+exports.clearPendingIrrigations = async (sensorName) => {
     //return await Irrigation.find({ sensorName })
     await Output.deleteMany({ outputSensor: sensorName })
 }
