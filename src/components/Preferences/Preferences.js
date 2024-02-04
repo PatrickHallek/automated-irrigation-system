@@ -101,7 +101,7 @@ const Preferences = props => {
   var outputname = "";
   var outputsens = props.sensors.find(obj => {return obj.sensorName === preferences.outputSensor});
   if (outputsens === undefined) {outputname = "Local"} else {outputname = outputsens.Nickname}
-  const batterypref = () => {return preferences.Batterypower === 1 ? "Battery" : "Plug-in"}
+  const batterypref = () => {return preferences === undefined || preferences.Batterypower === 1 ? "Battery" : "Plug-in"}
 
   return (
     <h3 sx={{ color: "text" }}>
