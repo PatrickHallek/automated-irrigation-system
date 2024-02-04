@@ -1,12 +1,14 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui";
+import { useState, useEffect, lazy} from "react";
 import Header from "./components/Header/Header";
 import Card from "./shared/Card/Card";
 import IotButton from "./components/IotButton/IotButton";
 import LineChart from "./components/LineChart/LineChart";
-import Preferences from "./components/Preferences/Preferences";
+//import Preferences from "./components/Preferences/Preferences";
+const Preferences = React.lazy(() => import('./components/Preferences/Preferences'));
 import SensorPicker from "./components/SensorPicker/SensorPicker";
-import { useState, useEffect } from "react";
+
 import "./style.css"
 
 const Main = () => {
@@ -42,7 +44,9 @@ const Main = () => {
             <Card title="Statistics" body={<LineChart sensorInFocus={sensorInFocus} />} />
           </div>
           <div className="col-md-6">
+            <Suspense fallback={<div>Loading...</div>}>
             <Card title="Preferences" body={<Preferences sensorInFocus={sensorInFocus} sensors={sensors} />} />
+            </Suspense>
           </div>
           <div className="col-md-6">
             <Card body={<IotButton sensorInFocus={sensorInFocus} />} />
