@@ -66,7 +66,7 @@ const Preferences = props => {
   }
 
   const preferenceBorderColor = (key) => {
-    return preferences[key] === undefined || preferences[key] === databasePreferences[key] ? "#161A30 !important" : "var(--primary) !important"
+    return preferences === undefined || preferences[key] === databasePreferences[key] ? "#161A30 !important" : "var(--primary) !important"
   }
 
   const preferenceButtonColor = () => {
