@@ -1,20 +1,20 @@
 const Preference = require('../models/preferences');
 
 exports.getPreference = async (sensorName) => {
+    const defaultproperties {
+            minIrrigationIntervalInMinutes: 15,
+            irrigationTimeInSeconds: 10,
+            capacityBuffer: 50,
+            outputSensor: "Local",
+            signalPin: 18,
+            Nickname: "Name",
+            Batterypower: 1,
+            ReadingIntervalInMinutes: 5,
+        };
     return (sensorName && sensorName !== "undefined") ? await Preference.findOneAndUpdate({
             sensorName
         }, {
-            $setOnInsert: {
-                minIrrigationIntervalInMinutes: 15,
-                irrigationTimeInSeconds: 10,
-                capacityBuffer: 50,
-                outputSensor: "Local",
-                signalPin: 18,
-                Nickname: sensorName,
-                Batterypower: 1,
-                ReadingIntervalInMinutes: 5,
-                sensorName
-            }
+            $setOnInsert: {...defaultproperties, Nickname: sensorName, sensorName}
         }, {
             returnOriginal: false,
             upsert: true,
