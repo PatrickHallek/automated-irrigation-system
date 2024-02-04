@@ -17,5 +17,5 @@ exports.irrigate = async (irrigationTimeInSeconds, sensorName) => {
 
 exports.getSensorNames = async () => {
     const preferences = await preferenceService.getPreferences()
-    return preferences.map(preference => preference.Nickname)
+    return [preferences.map(preference => preference.sensorName), preferences.map(preference => preference.Nickname)]
 }
