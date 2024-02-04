@@ -1,62 +1,44 @@
 const Irrigation = require('../models/irrigations')
 const Output = require('../models/outputs')
 const preferenceService = require("../services/preference-service")
-const sensorService = require("../services/sensor-service")
-const irrigationService = require("./irrigation-service")
 
-exports.getLastIrrigation = async (sensorName) => {
-    return await Irrigation.findOne({ sensorName }).sort({ timestamp: -1 });
+const dotenv = require('dotenv');
+
+
+dotenv.config();
+let rpio = {};
+if (!process.env.DEVELOPMENT) rpio = require('rpio');
+
+
+const irrigatelocal = async (irrigationtime, sensorName) => {
+    const preferences = await preferenceService.getPreference(sensorName)
+    console.log("Starting Irrigation...")
+    rpio.open(preferences.signalPin, rpio.OUTPUT, rpio.LOW);
+    rpio.write(preferences.signalPin, rpio.HIGH);
+    rpio.sleep(irrigationtime);
+    rpio.write(preferences.signalPin, rpio.LOW);
+    rpio.close(preferences.signalPin);
+    return "Success"
 }
 
-exports.setIrregation = async (capacity, sensorName) => {
-    return await Irrigation.create({ capacity, sensorName })
-}
-
-exports.getIrrigations = async (sensorName) => {
-    return await Irrigation.find({ sensorName })
-}
-
-
-exports.updateOutputs = async (outputSensor, signalPin, irrigationTimeInSeconds) => {
-    if(await Output.findOne({outputSensor: outputSensor, signalPin: signalPin}))
-        {
-           await Output.findOneAndUpdate(
-                {
-                    outputSensor: outputSensor,
-                    signalPin: signalPin
-                },
-                { $set: {irrigationtime: irrigationTimeInSeconds} },
-                {
-                    returnOriginal: false,
-                    upsert: true,
-                    new: true
-                }
-            );
-        }else
+const irrigateremote = async (outputSensor, signalPin, irrigationTimeInSeconds) => {
+    if(! await Output.findOne({outputSensor: outputSensor, signalPin: signalPin}))
         { 
           await Output.create({ outputSensor: outputSensor, signalPin: signalPin, irrigationtime: irrigationTimeInSeconds });
         } 
-    const outputs = await Output.findOne({outputSensor: outputSensor, signalPin: signalPin})
-    return outputs
 }
 
-exports.irrigateIfNeeded = async (currentCapacity, sensorName) => {
-    const preferences = await preferenceService.getPreference(sensorName)
-    if (await isLastIrrigationTimeBufferPassed(preferences, sensorName) && currentCapacity < preferences.capacityBuffer) {
-        irrigationService.setIrregation(currentCapacity, sensorName)
-        if(preferences.outputSensor == "Local"){
-            sensorService.irrigate(preferences.irrigationTimeInSeconds, sensorName)
+const irrigatesensor = async (sensorName) => {
+    const preferences = await preferenceService.getPreference(sensorName);
+    if(preferences.outputSensor == "Local"){
+            irrigatelocal(preferences.irrigationTimeInSeconds, sensorName)
         } else {
-            await irrigationService.updateOutputs(preferences.outputSensor, preferences.signalPin, preferences.irrigationTimeInSeconds)
+            await irrigateremote(preferences.outputSensor, preferences.signalPin, preferences.irrigationTimeInSeconds)
         }
-    }
-    const irrigateports = await Output.find( { outputSensor: sensorName } )
-    await Output.deleteMany({ outputSensor: sensorName })
-    return irrigateports
 }
 
-async function isLastIrrigationTimeBufferPassed(preferences, sensorName) {
-    const lastMeasurement = await irrigationService.getLastIrrigation(sensorName)
+const isLastIrrigationTimeBufferPassed(preferences, sensorName) {
+    await Irrigation.findOne({ sensorName }).sort({ timestamp: -1 });
     const now = new Date().getTime()
     if (lastMeasurement) {
         let lastMeasurementTime = lastMeasurement.timestamp
@@ -64,3 +46,38 @@ async function isLastIrrigationTimeBufferPassed(preferences, sensorName) {
         return now > lastMeasurementTimePlusBuffer
     } else return true
 }
+
+exports.startIrrigation = async (sensorName) => {
+    //return await Irrigation.find({ sensorName })
+    return await irrigatesensor(sensorName)
+}
+
+exports.getPendingIrrigations = async (sensorName) => {
+    //return await Irrigation.find({ sensorName })
+    return await Output.find( { outputSensor: sensorName } )
+}
+
+exports.getIrrigations = async (sensorName) => {
+    //return await Irrigation.find({ sensorName })
+    return await Irrigation.find( { sensorName: sensorName } )
+}
+
+exports.clearIrrigations = async (sensorName) => {
+    //return await Irrigation.find({ sensorName })
+    await Output.deleteMany({ outputSensor: sensorName })
+}
+
+exports.irrigation = async (req, res, next) => {
+    await irrigatesensor(req.params.sensorName);
+    await Irrigation.create({ 0, req.params.sensorName})
+};
+
+exports.irrigateIfNeeded = async (currentCapacity, sensorName) => {
+    const preferences = await preferenceService.getPreference(sensorName)
+    if (await isLastIrrigationTimeBufferPassed(preferences, sensorName) && currentCapacity < preferences.capacityBuffer) {
+        await irrigatesensor(sensorName);
+        await Irrigation.create({ capacity, sensorName });
+    }
+}
+
+
