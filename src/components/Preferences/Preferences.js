@@ -94,6 +94,10 @@ const Preferences = props => {
     */
   }
   
+  const getpref = (key) => {
+    return preferences === undefined  ? "" : preferences[key]
+  }
+  
   var outputname = "";
   var outputsens = props.sensors.find(obj => {return obj.sensorName === preferences.outputSensor});
   if (outputsens === undefined) {outputname = "Local"} else {outputname = outputsens.Nickname}
@@ -105,31 +109,31 @@ const Preferences = props => {
         <h3>Sensor Name:</h3>
         <input sx={{ color: "text", borderColor: preferenceBorderColor("Nickname") }} type="text"
           onChange={(e) => setPreferences({ ...preferences, Nickname: e.target.value })}
-          value={preferences.Nickname} />
+          value={getpref("Nickname")} />
       </div>
       <div className="preference">
         <h3>Irrigation time [s]:</h3>
         <input sx={{ color: "text", borderColor: preferenceBorderColor("irrigationTimeInSeconds") }} type="number"
           onChange={(e) => setPreferences({ ...preferences, irrigationTimeInSeconds: parseInt(e.target.value) })}
-          value={preferences.irrigationTimeInSeconds} />
+          value={getpref("irrigationTimeInSeconds")} />
       </div>
       <div className="preference">
         <h3>Irrigation time interval [min]:</h3>
         <input sx={{ color: "text", borderColor: preferenceBorderColor("minIrrigationIntervalInMinutes") }} type="number"
           onChange={(e) => setPreferences({ ...preferences, minIrrigationIntervalInMinutes: parseInt(e.target.value) })}
-          value={preferences.minIrrigationIntervalInMinutes} />
+          value={getpref("minIrrigationIntervalInMinutes")} />
       </div>
       <div className="preference">
         <h3>Minimum soil moisture:</h3>
         <input sx={{ color: "text", borderColor: preferenceBorderColor("capacityBuffer") }} type="number"
           onChange={(e) => setPreferences({ ...preferences, capacityBuffer: parseInt(e.target.value) })}
-          value={preferences.capacityBuffer} />
+          value={getpref("capacityBuffer")} />
       </div>
       <div className="preference">
         <h3>Output Sensor:</h3>
         <select sx={{ color: "text", borderColor: preferenceBorderColor("outputSensor") }}
           onChange={(e) => setPreferences({ ...preferences, outputSensor: e.target.value })}>
-            <option value={preferences.outputSensor} selected> {outputname} </option>
+            <option value={getpref("outputSensor")} selected> {outputname} </option>
             <option value="Local"> Local </option>
             {props.sensors.map((sensor) => <option value={sensor.sensorName}> {sensor.Nickname} </option>)}
         </select>
@@ -138,13 +142,13 @@ const Preferences = props => {
         <h3>Output Signal Pin:</h3>
         <input sx={{ color: "text", borderColor: preferenceBorderColor("signalPin") }} type="number"
           onChange={(e) => setPreferences({ ...preferences, signalPin: parseInt(e.target.value) })}
-          value={preferences.signalPin} />
+          value={getpref("signalPin")} />
       </div>
       <div className="preference">
         <h3>Power Type:</h3>
         <select sx={{ color: "text", borderColor: preferenceBorderColor("Batterypower") }}
           onChange={(e) => setPreferences({ ...preferences, Batterypower: parseInt(e.target.value) })}>
-            <option value={preferences.Batterypower} selected> {batterypref()} </option>
+            <option value={getpref("Batterypower")} selected> {batterypref()} </option>
             <option value="0"> Plug-in </option>
             <option value="1"> Battery </option>
         </select>
@@ -153,7 +157,7 @@ const Preferences = props => {
         <h3>Sensor update interval [min]:</h3>
         <input sx={{ color: "text", borderColor: preferenceBorderColor("ReadingIntervalInMinutes") }} type="number"
           onChange={(e) => setPreferences({ ...preferences, ReadingIntervalInMinutes: parseInt(e.target.value) })}
-          value={preferences.ReadingIntervalInMinutes} />
+          value={getpref("ReadingIntervalInMinutes")} />
       </div>      
       <div className="preference">
         <div></div>
