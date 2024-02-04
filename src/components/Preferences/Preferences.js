@@ -80,7 +80,7 @@ const Preferences = props => {
   }
   var outputname = "";
   var outputsens = props.sensors.find(obj => {return obj.sensorName === preferences.outputSensor});
-  if (outputsens === undefined) {outputname = "Local"} else {outputname = outputsens[0].Nickname}
+  if (outputsens === undefined) {outputname = "Local"} else {outputname = outputsens.Nickname}
   console.log(outputname);
   return (
     <h3 sx={{ color: "text" }}>
