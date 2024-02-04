@@ -25,6 +25,8 @@ router.get('/irrigations/:sensorName', IrrigationController.getIrrigations);
 
 router.get('/sensors', SensorController.getSensorNames);
 router.get('/sensors/irrigation/:sensorName', SensorController.irrigation);
+router.get('/sensors/deletedata/:sensorName', SensorController.deletedata);
+router.get('/sensors/deletesensor/:sensorName', SensorController.deletesensor);
 
 router.get('/preferences/:sensorName', PreferenceController.getPreference);
 router.put('/preferences/:sensorName', PreferenceController.updatePreferences);
