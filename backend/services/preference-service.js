@@ -1,7 +1,7 @@
 const Preference = require('../models/preferences');
 
 exports.getPreference = async (sensorName) => {
-    const defaultproperties {
+    var defaultproperties {
             minIrrigationIntervalInMinutes: 15,
             irrigationTimeInSeconds: 10,
             capacityBuffer: 50,
