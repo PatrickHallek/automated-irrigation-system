@@ -103,9 +103,10 @@ const Preferences = props => {
       </div>
       <div className="preference">
         <h3>Output Sensor:</h3>
-        <input sx={{ color: "text", borderColor: preferenceBorderColor("outputSensor") }} type="text"
-          onChange={(e) => setPreferences({ ...preferences, outputSensor: e.target.value })}
-          value={preferences.outputSensor} />
+        <select sx={{ color: "text", borderColor: preferenceBorderColor("outputSensor") }}
+          onChange={(e) => setPreferences({ ...preferences, outputSensor: e.target.value })}>
+            {props.sensors.map((sensor) => <option value={sensor.sensorName} {{ bg: sensor.sensorName === preferences.outputSensor ? "selected>" : ">" }} {sensor.Nickname} </option>)}
+        </select>
       </div>
       <div className="preference">
         <h3>Sensor Name:</h3>
