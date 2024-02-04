@@ -11,6 +11,7 @@ const Preferences = props => {
     irrigationTimeInSeconds: 0,
     capacityBuffer: 0,
     outputSensor: "Local",
+    Nickname:"Friendlyname",
     signalPin: 0
   });
   const [databasePreferences, setDatabasePreferences] = useState({
@@ -18,6 +19,7 @@ const Preferences = props => {
     irrigationTimeInSeconds: 0,
     capacityBuffer: 0,
     outputSensor: `Local`,
+    Nickname:"Friendlyname",
     signalPin: 0
   });
 
@@ -65,12 +67,14 @@ const Preferences = props => {
       irrigationTimeInSeconds: preferences.irrigationTimeInSeconds,
       capacityBuffer: preferences.capacityBuffer,
       outputSensor: preferences.outputSensor,
+      Nickname: preferences.Nickname,
       signalPin: preferences.signalPin
     }) === JSON.stringify({
       minIrrigationIntervalInMinutes: databasePreferences.minIrrigationIntervalInMinutes,
       irrigationTimeInSeconds: databasePreferences.irrigationTimeInSeconds,
       capacityBuffer: databasePreferences.capacityBuffer,
       outputSensor: databasePreferences.outputSensor,
+      Nickname: preferences.Nickname,
       signalPin: databasePreferences.signalPin
     }) ? "#161A30 !important" : "var(--primary) !important"
   }
@@ -102,6 +106,12 @@ const Preferences = props => {
         <input sx={{ color: "text", borderColor: preferenceBorderColor("outputSensor") }} type="text"
           onChange={(e) => setPreferences({ ...preferences, outputSensor: e.target.value })}
           value={preferences.outputSensor} />
+      </div>
+      <div className="preference">
+        <h3>Output Sensor:</h3>
+        <input sx={{ color: "text", borderColor: preferenceBorderColor("Nickname") }} type="text"
+          onChange={(e) => setPreferences({ ...preferences, Nickname: e.target.value })}
+          value={preferences.Nickname} />
       </div>
       <div className="preference">
         <h3>Signal Pin:</h3>
