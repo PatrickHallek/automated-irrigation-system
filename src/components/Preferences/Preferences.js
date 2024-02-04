@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 
 const Preferences = props => {
   const sensorName = props.sensorInFocus
-  const [preferences, setPreferences, databasePreferences, setDatabasePreferences] = useState({
+  const [preferences, setPreferences]  = useState({
     minIrrigationIntervalInMinutes: 0,
     irrigationTimeInSeconds: 0,
     capacityBuffer: 0,
@@ -15,6 +15,7 @@ const Preferences = props => {
     ReadingIntervalInMinutes:0,
     signalPin: 0
   });
+  const[databasePreferences, setDatabasePreferences] = [preferences, setPreferences];
   /* 
     const [databasePreferences, setDatabasePreferences] = useState({
     minIrrigationIntervalInMinutes: 0,
