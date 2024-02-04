@@ -7,7 +7,7 @@ import "./LineChart.css";
 const LineChart = props => {
   const sensorName = props.sensorInFocus
   const capacityFactor = 100000
-  const requestIntervall = 1000
+  const requestIntervall = 60000 // 1 minute
   const context = useThemeUI()
   const chartRef = React.createRef();
   const [dataFilter, setDataFilter] = useState("day");
