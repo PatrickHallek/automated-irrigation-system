@@ -5,13 +5,14 @@ import { useState, useEffect } from "react";
 
 const Preferences = props => {
   const sensorName = props.sensorInFocus
-  const capacityFactor = 100000
   const [preferences, setPreferences] = useState({
     minIrrigationIntervalInMinutes: 0,
     irrigationTimeInSeconds: 0,
     capacityBuffer: 0,
     outputSensor: "Local",
     Nickname:"Friendlyname",
+    Batterypower:true,
+    ReadingIntervalInMinutes:0,
     signalPin: 0
   });
   const [databasePreferences, setDatabasePreferences] = useState({
@@ -20,6 +21,8 @@ const Preferences = props => {
     capacityBuffer: 0,
     outputSensor: `Local`,
     Nickname:"Friendlyname",
+    Batterypower:true,
+    ReadingIntervalInMinutes:0,
     signalPin: 0
   });
 
@@ -29,8 +32,8 @@ const Preferences = props => {
         .then(res => res.json())
         .then(
           async (preferences) => {
-            setDatabasePreferences({ ...preferences, capacityBuffer: parseInt(capacityFactor / preferences.capacityBuffer) })
-            setPreferences({ ...preferences, capacityBuffer: parseInt(capacityFactor / preferences.capacityBuffer) })
+            setDatabasePreferences({ ...preferences})
+            setPreferences({ ...preferences})
           },
           (error) => {
             console.log(`Coudn't fetch data. Error: ${error}`)
@@ -44,12 +47,12 @@ const Preferences = props => {
     fetch(document.URL.replace(":5000", ":3000")+`preferences/${sensorName}`, {
       headers: { 'Content-Type': 'application/json', },
       method: 'PUT',
-      body: JSON.stringify({ ...preferences, capacityBuffer: parseInt(capacityFactor / preferences.capacityBuffer) })
+      body: JSON.stringify({ ...preferences})
     })
       .then(res => res.json())
       .then(
         async (preferences) => {
-          setDatabasePreferences({ ...preferences, capacityBuffer: parseInt(capacityFactor / preferences.capacityBuffer) })
+          setDatabasePreferences({ ...preferences})
         },
         (error) => {
           console.log(`Coudn't fetch data. Error: ${error}`)
@@ -68,6 +71,8 @@ const Preferences = props => {
       capacityBuffer: preferences.capacityBuffer,
       outputSensor: preferences.outputSensor,
       Nickname: preferences.Nickname,
+      Batterypower: preferences.Batterypower,
+      ReadingIntervalInMinutes: preferences.ReadingIntervalInMinutes,
       signalPin: preferences.signalPin
     }) === JSON.stringify({
       minIrrigationIntervalInMinutes: databasePreferences.minIrrigationIntervalInMinutes,
@@ -75,21 +80,27 @@ const Preferences = props => {
       capacityBuffer: databasePreferences.capacityBuffer,
       outputSensor: databasePreferences.outputSensor,
       Nickname: databasePreferences.Nickname,
+      Batterypower: databasePreferences.Batterypower,
+      ReadingIntervalInMinutes: databasepreferences.ReadingIntervalInMinutes,
       signalPin: databasePreferences.signalPin
     }) ? "#161A30 !important" : "var(--primary) !important"
   }
   var outputname = "";
   var outputsens = props.sensors.find(obj => {return obj.sensorName === preferences.outputSensor});
   if (outputsens === undefined) {outputname = "Local"} else {outputname = outputsens.Nickname}
-  console.log(outputname);
+  if (preferences.Batterypower === true) {batterypref = "Battery"} else {batterypref = "Plug-in"}
   return (
     <h3 sx={{ color: "text" }}>
+     <div className="preference">
+        <h3>Sensor Name:</h3>
+        <input sx={{ color: "text", borderColor: preferenceBorderColor("Nickname") }} type="text"
+          onChange={(e) => setPreferences({ ...preferences, Nickname: e.target.value })}
+          value={preferences.Nickname} />
+      </div>
       <div className="preference">
         <h3>Irrigation time [s]:</h3>
         <input sx={{ color: "text", borderColor: preferenceBorderColor("irrigationTimeInSeconds") }} type="number"
-          onChange={
-            (e) => setPreferences({ ...preferences, irrigationTimeInSeconds: parseInt(e.target.value) })
-          }
+          onChange={(e) => setPreferences({ ...preferences, irrigationTimeInSeconds: parseInt(e.target.value) })}
           value={preferences.irrigationTimeInSeconds} />
       </div>
       <div className="preference">
@@ -114,17 +125,26 @@ const Preferences = props => {
         </select>
       </div>
       <div className="preference">
-        <h3>Sensor Name:</h3>
-        <input sx={{ color: "text", borderColor: preferenceBorderColor("Nickname") }} type="text"
-          onChange={(e) => setPreferences({ ...preferences, Nickname: e.target.value })}
-          value={preferences.Nickname} />
-      </div>
-      <div className="preference">
-        <h3>Signal Pin:</h3>
+        <h3>Output Signal Pin:</h3>
         <input sx={{ color: "text", borderColor: preferenceBorderColor("signalPin") }} type="number"
           onChange={(e) => setPreferences({ ...preferences, signalPin: parseInt(e.target.value) })}
           value={preferences.signalPin} />
       </div>
+      <div className="preference">
+        <h3>Power Type:</h3>
+        <select sx={{ color: "text", borderColor: preferenceBorderColor("Batterypower") }}
+          onChange={(e) => setPreferences({ ...preferences, Batterypower: e.target.value })}>
+            <option value={preferences.Batterypower} selected> {batterypref} </option>
+            <option value=true> Battery </option>
+            <option value=false> Plug-in </option>
+        </select>
+      </div>
+      <div className="preference">
+        <h3>Sensor update interval [min]:</h3>
+        <input sx={{ color: "text", borderColor: preferenceBorderColor("ReadingIntervalInMinutes") }} type="number"
+          onChange={(e) => setPreferences({ ...preferences, ReadingIntervalInMinutes: parseInt(e.target.value) })}
+          value={preferences.ReadingIntervalInMinutes} />
+      </div>      
       <div className="preference">
         <div></div>
         <button sx={{ color: "text", borderColor: preferenceButtonColor() }} onClick={() => updatePreferences()}>Submit</button>
