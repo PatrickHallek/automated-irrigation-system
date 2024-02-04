@@ -4,7 +4,10 @@ import "./Preferences.css";
 import { useState, useEffect } from "react";
 
 const Preferences = props => {
-  const sensorName = props.sensorInFocus
+  const sensorName = props.sensorInFocus;
+  const [preferences, setPreferences]  = useState(props.sensors[0]);
+  const[databasePreferences, setDatabasePreferences] = useState(props.sensors[0]);
+  /* 
   const [preferences, setPreferences]  = useState({
     minIrrigationIntervalInMinutes: 0,
     irrigationTimeInSeconds: 0,
@@ -15,7 +18,7 @@ const Preferences = props => {
     ReadingIntervalInMinutes:0,
     signalPin: 0
   });
-  const[databasePreferences, setDatabasePreferences] = [preferences, setPreferences];
+  */
   /* 
     const [databasePreferences, setDatabasePreferences] = useState({
     minIrrigationIntervalInMinutes: 0,
@@ -67,6 +70,8 @@ const Preferences = props => {
   }
 
   const preferenceButtonColor = () => {
+    return preferences === databasePreferences ? "#161A30 !important" : "var(--primary) !important"
+    /*
     return JSON.stringify({
       minIrrigationIntervalInMinutes: preferences.minIrrigationIntervalInMinutes,
       irrigationTimeInSeconds: preferences.irrigationTimeInSeconds,
@@ -86,6 +91,7 @@ const Preferences = props => {
       ReadingIntervalInMinutes: databasePreferences.ReadingIntervalInMinutes,
       signalPin: databasePreferences.signalPin
     }) ? "#161A30 !important" : "var(--primary) !important"
+    */
   }
   var outputname = "";
   var outputsens = props.sensors.find(obj => {return obj.sensorName === preferences.outputSensor});
