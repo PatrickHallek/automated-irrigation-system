@@ -38,7 +38,7 @@ const irrigatesensor = async (sensorName) => {
 }
 
 const isLastIrrigationTimeBufferPassed = async (preferences, sensorName) => {
-    await Irrigation.findOne({ sensorName }).sort({ timestamp: -1 });
+    const lastMeasurement = await Irrigation.findOne({ sensor name }).sort({ timestamp: -1 });
     const now = new Date().getTime()
     if (lastMeasurement) {
         let lastMeasurementTime = lastMeasurement.timestamp
