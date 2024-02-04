@@ -19,6 +19,19 @@
     transition: all 0.3s ease;
 }
 
+.preference select {
+    background: transparent;
+    font-family: "Arial";
+    border: solid 2px;
+    height: 25px;
+    width: 95px;
+    font-size: 18px;
+    border-radius: 5px;
+    padding-left: 5px;
+    outline: none !important;
+    transition: all 0.3s ease;
+}
+
 .preference button {
     background: transparent;
     border: solid 2px;
