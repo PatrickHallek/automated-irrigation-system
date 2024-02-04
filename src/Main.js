@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui";
-import { useState, useEffect, lazy} from "react";
+import React, { lazy, Suspense } from 'react';
+import { useState, useEffect} from "react";
 import Header from "./components/Header/Header";
 import Card from "./shared/Card/Card";
 import IotButton from "./components/IotButton/IotButton";
