@@ -28,6 +28,7 @@ router.get('/sensors', SensorController.getSensorNames);
 router.get('/sensors/deletedata/:sensorName', SensorController.deletedata);
 router.get('/sensors/deletesensor/:sensorName', SensorController.deletesensor);
 
+router.get('/preferences', PreferenceController.getPreferences);
 router.get('/preferences/:sensorName', PreferenceController.getPreference);
 router.put('/preferences/:sensorName', PreferenceController.updatePreferences);
 
