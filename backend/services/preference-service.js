@@ -11,7 +11,7 @@ exports.getPreference = async (sensorName) => {
                 outputSensor: "Local",
                 signalPin: 18,
                 Nickname: sensorName,
-                Batterypower: true,
+                Batterypower: 1,
                 ReadingIntervalInMinutes: 5,
                 sensorName
             }
