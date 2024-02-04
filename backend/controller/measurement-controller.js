@@ -64,10 +64,13 @@ exports.getAllMeasurements = async (req, res, next) => {
 };
 
 exports.setMeasurement = async (req, res, next) => {
+    console.log(req.params.sensorName)
     console.log(req.body.capacity)
     const result = await measurementService.setMeasurement(req.body.capacity, req.params.sensorName);
+    console.log(result)
     await irrigationService.irrigateIfNeeded(req.body.capacity, req.params.sensorName);
     const pendingirrigation = await irrigationService.getPendingIrrigations(req.params.sensorName);
+    console.log(pendingirrigation)
     irrigationService.clearPendingIrrigations(req.params.sensorName);
     res.json({ ...result, pendingirrigation })
 };
