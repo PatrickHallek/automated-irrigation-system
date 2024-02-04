@@ -3,7 +3,7 @@ import { jsx } from "theme-ui";
 import "./Preferences.css";
 import { useState, useEffect } from "react";
 
-const defaultproperties {
+var defaultproperties {
             minIrrigationIntervalInMinutes: 15,
             irrigationTimeInSeconds: 10,
             capacityBuffer: 50,
