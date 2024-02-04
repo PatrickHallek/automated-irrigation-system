@@ -4,6 +4,7 @@ const router = express.Router();
 const MeasurementController = require("../controller/measurement-controller");
 const PreferenceController = require("../controller/preference-controller");
 const SensorController = require("../controller/sensor-controller");
+const IrrigationController = require("../controller/irrigation-controller");
 
 const measurementLimiter = rateLimit({
     windowMs: 1000, // time window
@@ -20,8 +21,10 @@ router.get('/measurements/hour/:sensorName', MeasurementController.getLastHourMe
 router.get('/measurements/minute/:sensorName', MeasurementController.getLastMinuteMeasurements);
 router.post('/measurement/:sensorName', measurementLimiter, MeasurementController.setMeasurement);
 
+router.get('/irrigate/:sensorName', IrrigationController.irrigate);
+router.get('/irrigations/:sensorName', IrrigationController.getIrrigations);
+
 router.get('/sensors', SensorController.getSensorNames);
-router.get('/sensors/irrigation/:sensorName', SensorController.irrigation);
 router.get('/sensors/deletedata/:sensorName', SensorController.deletedata);
 router.get('/sensors/deletesensor/:sensorName', SensorController.deletesensor);
 
