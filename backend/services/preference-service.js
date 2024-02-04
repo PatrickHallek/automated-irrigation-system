@@ -7,7 +7,7 @@ exports.getPreference = async (sensorName) => {
             $setOnInsert: {
                 minIrrigationIntervalInMinutes: 15,
                 irrigationTimeInSeconds: 10,
-                capacityBuffer: 500,
+                capacityBuffer: 50,
                 outputSensor: "Local",
                 signalPin: 18,
                 Nickname: sensorName,
