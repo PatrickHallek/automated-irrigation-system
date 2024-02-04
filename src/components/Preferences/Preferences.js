@@ -5,17 +5,18 @@ import { useState, useEffect } from "react";
 
 const Preferences = props => {
   const sensorName = props.sensorInFocus
-  const [preferences, setPreferences] = useState({
+  const [preferences, setPreferences, databasePreferences, setDatabasePreferences] = useState({
     minIrrigationIntervalInMinutes: 0,
     irrigationTimeInSeconds: 0,
     capacityBuffer: 0,
     outputSensor: "Local",
     Nickname:"Friendlyname",
-    Batterypower:true,
+    Batterypower:1,
     ReadingIntervalInMinutes:0,
     signalPin: 0
   });
-  const [databasePreferences, setDatabasePreferences] = useState({
+  /* 
+    const [databasePreferences, setDatabasePreferences] = useState({
     minIrrigationIntervalInMinutes: 0,
     irrigationTimeInSeconds: 0,
     capacityBuffer: 0,
@@ -25,7 +26,7 @@ const Preferences = props => {
     ReadingIntervalInMinutes:0,
     signalPin: 0
   });
-
+   */
   useEffect(() => {
     if (sensorName) {
       fetch(document.URL.replace(":5000", ":3000")+`preferences/${sensorName}`)
@@ -88,7 +89,7 @@ const Preferences = props => {
   var outputname = "";
   var outputsens = props.sensors.find(obj => {return obj.sensorName === preferences.outputSensor});
   if (outputsens === undefined) {outputname = "Local"} else {outputname = outputsens.Nickname}
-  if (preferences.Batterypower === true) {batterypref = "Battery"} else {batterypref = "Plug-in"}
+  if (preferences.Batterypower === 1) {batterypref = "Battery"} else {batterypref = "Plug-in"}
   return (
     <h3 sx={{ color: "text" }}>
      <div className="preference">
@@ -135,8 +136,8 @@ const Preferences = props => {
         <select sx={{ color: "text", borderColor: preferenceBorderColor("Batterypower") }}
           onChange={(e) => setPreferences({ ...preferences, Batterypower: e.target.value })}>
             <option value={preferences.Batterypower} selected> {batterypref} </option>
-            <option value=true> Battery </option>
-            <option value=false> Plug-in </option>
+            <option value=0> Plug-in </option>
+            <option value=1> Battery </option>
         </select>
       </div>
       <div className="preference">
