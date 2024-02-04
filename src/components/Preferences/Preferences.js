@@ -74,7 +74,7 @@ const Preferences = props => {
       irrigationTimeInSeconds: databasePreferences.irrigationTimeInSeconds,
       capacityBuffer: databasePreferences.capacityBuffer,
       outputSensor: databasePreferences.outputSensor,
-      Nickname: preferences.Nickname,
+      Nickname: databasePreferences.Nickname,
       signalPin: databasePreferences.signalPin
     }) ? "#161A30 !important" : "var(--primary) !important"
   }
