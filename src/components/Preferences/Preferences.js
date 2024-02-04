@@ -108,7 +108,7 @@ const Preferences = props => {
           value={preferences.outputSensor} />
       </div>
       <div className="preference">
-        <h3>Output Sensor:</h3>
+        <h3>Sensor Name:</h3>
         <input sx={{ color: "text", borderColor: preferenceBorderColor("Nickname") }} type="text"
           onChange={(e) => setPreferences({ ...preferences, Nickname: e.target.value })}
           value={preferences.Nickname} />
