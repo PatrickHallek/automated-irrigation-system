@@ -3,10 +3,22 @@ import { jsx } from "theme-ui";
 import "./Preferences.css";
 import { useState, useEffect } from "react";
 
+const defaultproperties {
+            minIrrigationIntervalInMinutes: 15,
+            irrigationTimeInSeconds: 10,
+            capacityBuffer: 50,
+            outputSensor: "Local",
+            signalPin: 18,
+            Nickname: "Name",
+            Batterypower: 1,
+            ReadingIntervalInMinutes: 5,
+        };
+  
 const Preferences = props => {
   const sensorName = props.sensorInFocus;
-  const [preferences, setPreferences]  = useState(props.sensors[0]);
-  const[databasePreferences, setDatabasePreferences] = useState(props.sensors[0]);
+  const [preferences, setPreferences]  = useState(defaultproperties);
+  const [databasePreferences, setDatabasePreferences] = useState(defaultproperties);
+
   /* 
   const [preferences, setPreferences]  = useState({
     minIrrigationIntervalInMinutes: 0,
