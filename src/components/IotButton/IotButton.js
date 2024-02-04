@@ -22,28 +22,20 @@ const IotButton = props => {
   }
 
   const deletesensordata = () => {
-    addSpinner(true)
     fetch(document.URL.replace(":5000", ":3000")+`sensors/deletedata/${sensorName}`)
       .then(res => res.json())
       .then(
-        async (result) => {
-          addSpinner(false)
-        },
-        (error) => {
+        async (error) => {
           console.log(`Coudn't fetch data. Error: ${error}`)
         }
       )
   }
 
   const deletesensor = () => {
-    addSpinner(true)
     fetch(document.URL.replace(":5000", ":3000")+`sensors/deletesensor/${sensorName}`)
       .then(res => res.json())
       .then(
-        async (result) => {
-          addSpinner(false)
-        },
-        (error) => {
+        async (error) => {
           console.log(`Coudn't fetch data. Error: ${error}`)
         }
       )
