@@ -32,7 +32,7 @@ exports.updatePreferences = async (payload, sensorName) => {
         capacityBuffer: payload.capacityBuffer,
         outputSensor: payload.outputSensor,
         signalPin: payload.signalPin,
-        Nickname: payload.sensorName,
+        Nickname: payload.Nickname,
         sensorName: payload.sensorName
     }
     const preference = await Preference.findOneAndUpdate({
