@@ -67,7 +67,7 @@ exports.setMeasurement = async (req, res, next) => {
     console.log(req.body.capacity)
     const result = await measurementService.setMeasurement(req.body.capacity, req.params.sensorName);
     await irrigationService.irrigateIfNeeded(req.body.capacity, req.params.sensorName);
-    const irrigated = await getIrrigations.clearIrrigations(req.params.sensorName);
+    const irrigated = await irrigationService.getIrrigations(req.params.sensorName);
     irrigationService.clearIrrigations(req.params.sensorName);
     res.json({ ...result, irrigated })
 };
