@@ -89,7 +89,7 @@ const Preferences = props => {
   var outputname = "";
   var outputsens = props.sensors.find(obj => {return obj.sensorName === preferences.outputSensor});
   if (outputsens === undefined) {outputname = "Local"} else {outputname = outputsens.Nickname}
-  if (preferences.Batterypower === 1) {batterypref = "Battery"} else {batterypref = "Plug-in"}
+  
   return (
     <h3 sx={{ color: "text" }}>
      <div className="preference">
@@ -135,7 +135,7 @@ const Preferences = props => {
         <h3>Power Type:</h3>
         <select sx={{ color: "text", borderColor: preferenceBorderColor("Batterypower") }}
           onChange={(e) => setPreferences({ ...preferences, Batterypower: parseInt(e.target.value) })}>
-            <option value={preferences.Batterypower} selected> {batterypref} </option>
+            <option value={preferences.Batterypower} selected> {if (preferences.Batterypower === 1) {"Battery"} else {"Plug-in"}} </option>
             <option value="0"> Plug-in </option>
             <option value="1"> Battery </option>
         </select>
