@@ -18,31 +18,6 @@ const Preferences = props => {
   const sensorName = props.sensorInFocus;
   const [preferences, setPreferences]  = useState(defaultproperties);
   const [databasePreferences, setDatabasePreferences] = useState(defaultproperties);
-
-  /* 
-  const [preferences, setPreferences]  = useState({
-    minIrrigationIntervalInMinutes: 0,
-    irrigationTimeInSeconds: 0,
-    capacityBuffer: 0,
-    outputSensor: "Local",
-    Nickname:"Friendlyname",
-    Batterypower:1,
-    ReadingIntervalInMinutes:0,
-    signalPin: 0
-  });
-  */
-  /* 
-    const [databasePreferences, setDatabasePreferences] = useState({
-    minIrrigationIntervalInMinutes: 0,
-    irrigationTimeInSeconds: 0,
-    capacityBuffer: 0,
-    outputSensor: `Local`,
-    Nickname:"Friendlyname",
-    Batterypower:true,
-    ReadingIntervalInMinutes:0,
-    signalPin: 0
-  });
-   */
   useEffect(() => {
     if (sensorName) {
       fetch(document.URL.replace(":5000", ":3000")+`preferences/${sensorName}`)
@@ -82,28 +57,11 @@ const Preferences = props => {
   }
 
   const preferenceButtonColor = () => {
-    return preferences === databasePreferences ? "#161A30 !important" : "var(--primary) !important"
-    /*
-    return JSON.stringify({
-      minIrrigationIntervalInMinutes: preferences.minIrrigationIntervalInMinutes,
-      irrigationTimeInSeconds: preferences.irrigationTimeInSeconds,
-      capacityBuffer: preferences.capacityBuffer,
-      outputSensor: preferences.outputSensor,
-      Nickname: preferences.Nickname,
-      Batterypower: preferences.Batterypower,
-      ReadingIntervalInMinutes: preferences.ReadingIntervalInMinutes,
-      signalPin: preferences.signalPin
-    }) === JSON.stringify({
-      minIrrigationIntervalInMinutes: databasePreferences.minIrrigationIntervalInMinutes,
-      irrigationTimeInSeconds: databasePreferences.irrigationTimeInSeconds,
-      capacityBuffer: databasePreferences.capacityBuffer,
-      outputSensor: databasePreferences.outputSensor,
-      Nickname: databasePreferences.Nickname,
-      Batterypower: databasePreferences.Batterypower,
-      ReadingIntervalInMinutes: databasePreferences.ReadingIntervalInMinutes,
-      signalPin: databasePreferences.signalPin
-    }) ? "#161A30 !important" : "var(--primary) !important"
-    */
+    let changed = false;
+    for (const key in preferences) {
+             not(preferences[key] !== databasePreferences[key]) ? changed = true : null
+            }             
+    return changed ? "var(--primary) !important" : "#161A30 !important"
   }
   
   const getpref = (key) => {
