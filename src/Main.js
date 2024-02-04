@@ -1,15 +1,15 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui";
-import React, { lazy, Suspense } from 'react';
 import { useState, useEffect} from "react";
 import Header from "./components/Header/Header";
 import Card from "./shared/Card/Card";
 import IotButton from "./components/IotButton/IotButton";
 import LineChart from "./components/LineChart/LineChart";
+import Preferences from "./components/Preferences/Preferences";
 import SensorPicker from "./components/SensorPicker/SensorPicker";
 import "./style.css"
-//import Preferences from "./components/Preferences/Preferences";
-const Preferences = React.lazy(() => import('./components/Preferences/Preferences'));
+
+
 
 
 const Main = () => {
