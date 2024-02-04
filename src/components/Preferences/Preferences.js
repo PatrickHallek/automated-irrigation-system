@@ -82,7 +82,7 @@ const Preferences = props => {
       outputSensor: databasePreferences.outputSensor,
       Nickname: databasePreferences.Nickname,
       Batterypower: databasePreferences.Batterypower,
-      ReadingIntervalInMinutes: databasepreferences.ReadingIntervalInMinutes,
+      ReadingIntervalInMinutes: databasePreferences.ReadingIntervalInMinutes,
       signalPin: databasePreferences.signalPin
     }) ? "#161A30 !important" : "var(--primary) !important"
   }
