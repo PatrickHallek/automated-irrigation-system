@@ -47,7 +47,7 @@ services:
 
   mdns:
     container_name: "docker-mdns"
-    image: "phyber/docker-mdns:aarch64-latest"
+    image: "phyber/docker-mdns"
 
     # We need to be able to see the real IP addresses on the host, so we need
     # host networking mode.
