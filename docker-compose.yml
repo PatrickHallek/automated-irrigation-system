@@ -33,7 +33,6 @@ services:
       docker-mdns.host: "irrigationbackend.local"
     depends_on:
       - mongodb
-      - mdns
     environment:
       MONGO_DB: "mongodb://mongodb/irrigation"
 
@@ -44,24 +43,3 @@ services:
     ports:
       - "27018:27017"
     restart: always
-
-  mdns:
-    container_name: "docker-mdns"
-    image: "phyber/docker-mdns"
-
-    # We need to be able to see the real IP addresses on the host, so we need
-    # host networking mode.
-    network_mode: "host"
-
-    # Set this to the name of the interface with the IP addresses you'd like to
-    # announce for your hostnames.
-    # Both IPv4 and IPv6 addresses will be used.
-    command:
-      - "eth0"
-
-    # We need to be able to read docker.sock to watch for container events,
-    # and we need to be able to write to the system d-bus socket to add
-    # hostnames in Avahi
-    volumes:
-      - "/var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket:rw"
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
