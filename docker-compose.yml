@@ -28,6 +28,9 @@ services:
       - /src/backend/node_modules/
     command: npm start
     restart: always
+    labels:
+      docker-mdns.enable: "true"
+      docker-mdns.host: "irrigationbackend.local"
     depends_on:
       - mongodb
       - mdns
