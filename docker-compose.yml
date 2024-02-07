@@ -26,11 +26,10 @@ services:
     volumes:
       - ./backend:/src/backend
       - /src/backend/node_modules/
+      - /var/run/dbus:/var/run/dbus
+      - /var/run/avahi-daemon/socket:/var/run/avahi-daemon/socket
     command: npm start
     restart: always
-    labels:
-      docker-mdns.enable: "true"
-      docker-mdns.host: "irrigationbackend.local"
     depends_on:
       - mongodb
     environment:
