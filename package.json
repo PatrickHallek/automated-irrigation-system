@@ -13,10 +13,17 @@
     "react-dom": "latest",
     "react-scripts": "latest",
     "serve": "latest",
-    "theme-ui": "latest"
+    "theme-ui": "latest",
+    @babel/plugin-proposal-private-property-in-object
   },
   "devDependencies": {
-    "typescript": "latest"
+    "typescript": "latest",
+    "@babel/cli": "latest",
+    "@babel/core": "latest",
+    "@babel/node": "latest",
+    "@babel/preset-env": "latest",
+    "@babel/register": "latest"
+    "@babel/plugin-proposal-private-property-in-object": "latest",
   },
   "scripts": {
     "dev": "react-scripts start",
