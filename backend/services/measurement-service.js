@@ -23,7 +23,7 @@ exports.setMeasurement = async (capacity, sensorName) => {
 };
 
 const updateMeasurement = async (collection, timestamp, capacity, sensorName) => {
-    return await collection.updateOne({
+    return collection.updateOne({
         timestamp
     }, {
         capacity,
