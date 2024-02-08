@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import { jsx } from "theme-ui";
 import { useState, useEffect} from "react";
 import Header from "./components/Header/Header";
