@@ -12,7 +12,7 @@
     "express": "latest",
     "express-rate-limit": "latest",
     "http-errors": "latest",
-    "jade": "latest",
+    "pug": "latest",
     "mongoose": "latest",
     "morgan": "latest",
     "node-cron": "latest",
