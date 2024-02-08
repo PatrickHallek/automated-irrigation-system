@@ -34,17 +34,17 @@ const updateMeasurement = async (collection, timestamp, capacity, sensorName) =>
 }
 
 exports.getDailyMeasurements = async (queryFilter) => {
-    return await DailyMeasurement.find(queryFilter);
+    return DailyMeasurement.find(queryFilter);
 };
 
 exports.getHourlyMeasurements = async (queryFilter) => {
-    return await HourlyMeasurement.find(queryFilter);
+    return HourlyMeasurement.find(queryFilter);
 };
 
 exports.getMinutelyMeasurements = async (queryFilter) => {
-    return await MinutelyMeasurement.find(queryFilter);
+    return MinutelyMeasurement.find(queryFilter);
 };
 
 exports.getSecondlyMeasurements = async (queryFilter) => {
-    return await SecondlyMeasurement.find(queryFilter);
+    return SecondlyMeasurement.find(queryFilter);
 };
