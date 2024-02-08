@@ -34,7 +34,7 @@ services:
       - mongodb
     environment:
       WAIT_HOSTS: mongodb:27017
-      MONGO_DB: "mongodb://mongodb:20717/irrigation"
+      MONGO_DB: "mongodb://mongodb:27017/irrigation"
 
   mongodb:
     image: mongo
