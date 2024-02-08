@@ -1,4 +1,4 @@
-FROM node:10
+FROM node
 COPY . /src
 WORKDIR /src
 RUN npm install
