@@ -22,9 +22,9 @@ const irrigatelocal = async (irrigationtime, sensorName) => {
 }
 
 const irrigateremote = async (outputSensor, signalPin, irrigationTimeInSeconds) => {
-    if(! await Output.findOne({outputSensor: outputSensor, signalPin: signalPin}))
+    if(! Output.findOne({outputSensor: outputSensor, signalPin: signalPin}))
         { 
-          await Output.create({ outputSensor: outputSensor, signalPin: signalPin, irrigationtime: irrigationTimeInSeconds });
+          Output.create({ outputSensor: outputSensor, signalPin: signalPin, irrigationtime: irrigationTimeInSeconds });
         } 
 }
 
@@ -50,29 +50,29 @@ const isLastIrrigationTimeBufferPassed = async (preferences, sensorName) => {
 exports.startIrrigation = async (sensorName) => {
     //return await Irrigation.find({ sensorName })
     return await irrigatesensor(sensorName)
-    await Irrigation.create({ capacity: "0", sensorName: req.params.sensorName});
+    Irrigation.create({ capacity: "0", sensorName: req.params.sensorName});
 }
 
 exports.getPendingIrrigations = async (sensorName) => {
     //return await Irrigation.find({ sensorName })
-    return await Output.find( { outputSensor: sensorName } )
+    return Output.find( { outputSensor: sensorName } )
 }
 
 exports.getIrrigations = async (sensorName) => {
     //return await Irrigation.find({ sensorName })
-    return await Irrigation.find( { sensorName: sensorName } )
+    return Irrigation.find( { sensorName: sensorName } )
 }
 
 exports.clearPendingIrrigations = async (sensorName) => {
     //return await Irrigation.find({ sensorName })
-    await Output.deleteMany({ outputSensor: sensorName })
+    Output.deleteMany({ outputSensor: sensorName })
 }
 
 exports.irrigateIfNeeded = async (currentCapacity, sensorName) => {
     const preferences = await preferenceService.getPreference(sensorName)
     if (await isLastIrrigationTimeBufferPassed(preferences, sensorName) && currentCapacity < preferences.capacityBuffer) {
         await irrigatesensor(sensorName);
-        await Irrigation.create({ currentCapacity, sensorName });
+        Irrigation.create({ currentCapacity, sensorName });
     }
 }
 
