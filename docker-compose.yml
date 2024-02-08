@@ -33,6 +33,7 @@ services:
     depends_on:
       - mongodb
     environment:
+      WAIT_HOSTS: mongodb:27017
       MONGO_DB: "mongodb://mongodb:20717/irrigation"
 
   mongodb:
