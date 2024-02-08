@@ -7,18 +7,18 @@
   "author": "Patrick Hallek",
   "license": "MIT",
   "dependencies": {
-    "@emotion/core": ">=10.0.22",
-    "@mdx-js/react": ">=1.5.1",
-    "chart.js": ">=2.9.3",
-    "react": ">=16.12.0",
-    "react-chartjs-2": ">=2.9.0",
-    "react-dom": ">=16.12.0",
-    "react-scripts": ">=3.0.1",
-    "serve": ">=11.3.2",
-    "theme-ui": ">=0.2.49"
+    "@emotion/core": "latest",
+    "@mdx-js/react": "latest",
+    "chart.js": "latest",
+    "react": "latest",
+    "react-chartjs-2": "latest",
+    "react-dom": "latest",
+    "react-scripts": "latest",
+    "serve": "latest",
+    "theme-ui": "latest"
   },
   "devDependencies": {
-    "typescript": ">=3.3.3"
+    "typescript": "latest"
   },
   "scripts": {
     "dev": "react-scripts start",
