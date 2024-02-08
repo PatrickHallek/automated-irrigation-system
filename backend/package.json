@@ -12,12 +12,10 @@
     "express": "latest",
     "express-rate-limit": "latest",
     "http-errors": "latest",
-
     "mongoose": "latest",
     "morgan": "latest",
     "node-cron": "latest",
-    "rpio": "latest",
-
+    "rpio": "latest"
   },
   "devDependencies": {
     "nodemon": "latest"
