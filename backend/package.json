@@ -16,7 +16,8 @@
     "mongoose": ">=4.13.19",
     "morgan": ">=1.9.1",
     "node-cron": ">=2.0.3",
-    "rpio": ">=2.1.1"
+    "rpio": ">=2.1.1",
+    "mdns"
   },
   "devDependencies": {
     "nodemon": ">=1.18.5"
