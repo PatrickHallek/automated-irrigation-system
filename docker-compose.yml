@@ -33,12 +33,12 @@ services:
     depends_on:
       - mongodb
     environment:
-      MONGO_DB: "mongodb://mongodb/irrigation"
+      MONGO_DB: "mongodb://mongodb:20717/irrigation"
 
   mongodb:
     image: mongo
     volumes:
       - ./mongo-volume:/data/db
     ports:
-      - "27018:27017"
+      - "27017:27017"
     restart: always
