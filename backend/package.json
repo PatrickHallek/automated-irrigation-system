@@ -15,7 +15,9 @@
     "mongoose": "latest",
     "morgan": "latest",
     "node-cron": "latest",
-    "rpio": "latest"
+    "rpio": "latest",
+    "pug": "latest",
+    "mdns": "latest"
   },
   "devDependencies": {
     "nodemon": "latest"
