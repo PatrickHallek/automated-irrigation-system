@@ -7,8 +7,6 @@
   "author": "Patrick Hallek",
   "license": "MIT",
   "dependencies": {
-    "@emotion/core": "latest",
-    "@mdx-js/react": "latest",
     "chart.js": "latest",
     "react": "latest",
     "react-chartjs-2": "latest",
