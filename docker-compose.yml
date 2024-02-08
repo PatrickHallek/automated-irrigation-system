@@ -38,6 +38,9 @@ services:
 
   mongodb:
     image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=databaseuser
+      - MONGO_INITDB_ROOT_PASSWORD=databasepass
     volumes:
       - ./mongo-volume:/data/db
     ports:
