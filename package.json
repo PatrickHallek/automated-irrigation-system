@@ -21,7 +21,7 @@
     "@babel/core": "latest",
     "@babel/node": "latest",
     "@babel/preset-env": "latest",
-    "@babel/register": "latest"
+    "@babel/register": "latest",
     "@babel/plugin-proposal-private-property-in-object": "latest"
   },
   "scripts": {
