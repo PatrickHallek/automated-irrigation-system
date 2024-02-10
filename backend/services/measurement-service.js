@@ -4,8 +4,10 @@ const MinutelyMeasurement = require("../models/measurements/minutely-measurement
 const SecondlyMeasurement = require("../models/measurements/secondly-measurement");
 
 exports.setMeasurement = async (measurementdata, queryFilter) => {
-    const lastDailyMeasurement = DailyMeasurement.findOne(queryFilter).sort({ timestamp: -1 });
+    const lastDailyMeasurement = await DailyMeasurement.findOne(queryFilter).sort({ timestamp: -1 });
+    console.log("lastDailyMeasurement: ");
     console.log(lastDailyMeasurement);
+    console.log("Timestamp: ");
     console.log(lastDailyMeasurement.timestamp);
     var update = true;
     if (lastDailyMeasurement) {
@@ -13,7 +15,7 @@ exports.setMeasurement = async (measurementdata, queryFilter) => {
     } 
     if(update){DailyMeasurement.create(measurementdata);}
     
-    const lastHourlyMeasurement = HourlyMeasurement.findOne(queryFilter).sort({ timestamp: -1 });
+    const lastHourlyMeasurement = await HourlyMeasurement.findOne(queryFilter).sort({ timestamp: -1 });
     var update = true;
     if (lastHourlyMeasurement) {
         if (lastHourlyMeasurement.timestamp.getHours() < Date().getHours()){update = false;}
@@ -25,17 +27,6 @@ exports.setMeasurement = async (measurementdata, queryFilter) => {
     result = [];
     return result;
 };
-
-const updateMeasurement = async (collection, vtimestamp, vcapacity, vsensorName) => {
-    return collection.findOneAndUpdate({
-        timestamp: vtimestamp,
-        sensorName: vsensorName
-    }, {
-        capacity: vcapacity
-    }, {
-        upsert: true,
-    })
-}
 
 exports.getDailyMeasurements = (queryFilter) => {
     return DailyMeasurement.find(queryFilter);
