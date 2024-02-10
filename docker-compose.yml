@@ -26,17 +26,20 @@ services:
     volumes:
       - ./backend:/src/backend
       - /src/backend/node_modules/
+      - /var/run/dbus:/var/run/dbus
+      - /var/run/avahi-daemon/socket:/var/run/avahi-daemon/socket
     command: npm start
     restart: always
     depends_on:
       - mongodb
     environment:
-      MONGO_DB: "mongodb://mongodb/irrigation"
+      WAIT_HOSTS: mongodb:27017
+      MONGO_DB: "mongodb://mongodb:27017/irrigation"
 
   mongodb:
     image: mongo
     volumes:
       - ./mongo-volume:/data/db
     ports:
-      - "27018:27017"
+      - "27017:27017"
     restart: always
