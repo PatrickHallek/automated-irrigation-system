@@ -18,5 +18,5 @@ const browser = mdns.browseThemAll(); // all_the_types is just another browser..
         console.log("service down: ", service);
       });
       browser.start();
-}
+};
 
