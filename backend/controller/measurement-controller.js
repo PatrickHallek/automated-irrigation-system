@@ -1,4 +1,5 @@
 const measurementService = require("../services/measurement-service")
+const preferenceService = require("../services/preference-service")
 const irrigationService = require("../services/irrigation-service")
 
 exports.getLastMinuteMeasurements = async (req, res, next) => {
