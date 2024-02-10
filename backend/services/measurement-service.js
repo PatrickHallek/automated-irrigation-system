@@ -7,8 +7,6 @@ exports.setMeasurement = async (measurementdata, queryFilter) => {
     const lastDailyMeasurement = await DailyMeasurement.findOne(queryFilter).sort({ timestamp: -1 });
     console.log("lastDailyMeasurement: ");
     console.log(lastDailyMeasurement);
-    console.log("Timestamp: ");
-    console.log(lastDailyMeasurement.timestamp);
     var update = true;
     if (lastDailyMeasurement) {
         if(lastDailyMeasurement.timestamp.getDay() < Date().getDay()){update = false;}
