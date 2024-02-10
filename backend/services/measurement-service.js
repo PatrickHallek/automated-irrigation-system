@@ -14,16 +14,15 @@ exports.setMeasurement = async (capacity, sensorName) => {
     const currentDate = new Date();
 
     let result = [];
-    result.push(updateMeasurement(DailyMeasurement, currentDay, capacity, sensorName));
-    result.push(updateMeasurement(HourlyMeasurement, currentHour, capacity, sensorName));
-    result.push(updateMeasurement(MinutelyMeasurement, currentMinute, capacity, sensorName));
-    result.push(updateMeasurement(SecondlyMeasurement, currentDate, capacity, sensorName));
-
+    result.push(await updateMeasurement(DailyMeasurement, currentDay, capacity, sensorName));
+    result.push(await updateMeasurement(HourlyMeasurement, currentHour, capacity, sensorName));
+    result.push(await updateMeasurement(MinutelyMeasurement, currentMinute, capacity, sensorName));
+    result.push(await updateMeasurement(SecondlyMeasurement, currentDate, capacity, sensorName));
     return result;
 };
 
-const updateMeasurement = (collection, vtimestamp, vcapacity, vsensorName) => {
-    return collection.findOneAndUpdate({
+const updateMeasurement = async (collection, vtimestamp, vcapacity, vsensorName) => {
+    return await collection.findOneAndUpdate({
         timestamp: vtimestamp,
         sensorName: vsensorName
     }, {
