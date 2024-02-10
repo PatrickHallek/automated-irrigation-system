@@ -7,13 +7,13 @@ const mdns = require('multicast-dns');
  
  
 // discover all available service types
-mdns.on('response', function(response) {
-    console.log('got a response packet:', response)
-  })
+//mdns.on('response', function(response) {
+//    console.log('got a response packet:', response)
+//  })
   
-  mdns.on('query', function(query) {
-    console.log('got a query packet:', query)
-  })
+//  mdns.on('query', function(query) {
+//    console.log('got a query packet:', query)
+//  })
 
   exports.getMDNS = () => {
           // lets query for an A record for 'brunhilde.local'
