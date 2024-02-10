@@ -22,8 +22,8 @@ exports.setMeasurement = async (capacity, sensorName) => {
     return result;
 };
 
-const updateMeasurement = async (collection, timestamp, capacity, sensorName) => {
-    return await collection.updateOne({
+const updateMeasurement = (collection, timestamp, capacity, sensorName) => {
+    return collection.updateOne({
         timestamp
     }, {
         capacity,
@@ -33,18 +33,18 @@ const updateMeasurement = async (collection, timestamp, capacity, sensorName) =>
     })
 }
 
-exports.getDailyMeasurements = async (queryFilter) => {
+exports.getDailyMeasurements = (queryFilter) => {
     return DailyMeasurement.find(queryFilter);
 };
 
-exports.getHourlyMeasurements = async (queryFilter) => {
+exports.getHourlyMeasurements = (queryFilter) => {
     return HourlyMeasurement.find(queryFilter);
 };
 
-exports.getMinutelyMeasurements = async (queryFilter) => {
+exports.getMinutelyMeasurements = (queryFilter) => {
     return MinutelyMeasurement.find(queryFilter);
 };
 
-exports.getSecondlyMeasurements = async (queryFilter) => {
+exports.getSecondlyMeasurements = (queryFilter) => {
     return SecondlyMeasurement.find(queryFilter);
 };
