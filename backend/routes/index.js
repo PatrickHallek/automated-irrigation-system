@@ -26,7 +26,7 @@ router.get('/irrigate/:sensorName', IrrigationController.irrigate);
 router.get('/irrigations/:sensorName', IrrigationController.getIrrigations);
 
 router.get('/sensors', SensorController.getSensorNames);
-router.get('/networksensors', SensorController.getSensorNames);
+router.get('/networksensors', SensorController.getMDNS);
 router.get('/sensors/deletedata/:sensorName', SensorController.deletedata);
 router.get('/sensors/deletesensor/:sensorName', SensorController.deletesensor);
 
