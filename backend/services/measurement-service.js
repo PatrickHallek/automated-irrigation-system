@@ -13,16 +13,23 @@ exports.setMeasurement = async (capacity, sensorName) => {
     const currentMinute = new Date(Math.floor(new Date().getTime() / minute) * minute);
     const currentDate = new Date();
 
-    let result = [];
-    result.push(await updateMeasurement(DailyMeasurement, currentDay, capacity, sensorName));
-    result.push(await updateMeasurement(HourlyMeasurement, currentHour, capacity, sensorName));
-    result.push(await updateMeasurement(MinutelyMeasurement, currentMinute, capacity, sensorName));
-    result.push(await updateMeasurement(SecondlyMeasurement, currentDate, capacity, sensorName));
+    const lastDailyMeasurement = await DailyMeasurement.findOne({ sensorName: sensorName }).sort({ timestamp: -1 });
+        if (!lastDailyMeasurement || lastDailyMeasurement.timestamp.getDay() < Date().getDay()) {
+            DailyMeasurement.create({ capacity: capacity, sensorName: sensorName});
+    } 
+
+    const lastHourlyMeasurement = await HourlyMeasurement.findOne({ sensorName: sensorName }).sort({ timestamp: -1 });
+        if (!lastHourlyMeasurement || lastHourlyMeasurement.timestamp.getHours() < Date().getHours()) {
+            HourlyMeasurement.create({ capacity: capacity, sensorName: sensorName});
+    } 
+
+    MinutelyMeasurement.create({ capacity: capacity, sensorName: sensorName});
+    SecondlyMeasurement.create({ capacity: capacity, sensorName: sensorName});
     return result;
 };
 
 const updateMeasurement = async (collection, vtimestamp, vcapacity, vsensorName) => {
-    return await collection.findOneAndUpdate({
+    return collection.findOneAndUpdate({
         timestamp: vtimestamp,
         sensorName: vsensorName
     }, {
