@@ -5,14 +5,21 @@ const SecondlyMeasurement = require("../models/measurements/secondly-measurement
 
 exports.setMeasurement = async (measurementdata, queryFilter) => {
     const lastDailyMeasurement = DailyMeasurement.findOne(queryFilter).sort({ timestamp: -1 });
-        if (!lastDailyMeasurement || lastDailyMeasurement.timestamp.getDay() < Date().getDay()) {
-            DailyMeasurement.create(measurementdata);
+    console.log(lastDailyMeasurement);
+    console.log(lastDailyMeasurement.timestamp);
+    var update = true;
+    if (lastDailyMeasurement) {
+        if(lastDailyMeasurement.timestamp.getDay() < Date().getDay()){update = false;}
     } 
-
+    if(update){DailyMeasurement.create(measurementdata);}
+    
     const lastHourlyMeasurement = HourlyMeasurement.findOne(queryFilter).sort({ timestamp: -1 });
-        if (!lastHourlyMeasurement || lastHourlyMeasurement.timestamp.getHours() < Date().getHours()) {
-            HourlyMeasurement.create(measurementdata);
+    var update = true;
+    if (lastHourlyMeasurement) {
+        if (lastHourlyMeasurement.timestamp.getHours() < Date().getHours()){update = false;}
+        
     } 
+    if(update){HourlyMeasurement.create(measurementdata);}
     MinutelyMeasurement.create(measurementdata);
     SecondlyMeasurement.create(measurementdata);
     result = [];
