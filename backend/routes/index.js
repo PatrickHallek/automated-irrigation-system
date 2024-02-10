@@ -6,20 +6,7 @@ const PreferenceController = require("../controller/preference-controller");
 const SensorController = require("../controller/sensor-controller");
 const IrrigationController = require("../controller/irrigation-controller");
 const SensorService = require("../services/sensor-service");
-var mdns = require('multicast-dns');
-          // lets query for an A record for 'brunhilde.local'
-    mdns.on('response', function(response) {
-        console.log('got a response packet:', response)
-        });
-    mdns.on('query', function(query) {
-        console.log('got a query packet:', query)
-        });
-    mdns.query({
-        questions:[{
-          name: 'brunhilde.local',
-          type: 'A'
-        }]
-      });
+
 const measurementLimiter = rateLimit({
     windowMs: 1000, // time window
     max: 2, // start blocking after 5 requests
@@ -39,7 +26,6 @@ router.get('/irrigate/:sensorName', IrrigationController.irrigate);
 router.get('/irrigations/:sensorName', IrrigationController.getIrrigations);
 
 router.get('/sensors', SensorController.getSensorNames);
-router.get('/networksensors', SensorService.getMDNS);
 router.get('/sensors/deletedata/:sensorName', SensorController.deletedata);
 router.get('/sensors/deletesensor/:sensorName', SensorController.deletesensor);
 

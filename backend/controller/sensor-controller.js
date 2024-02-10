@@ -30,8 +30,3 @@ exports.deletedata = async (req, res, next) => {
     res.json("Success");
 };
 
-exports.getmdns = async (req, res, next) => {
-    res.json(await sensorService.getMDNS())
-    res.status(200);
-    res.json("Success");
-};
