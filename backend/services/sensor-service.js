@@ -1,5 +1,5 @@
 // import the module
-const mdns = require('mdns');
+const mdns = require('multicast-dns');
  
 // advertise a http server on port 4321
 // const ad = mdns.createAdvertisement(mdns.tcp('http'), 4321);
@@ -7,16 +7,23 @@ const mdns = require('mdns');
  
  
 // discover all available service types
-const browser = mdns.browseThemAll(); // all_the_types is just another browser..
 
 
   exports.getMDNS = () => {
-    browser.on('serviceUp', service => {
-        console.log("service up: ", service);
-      });
-      browser.on('serviceDown', service => {
-        console.log("service down: ", service);
-      });
-      browser.start();
+    mdns.on('response', function(response) {
+        console.log('got a response packet:', response)
+      })
+      
+      mdns.on('query', function(query) {
+        console.log('got a query packet:', query)
+      })
+      
+      // lets query for an A record for 'brunhilde.local'
+      mdns.query({
+        questions:[{
+          name: 'brunhilde.local',
+          type: 'A'
+        }]
+      })
 };
 
