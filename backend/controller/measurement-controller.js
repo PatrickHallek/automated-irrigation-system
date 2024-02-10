@@ -1,6 +1,7 @@
 const measurementService = require("../services/measurement-service")
 const preferenceService = require("../services/preference-service")
 const irrigationService = require("../services/irrigation-service")
+const preferenceController = require("../controller/preference-controller")
 
 exports.getLastMinuteMeasurements = async (req, res, next) => {
     const queryFilter = {
@@ -66,7 +67,7 @@ exports.getAllMeasurements = async (req, res, next) => {
 
 exports.setMeasurement = async (req, res, next) => {
     const result = await measurementService.setMeasurement(req.body.capacity, req.params.sensorName);
-    const prefs = await preferenceService.getPreference(req.params.sensorName);
+    const prefs = await preferenceController.getPreference(req.params.sensorName);
     await irrigationService.irrigateIfNeeded(req.body.capacity, req.params.sensorName);
     const pendingirrigation = await irrigationService.getPendingIrrigations(req.params.sensorName);
     irrigationService.clearPendingIrrigations(req.params.sensorName);
