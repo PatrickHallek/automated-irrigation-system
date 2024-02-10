@@ -22,12 +22,12 @@ exports.setMeasurement = async (capacity, sensorName) => {
     return result;
 };
 
-const updateMeasurement = (collection, timestamp, capacity, sensorName) => {
-    return collection.updateOne({
-        timestamp
+const updateMeasurement = (collection, vtimestamp, vcapacity, vsensorName) => {
+    return collection.findOneAndUpdate({
+        timestamp: vtimestamp,
+        sensorName: vsensorname
     }, {
-        capacity,
-        sensorName
+        capacity: vcapacity
     }, {
         upsert: true,
     })
