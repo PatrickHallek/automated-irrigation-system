@@ -66,7 +66,9 @@ exports.getAllMeasurements = async (req, res, next) => {
 };
 
 exports.setMeasurement = async (req, res, next) => {
-    const result = await measurementService.setMeasurement(req.body.capacity, req.params.sensorName);
+    const measurementdata = { capacity: req.body.capacity, sensorName: req.params.sensorName};
+    const queryFilter = {sensorName: req.params.sensorName}
+    const result = await measurementService.setMeasurement(measurementdata, queryFilter);
     console.log("Setting measurement: " + req.params.sensorName + req.body.capacity)
     console.log(result)
     const prefs = await preferenceService.getPreference(req.params.sensorName);
