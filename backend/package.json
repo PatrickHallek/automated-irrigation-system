@@ -22,6 +22,9 @@
   "devDependencies": {
     "nodemon": "^1.18.5"
   },
+  "overrides": {
+    "mongoose": "$mongoose"
+  },
   "main": "app.js",
   "keywords": [],
   "author": "Patrick Hallek",
