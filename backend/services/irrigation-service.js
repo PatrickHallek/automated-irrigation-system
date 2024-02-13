@@ -23,10 +23,14 @@ const irrigatelocal = async (irrigationtime, sensorName) => {
 
 const irrigateremote = async (outputSensor, signalPin, irrigationTimeInSeconds) => {
     console.log("Irrigateremote Creating pending irrigation entry for sensor: " + outputSensor + " using port: " + signalPin);
-    if(! Output.findOne({outputSensor: outputSensor, signalPin: signalPin}))
+    const existingmeasurement = await Output.findOne({outputSensor: outputSensor, signalPin: signalPin});
+    if(existingmeasurement)
         { 
-          Output.create({ outputSensor: outputSensor, signalPin: signalPin, irrigationtime: irrigationTimeInSeconds });
+          console.log("Sensor " + outputSensor + " is already tagged for irrigating");  
         } 
+    else{
+        Output.create({ outputSensor: outputSensor, signalPin: signalPin, irrigationtime: irrigationTimeInSeconds });
+    }
 }
 
 const irrigatesensor = async (sensorName) => {
