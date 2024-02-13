@@ -6,8 +6,6 @@ const SecondlyMeasurement = require("../models/measurements/secondly-measurement
 exports.setMeasurement = async (measurementdata, queryFilter) => {
     const lastDailyMeasurement = await DailyMeasurement.findOne(queryFilter).sort({ timestamp: -1 });
     const date = new Date();
-    console.log("lastDailyMeasurement: ");
-    console.log(lastDailyMeasurement);
     var update = true;
     if (lastDailyMeasurement) {
         if(lastDailyMeasurement.timestamp.getDate() < date.getDate()){update = false;}
