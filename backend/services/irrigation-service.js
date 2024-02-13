@@ -11,8 +11,8 @@ if (!process.env.DEVELOPMENT) rpio = require('rpio');
 
 
 const irrigatelocal = async (irrigationtime, sensorName) => {
-    const preferences = preferenceService.getPreference(sensorName)
-    console.log("Starting Irrigation...")
+    const preferences = await preferenceService.getPreference(sensorName)
+    console.log("Starting Local Irrigation...")
     rpio.open(preferences.signalPin, rpio.OUTPUT, rpio.LOW);
     rpio.write(preferences.signalPin, rpio.HIGH);
     rpio.sleep(irrigationtime);
@@ -21,24 +21,33 @@ const irrigatelocal = async (irrigationtime, sensorName) => {
     return "Success"
 }
 
-const irrigateremote = (outputSensor, signalPin, irrigationTimeInSeconds) => {
+const irrigateremote = async (outputSensor, signalPin, irrigationTimeInSeconds) => {
+    console.log("Irrigateremote Creating pending irrigation entry for sensor... ");
+    console.log(outputSensor);
+    console.log("Using port... ");
+    console.log(signalPin);
     if(! Output.findOne({outputSensor: outputSensor, signalPin: signalPin}))
         { 
           Output.create({ outputSensor: outputSensor, signalPin: signalPin, irrigationtime: irrigationTimeInSeconds });
         } 
 }
 
-const irrigatesensor = (sensorName) => {
-    const preferences = preferenceService.getPreference(sensorName);
+const irrigatesensor = async (sensorName) => {
+    const preferences = await preferenceService.getPreference(sensorName);
+    console.log("irrigatesensor was tasked with irrigating sensor... ");
+    console.log(sensorName);
     if(preferences.outputSensor == "Local"){
+            console.log("Irrigation port seems to be local... ");
             irrigatelocal(preferences.irrigationTimeInSeconds, sensorName)
         } else {
-            irrigateremote(preferences.outputSensor, preferences.signalPin, preferences.irrigationTimeInSeconds)
+            console.log("Irrigation port seems to be remote... ");
+            await irrigateremote(preferences.outputSensor, preferences.signalPin, preferences.irrigationTimeInSeconds)
         }
 }
 
 const isLastIrrigationTimeBufferPassed = async (preferences, sensorName) => {
     const lastMeasurement = await Irrigation.findOne({ sensorName }).sort({ timestamp: -1 });
+    console.log("Checking if minimum time buffer has passed before irrigating again... ");
     const now = new Date().getTime()
     if (lastMeasurement) {
         let lastMeasurementTime = lastMeasurement.timestamp
@@ -47,33 +56,39 @@ const isLastIrrigationTimeBufferPassed = async (preferences, sensorName) => {
     } else return true
 }
 
-exports.startIrrigation = (sensorName) => {
+exports.startIrrigation = async (sensorName) => {
     //return await Irrigation.find({ sensorName })
-    return irrigatesensor(sensorName)
+    console.log("startIrrigation will start irrigating sensor... ");
+    console.log(sensorName);
+    return await irrigatesensor(sensorName)
     Irrigation.create({ capacity: "0", sensorName: req.params.sensorName});
 }
 
-exports.getPendingIrrigations = (sensorName) => {
+exports.getPendingIrrigations = async (sensorName) => {
     //return await Irrigation.find({ sensorName })
     return Output.find( { outputSensor: sensorName } )
 }
 
-exports.getIrrigations = (sensorName) => {
+exports.getIrrigations = async (sensorName) => {
     //return await Irrigation.find({ sensorName })
     return Irrigation.find( { sensorName: sensorName } )
 }
 
-exports.clearPendingIrrigations = (sensorName) => {
+exports.clearPendingIrrigations = async (sensorName) => {
     //return await Irrigation.find({ sensorName })
     Output.deleteMany({ outputSensor: sensorName })
 }
 
-exports.irrigateIfNeeded = (currentCapacity, sensorName) => {
-    const preferences = preferenceService.getPreference(sensorName)
-    if (isLastIrrigationTimeBufferPassed(preferences, sensorName) && currentCapacity < preferences.capacityBuffer) {
-        irrigatesensor(sensorName);
+exports.irrigateIfNeeded = async (currentCapacity, sensorName) => {
+    console.log("Will irrigate only if soil is dry sensor... ");
+    console.log(sensorName);
+    const preferences = await preferenceService.getPreference(sensorName)
+    if (await isLastIrrigationTimeBufferPassed(preferences, sensorName) && currentCapacity < preferences.capacityBuffer) {
+        await irrigatesensor(sensorName);
         Irrigation.create({ currentCapacity, sensorName });
     }
 }
+
+
 
 
