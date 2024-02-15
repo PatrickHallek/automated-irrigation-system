@@ -7,6 +7,12 @@
 This is an open source application to water plants automatically. Up to now there is almost no free professional software and instructions available to build a DYI irrigation that is scalable, accurate and most importantly, durable. The app is also not only there to look good and for the love of data. Above all, it is a tool to tailor the sensors to the exact needs of the plants. This is where most irrigation systems with direct soil moisture measurement fail because every soil and plant is different and therefore manual calibration and possibly after some time also recalibration is essential.
 
 The app contains the following features:
+- Automatic detection of server / sensors
+- Setting of sensor settings from frontend
+- Assign pumps from frontend (Phisically wired to sensor or to another ESP module)
+- Compatibility with ESP32 and ESP8266 Chips
+- Automatic Wifi configuration
+- Server runs on windows or linux in a desktop computer or raspberry pi
 - Monitor and display time series data at the minute, hour, day, week and month levels
 - Setting the water level from which automatic watering should be triggered.
 - Setting how long the pump works during an irrigation
@@ -82,21 +88,13 @@ sudo apt-get install -y libffi-dev libssl-dev
 sudo apt-get install -y python3 python3-pip
 sudo apt-get remove python-configparser
 sudo pip3 install docker-compose
+git clone -b Working2 https://github.com/rafaelmuylaert/automated-irrigation-system
+cd automated-irrigation-system/
+git pull && sudo docker-compose build --no-cache && docker-compose up
 ```
-
-Now you have to pass the ip address of your pi into the `REACT_APP_BACKEND_URL=http://<YOUR-RASPI-IP>:3000` environment variable in the docker-compose file:
-
-```bash
-sudo nano docker-compose.yml
-```
-
-You can find the ip with the command `ifconfig`. It should be something like *192.168.178.44*. You can save your input in the Nano editor with `ctr + x`, then type in `yes`, finally exit with `enter`.
 
 Now everything should be ready and you can start the application with the following command:
 
-```bash
-sudo docker-compose up
-```
 
 **Attention**: If you have a Raspberry Pi with a processor other than *ARMv7*, you need to adjust the image for the mongodb in the docker-compose file. Since this is only suitable for *ARMv6*.
 
@@ -165,11 +163,10 @@ After downloading the project you have to create environment files for the front
 ```bash
 sudo nano .env
 ```
-If you are in nano edit mode, copy the following text into it and type in your raspi ip. You can find the ip with the command `ifconfig`. It should be something like *192.168.178.44*
+If you are in nano edit mode, copy the following text into it and type in your ip. You can find the ip with the command `ifconfig`. It should be something like *192.168.178.44*
 ```nano
 SKIP_PREFLIGHT_CHECK=true
 PORT=4200
-REACT_APP_BACKEND_URL="http://<YOUR-RASPI-IP>:3000"
 ```
 You can save your input in the Nano editor with `ctr + x`, then type in `yes`, finally exit with `enter`.
 
