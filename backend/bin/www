@@ -30,6 +30,29 @@ server.on('error', onError);
 server.on('listening', onListening);
 
 /**
+ * Advertise the server IP to sensors in network
+ */
+
+function AdvertiseIrrigationServer() {
+console.log("Advertising server ip");
+
+const options = {
+    hostname: 'irrigationsensor.local',
+    path: '/setserver',
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    }
+};
+
+const req = https.request(options)
+req.end();
+setTimeout(AdvertiseIrrigationServer, 120000);
+}
+AdvertiseIrrigationServer();
+
+
+/**
  * Normalize a port into a number, string, or false.
  */
 
