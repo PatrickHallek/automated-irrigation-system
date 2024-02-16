@@ -1,6 +1,6 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import { jsx } from "theme-ui";
-import { useColorMode } from "theme-ui";
+
 
 const ThemePicker = () => {
   const [colorMode, setColorMode] = useColorMode();

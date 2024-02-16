@@ -35,6 +35,7 @@ const irrigateremote = async (outputSensor, signalPin, irrigationTimeInSeconds) 
 
 const irrigatesensor = async (sensorName) => {
     const preferences = await preferenceService.getPreference(sensorName);
+
     console.log("irrigatesensor was tasked with irrigating sensor: " + sensorName);
     if(preferences.outputSensor == "Local"){
             console.log("Irrigation port seems to be local... ");

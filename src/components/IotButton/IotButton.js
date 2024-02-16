@@ -1,4 +1,4 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import { jsx } from "theme-ui";
 import "./IotButton.css";
 import { useState } from "react";

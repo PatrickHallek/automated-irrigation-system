@@ -38,5 +38,6 @@ exports.getMinutelyMeasurements = (queryFilter) => {
 };
 
 exports.getSecondlyMeasurements = (queryFilter) => {
+
     return SecondlyMeasurement.find(queryFilter);
 };

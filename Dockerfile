@@ -1,6 +1,6 @@
-FROM node:10
+FROM node
 COPY . /frontend
 WORKDIR /frontend
-RUN npm install
+RUN npm install --install-strategy=nested
 RUN npm run build
-EXPOSE 4200
+EXPOSE 5000
