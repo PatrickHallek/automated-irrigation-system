@@ -42,7 +42,7 @@ const postData = JSON.stringify({
 
 const options = {
     hostname: 'irrigationsensor.local',
-    path: '/setserver',
+    path: '/setserver/',
     port: 80,
     method: 'POST',
     headers: {
