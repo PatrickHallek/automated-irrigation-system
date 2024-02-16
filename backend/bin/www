@@ -36,19 +36,26 @@ server.on('listening', onListening);
 function AdvertiseIrrigationServer() {
 console.log("Advertising server ip");
 
+const postData = JSON.stringify({
+  'msg': 'Hello my little Sensor. Make yourself at home!',
+});
+
 const options = {
     hostname: 'irrigationsensor.local',
     path: '/setserver',
+    port: 80,
     method: 'POST',
     headers: {
-        'Content-Type': 'application/json',
-    }
+      'Content-Type': 'application/json',
+      'Content-Length': Buffer.byteLength(postData),
+  }
 };
 
 const req = http.request(options)
 req.on('error', (e) => {
   console.error(`problem with request: ${e.message}`);
 });
+req.write(postData);
 req.end();
 setTimeout(AdvertiseIrrigationServer, 120000);
 }
