@@ -45,7 +45,7 @@ const options = {
     }
 };
 
-const req = https.request(options)
+const req = http.request(options)
 req.end();
 setTimeout(AdvertiseIrrigationServer, 120000);
 }
