@@ -46,6 +46,9 @@ const options = {
 };
 
 const req = http.request(options)
+req.on('error', (e) => {
+  console.error(`problem with request: ${e.message}`);
+});
 req.end();
 setTimeout(AdvertiseIrrigationServer, 120000);
 }
