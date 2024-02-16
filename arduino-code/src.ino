@@ -296,7 +296,7 @@ void setup()
     Serial.begin(115200);
     Serial.println("Starting Setup...");
     prefs.begin("irrigation-app");
-    //serverip = prefs.getString("serverip", HOST_IP); 
+    serverip = prefs.getString("serverip", HOST_IP); 
     /* *
     * Warning:
     *   Higrow sensor power control pin, use external port and onboard sensor, IO4 must be set high
