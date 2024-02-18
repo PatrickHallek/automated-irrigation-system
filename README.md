@@ -36,13 +36,13 @@ The app contains the following features:
 | Name  | Anmount | Description |
 | ------------- | ------------- | ------------- |
 | [CHEAP ALL IN ONE OFFER](https://amzn.to/39jLexe)  | 1 - n  | pump, tube, capacity sensor and relay |
-| [NodeMCU ESP8266](https://amzn.to/3dh7IPR)  | 1 - n  | Wifi module for reading capacities and sending them to the backend (Raspi)|
-| [Raspberry Pi Zero](https://amzn.to/2NeY05X)  | 1  | Running the whole software and triggering the pump(s) |
-| [Raspberry Pi SD Card](https://amzn.to/3hLghpt)  | 1  | This is the data memory for the raspberry pi  |
-| [Relay](https://amzn.to/2YgcvNt)  | 1 - n  | To close or open the pump circuit on signal  from the raspi|
-| [Capacitive Soil Moisture Sensors](https://amzn.to/3dh9PTU)  | 1-n  | To measure the soil moisture. Capacitive sensors do not dissolve. Never use electrodical humidity sensors, as they wear out very quickly |
-| [Pump](https://amzn.to/2WO8Zsf)  | 1 - n  | Theoretically any pump can be used, as it is controlled by a separate power supply and the relay |
-| [Aquarium tube and irrigation nozzles](https://amzn.to/3153W9I)  | -  | Water transfer to the plants and to distribute the water on the earth |
+| [NodeMCU ESP8266](https://amzn.to/3wv2EGP)  | 1 - n  | Wifi module for reading capacities and sending them to the backend (Raspi)|
+| [Raspberry Pi Zero](https://amzn.to/42LBFmL)  | 1  | Running the whole software and triggering the pump(s) |
+| [Raspberry Pi SD Card](https://amzn.to/3wgoWfo)  | 1  | This is the data memory for the raspberry pi  |
+| [Relay](https://amzn.to/49zyu3w)  | 1 - n  | To close or open the pump circuit on signal  from the raspi|
+| [Capacitive Soil Moisture Sensors](https://amzn.to/48nYbTV)  | 1-n  | To measure the soil moisture. Capacitive sensors do not dissolve. Never use electrodical humidity sensors, as they wear out very quickly |
+| [Pump](https://amzn.to/3wj23Iu)  | 1 - n  | Theoretically any pump can be used, as it is controlled by a separate power supply and the relay |
+| [Aquarium tube and irrigation nozzles](https://amzn.to/42IOJJm)  | -  | Water transfer to the plants and to distribute the water on the earth |
 
 *all product links are also affiliate links to exactly the same products I bought for the system. If you order via the link, I will receive a tiny commission.
 
