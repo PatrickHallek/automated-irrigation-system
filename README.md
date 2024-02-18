@@ -35,7 +35,6 @@ The app contains the following features:
 
 | Name  | Anmount | Description |
 | ------------- | ------------- | ------------- |
-| [CHEAP ALL IN ONE OFFER](https://amzn.to/39jLexe)  | 1 - n  | pump, tube, capacity sensor and relay |
 | [NodeMCU ESP8266](https://amzn.to/3wv2EGP)  | 1 - n  | Wifi module for reading capacities and sending them to the backend (Raspi)|
 | [Raspberry Pi Zero](https://amzn.to/42LBFmL)  | 1  | Running the whole software and triggering the pump(s) |
 | [Raspberry Pi SD Card](https://amzn.to/3wgoWfo)  | 1  | This is the data memory for the raspberry pi  |
