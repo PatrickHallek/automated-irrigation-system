@@ -11,6 +11,26 @@ const dailyMeasurementSchema = new Schema({
         type: Number,
         require: true
     },
+    salt: {
+        type: Number,
+        require: false
+    },
+    battery: {
+        type: Number,
+        require: false
+    },
+    temperature: {
+        type: Number,
+        require: false
+    },
+    humidity: {
+        type: Number,
+        require: false
+    },
+    light: {
+        type: Number,
+        require: false
+    },
     sensorName: {
         type: String,
         require: true
